@@ -7,6 +7,8 @@ namespace IJ
 {
 	Animator::Animator()
 		: Component(myComponentType::Animator)
+		, isLoop(false)
+		, isDrawOnCamera(false)
 		, myAlpha(1.0f)
 	{}
 

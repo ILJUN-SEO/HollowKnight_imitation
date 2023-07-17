@@ -46,7 +46,7 @@ namespace IJ
 		Transform* tr = myAnimator->GetOwner()->GetComponent<Transform>();
 		Vector2 pos = tr->GetPosition();
 
-		if (myAnimator->GetFollowingCamera())
+		if (myAnimator->GetDrawOnCamera() == false)
 			pos = Camera::GetWinPosition(pos);
 		BLENDFUNCTION func = {};
 		func.BlendOp = AC_SRC_OVER;

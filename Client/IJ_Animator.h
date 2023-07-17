@@ -27,8 +27,8 @@ namespace IJ
 		Animation* FindAnimation(const std::wstring& name);
 		void PlayAnimation(const std::wstring& name, bool loop = false);
 
-		bool GetFollowingCamera() { return isDrawnOnCamera; }
-		void MakeFollowCamera(bool value) { isDrawnOnCamera = value; }
+		bool GetDrawOnCamera() { return isDrawOnCamera; }
+		void SetDrawOnCamera(bool value) { isDrawOnCamera = value; }
 		float GetAlpha() { return myAlpha; }
 		void SetAlpha(float alpha) { myAlpha = alpha; }
 
@@ -37,7 +37,7 @@ namespace IJ
 
 		Animation* myActivatedAnimation;
 		bool isLoop;
-		bool isDrawnOnCamera;
+		bool isDrawOnCamera;
 		float myAlpha;
 	};
 }

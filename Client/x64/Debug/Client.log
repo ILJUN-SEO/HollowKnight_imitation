@@ -1,2 +1,52 @@
-﻿  IJ_PlayScene.cpp
+﻿  IJ_Animation.cpp
+C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\Client\IJ_Animation.cpp(69,33): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\Client\IJ_Animation.cpp(68,33): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\Client\IJ_Animation.cpp(67,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\Client\IJ_Animation.cpp(66,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\Client\IJ_Animation.cpp(64,33): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\Client\IJ_Animation.cpp(63,33): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\Client\IJ_Animation.cpp(62,58): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\Client\IJ_Animation.cpp(61,71): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\Client\IJ_Animation.cpp(79,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  IJ_Animator.cpp
+C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\Client\IJ_Animator.cpp(98,21): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\Client\IJ_Animator.cpp(98,14): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  IJ_Application.cpp
+C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\Client\IJ_Application.cpp(30,28): warning C4838: 'UINT'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\Client\IJ_Application.cpp(30,37): warning C4838: 'UINT'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+  IJ_Camera.cpp
+C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\Client\IJ_Camera.cpp(19,40): warning C4244: '=': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\Client\IJ_Camera.cpp(20,41): warning C4244: '=': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  IJ_Component.cpp
+  IJ_Crawler.cpp
+  IJ_Entity.cpp
+  IJ_GameObject.cpp
+  IJ_HUDFrame.cpp
+  IJ_HUDHealth.cpp
+  IJ_Input.cpp
+  IJ_Layer.cpp
+  IJ_Math.cpp
+  IJ_PlayBackground.cpp
+  IJ_PlayScene.cpp
+  IJ_Player.cpp
+  IJ_Resource.cpp
+  IJ_ResourceManager.cpp
+  IJ_Scene.cpp
+  IJ_SceneManager.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  IJ_SpriteRenderer.cpp
+C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\Client\IJ_SpriteRenderer.cpp(40,65): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\Client\IJ_SpriteRenderer.cpp(40,29): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  IJ_Temp_Platform.cpp
+  IJ_Texture.cpp
+  IJ_Time.cpp
+C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\Client\IJ_Time.cpp(46,17): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  IJ_TitleScene.cpp
+  IJ_TitleScene_Background.cpp
+  IJ_TitleScene_Title.cpp
+  IJ_Transform.cpp
+  main.cpp
+  코드를 생성하고 있습니다...
+  LINK : C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\x64\Debug\Client.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
   Client.vcxproj -> C:\Users\sij83\OneDrive\바탕 화면\Code\_Git\HollowKnight\x64\Debug\Client.exe

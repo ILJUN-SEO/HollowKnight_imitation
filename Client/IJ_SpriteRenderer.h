@@ -18,14 +18,14 @@ namespace IJ
 
 		void SetTexture(Texture* texture) { myTexture = texture; }
 		void SetScale(Math::Vector2 scale) { myScale = scale; }
-		void MakeFollowCamera(bool value) { isDrawnOnCamera = value; }
+		void SetDrawOnCamera(bool value) { isDrawOnCamera = value; }
 		void SetAlpha(float alpha) { myAlpha = alpha; }
 		float GetAlpha() { return myAlpha; }
 
 	private:
-		bool isDrawnOnCamera;
 		Texture* myTexture;
 		Vector2 myScale;
+		bool isDrawOnCamera;
 		float myAlpha;
 	};
 }

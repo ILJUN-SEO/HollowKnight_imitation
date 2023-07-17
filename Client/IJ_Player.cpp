@@ -45,6 +45,8 @@ namespace IJ
 		}
 		if (Input::GetKeyPressing(myKeyCode::Right))
 		{
+			anim->PlayAnimation(L"Knight_walk", true);
+
 			pos.x += 300.0f * Time::DeltaTime();
 			myinput = true;
 		}

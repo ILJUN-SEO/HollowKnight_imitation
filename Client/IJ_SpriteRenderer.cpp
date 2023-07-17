@@ -8,9 +8,9 @@ namespace IJ
 {
 	SpriteRenderer::SpriteRenderer()
 		:Component(myComponentType::SpriteRenderer)
-		, isDrawnOnCamera(true)
 		, myTexture(nullptr)
 		, myScale(Vector2::One)
+		, isDrawOnCamera(false)
 		, myAlpha(1.0f)
 	{}
 
@@ -31,7 +31,7 @@ namespace IJ
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Math::Vector2 pos = tr->GetPosition();
 
-		if (isDrawnOnCamera)
+		if (isDrawOnCamera == false)
 			pos = Camera::GetWinPosition(pos);
 		
 		if (myTexture->GetType() == myTextureType::bmp)
