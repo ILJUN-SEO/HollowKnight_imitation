@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -128,12 +129,70 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Client.h" />
+    <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="IJ_Animation.h" />
+    <ClInclude Include="IJ_Animator.h" />
+    <ClInclude Include="IJ_Application.h" />
+    <ClInclude Include="IJ_Camera.h" />
+    <ClInclude Include="IJ_Component.h" />
+    <ClInclude Include="IJ_Crawler.h" />
+    <ClInclude Include="IJ_Entity.h" />
+    <ClInclude Include="IJ_GameObject.h" />
+    <ClInclude Include="IJ_HUDFrame.h" />
+    <ClInclude Include="IJ_HUDHealth.h" />
+    <ClInclude Include="IJ_Input.h" />
+    <ClInclude Include="IJ_Layer.h" />
+    <ClInclude Include="IJ_Math.h" />
+    <ClInclude Include="IJ_ObjectManager.h" />
+    <ClInclude Include="IJ_PlayBackground.h" />
+    <ClInclude Include="IJ_Player.h" />
+    <ClInclude Include="IJ_PlayScene.h" />
+    <ClInclude Include="IJ_Resource.h" />
+    <ClInclude Include="IJ_ResourceManager.h" />
+    <ClInclude Include="IJ_Scene.h" />
+    <ClInclude Include="IJ_SceneManager.h" />
+    <ClInclude Include="IJ_SpriteRenderer.h" />
+    <ClInclude Include="IJ_Temp_Platform.h" />
+    <ClInclude Include="IJ_Texture.h" />
+    <ClInclude Include="IJ_Time.h" />
+    <ClInclude Include="IJ_TitleScene.h" />
+    <ClInclude Include="IJ_TitleScene_Background.h" />
+    <ClInclude Include="IJ_TitleScene_Title.h" />
+    <ClInclude Include="IJ_Transform.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Client.cpp" />
+    <ClCompile Include="IJ_Animation.cpp" />
+    <ClCompile Include="IJ_Animator.cpp" />
+    <ClCompile Include="IJ_Camera.cpp" />
+    <ClCompile Include="IJ_Crawler.cpp" />
+    <ClCompile Include="IJ_HUDFrame.cpp" />
+    <ClCompile Include="IJ_HUDHealth.cpp" />
+    <ClCompile Include="IJ_PlayBackground.cpp" />
+    <ClCompile Include="IJ_PlayScene.cpp" />
+    <ClCompile Include="IJ_ResourceManager.cpp" />
+    <ClCompile Include="IJ_Application.cpp" />
+    <ClCompile Include="IJ_Component.cpp" />
+    <ClCompile Include="IJ_Entity.cpp" />
+    <ClCompile Include="IJ_GameObject.cpp" />
+    <ClCompile Include="IJ_Input.cpp" />
+    <ClCompile Include="IJ_Layer.cpp" />
+    <ClCompile Include="IJ_Math.cpp" />
+    <ClCompile Include="IJ_Player.cpp" />
+    <ClCompile Include="IJ_Resource.cpp" />
+    <ClCompile Include="IJ_Scene.cpp" />
+    <ClCompile Include="IJ_SceneManager.cpp" />
+    <ClCompile Include="IJ_SpriteRenderer.cpp" />
+    <ClCompile Include="IJ_Temp_Platform.cpp" />
+    <ClCompile Include="IJ_Texture.cpp" />
+    <ClCompile Include="IJ_Time.cpp" />
+    <ClCompile Include="IJ_TitleScene.cpp" />
+    <ClCompile Include="IJ_TitleScene_Background.cpp" />
+    <ClCompile Include="IJ_TitleScene_Title.cpp" />
+    <ClCompile Include="IJ_Transform.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

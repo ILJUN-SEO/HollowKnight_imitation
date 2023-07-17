@@ -1,0 +1,43 @@
+#pragma once
+#include "IJ_Component.h"
+#include "IJ_Animation.h"
+
+
+namespace IJ
+{
+	class Animator : public Component
+	{
+	public:
+		Animator();
+		~Animator();
+
+		virtual void Initialize() override;
+		virtual void Update() override;
+		virtual void Render(HDC hdc) override;
+
+		void CreateAnimation(const std::wstring& name
+			, class Texture* texture
+			, Vector2 leftTop, Vector2 size, UINT spriteLength
+			, Vector2 offset = Vector2::Zero, float duration = 0.1f);
+
+		void CreateAnimationFolder(const std::wstring& name
+			, const std::wstring& path
+			, Vector2 offset = Vector2::Zero, float duration = 0.1f);
+
+		Animation* FindAnimation(const std::wstring& name);
+		void PlayAnimation(const std::wstring& name, bool loop = false);
+
+		bool GetFollowingCamera() { return isDrawnOnCamera; }
+		void MakeFollowCamera(bool value) { isDrawnOnCamera = value; }
+		float GetAlpha() { return myAlpha; }
+		void SetAlpha(float alpha) { myAlpha = alpha; }
+
+	private:
+		std::map<std::wstring, Animation*> myAnimations;
+
+		Animation* myActivatedAnimation;
+		bool isLoop;
+		bool isDrawnOnCamera;
+		float myAlpha;
+	};
+}

@@ -1,49 +1,293 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{6d122acd-40fb-404e-a8b7-2c6f5c94ef35}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{c18c92fd-b5dd-426f-8a67-fe16131d4855}</UniqueIdentifier>
     </Filter>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Engine\Common">
+      <UniqueIdentifier>{36dd997f-6dec-4f2b-85df-2f108b6480c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\High_Level_Interface">
+      <UniqueIdentifier>{4df49601-91f4-4a90-b259-2e438085f022}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Time">
+      <UniqueIdentifier>{e71ad175-1914-4330-80a6-cd316165f126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Entity">
+      <UniqueIdentifier>{ebd9036e-920d-4809-a2b6-4c092d701d9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject">
+      <UniqueIdentifier>{c2865c07-5ad3-4998-b308-93cb21bd9efe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Scene">
+      <UniqueIdentifier>{e0a52e54-67c3-484c-b848-1e0a6fdcf7c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Scene\Layer">
+      <UniqueIdentifier>{972a2242-f415-466d-a3b7-7f7b9d018400}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Input">
+      <UniqueIdentifier>{060142a1-2f2b-4d37-907e-2493e68c8f78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ResourceManager">
+      <UniqueIdentifier>{1ec2d895-a40c-419a-81fb-cb557fe8af5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Component">
+      <UniqueIdentifier>{0423c79e-be99-45d7-aee5-96b2c1eed23f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Component\Transform">
+      <UniqueIdentifier>{c197f8e1-b401-4113-80aa-fa263f1077f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Component\SpriteRenderer">
+      <UniqueIdentifier>{196133d5-c6b3-408e-8c4f-891ccb9a23ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObjects">
+      <UniqueIdentifier>{e9c5eb33-b47c-468c-adbf-9c211754c29c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scenes">
+      <UniqueIdentifier>{261e7df3-b9ac-4c28-9ef9-5b80992bcbd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ResourceManager\Texture">
+      <UniqueIdentifier>{7009437a-30ca-4c85-a630-d4b2a41d1d8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObjects\Player">
+      <UniqueIdentifier>{a758615d-239e-434c-8720-b77f20627005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObjects\UI">
+      <UniqueIdentifier>{75a446db-3275-4069-8bf5-b2016b4ad9a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObjects\Background">
+      <UniqueIdentifier>{80aa5457-468a-4b90-91c2-4ee23d492710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Camera">
+      <UniqueIdentifier>{e185daf3-5b80-45d6-8df1-135909c209f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObjects\Terrain">
+      <UniqueIdentifier>{3d699c43-7bfa-438d-a055-f80d1a8ca9d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Component\Animator">
+      <UniqueIdentifier>{74df2e3e-6c26-41fd-8dcb-fac2c0bc0609}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ResourceManager\Animation">
+      <UniqueIdentifier>{8a82d48d-b8e8-4210-9849-27ea19ed05a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows">
+      <UniqueIdentifier>{508c1b64-9523-4468-9c95-34bf5045a3a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows\Header">
+      <UniqueIdentifier>{07b0d747-0298-4f2a-8117-9fb4004283d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows\Resource">
+      <UniqueIdentifier>{fd094d2d-3b49-4709-8e47-eb84d75549f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObjects\Enemy">
+      <UniqueIdentifier>{417c5d2a-1bcb-4783-af8f-565b135dc72e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="CommonInclude.h">
+      <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Application.h">
+      <Filter>Engine\High_Level_Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Time.h">
+      <Filter>Engine\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Entity.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Scene.h">
+      <Filter>Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Layer.h">
+      <Filter>Engine\Scene\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_GameObject.h">
+      <Filter>Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Component.h">
+      <Filter>Engine\GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_SpriteRenderer.h">
+      <Filter>Engine\GameObject\Component\SpriteRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Transform.h">
+      <Filter>Engine\GameObject\Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Math.h">
+      <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_SceneManager.h">
+      <Filter>Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_TitleScene.h">
+      <Filter>Contents\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Input.h">
+      <Filter>Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Resource.h">
+      <Filter>Engine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_ResourceManager.h">
+      <Filter>Engine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Texture.h">
+      <Filter>Engine\ResourceManager\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_TitleScene_Background.h">
+      <Filter>Contents\GameObjects\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_ObjectManager.h">
+      <Filter>Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Player.h">
+      <Filter>Contents\GameObjects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_TitleScene_Title.h">
+      <Filter>Contents\GameObjects\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Camera.h">
+      <Filter>Engine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_PlayScene.h">
+      <Filter>Contents\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Temp_Platform.h">
+      <Filter>Contents\GameObjects\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_HUDFrame.h">
+      <Filter>Contents\GameObjects\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_HUDHealth.h">
+      <Filter>Contents\GameObjects\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_PlayBackground.h">
+      <Filter>Contents\GameObjects\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Animator.h">
+      <Filter>Engine\GameObject\Component\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Animation.h">
+      <Filter>Engine\ResourceManager\Animation</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Windows\Header</Filter>
     </ClInclude>
     <ClInclude Include="Client.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Windows\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>Windows\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Windows\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Crawler.h">
+      <Filter>Contents\GameObjects\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Client.cpp">
-      <Filter>소스 파일</Filter>
+    <Image Include="Client.ico">
+      <Filter>Windows\Resource</Filter>
+    </Image>
+    <Image Include="small.ico">
+      <Filter>Windows\Resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="IJ_Application.cpp">
+      <Filter>Engine\High_Level_Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Time.cpp">
+      <Filter>Engine\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Entity.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Scene.cpp">
+      <Filter>Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Layer.cpp">
+      <Filter>Engine\Scene\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_GameObject.cpp">
+      <Filter>Engine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Component.cpp">
+      <Filter>Engine\GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_SpriteRenderer.cpp">
+      <Filter>Engine\GameObject\Component\SpriteRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Transform.cpp">
+      <Filter>Engine\GameObject\Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Math.cpp">
+      <Filter>Engine\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_SceneManager.cpp">
+      <Filter>Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_TitleScene.cpp">
+      <Filter>Contents\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Input.cpp">
+      <Filter>Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Resource.cpp">
+      <Filter>Engine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_ResourceManager.cpp">
+      <Filter>Engine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Texture.cpp">
+      <Filter>Engine\ResourceManager\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_TitleScene_Background.cpp">
+      <Filter>Contents\GameObjects\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Player.cpp">
+      <Filter>Contents\GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_TitleScene_Title.cpp">
+      <Filter>Contents\GameObjects\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Camera.cpp">
+      <Filter>Engine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_PlayScene.cpp">
+      <Filter>Contents\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Temp_Platform.cpp">
+      <Filter>Contents\GameObjects\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_HUDFrame.cpp">
+      <Filter>Contents\GameObjects\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_HUDHealth.cpp">
+      <Filter>Contents\GameObjects\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_PlayBackground.cpp">
+      <Filter>Contents\GameObjects\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Animator.cpp">
+      <Filter>Engine\GameObject\Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Animation.cpp">
+      <Filter>Engine\ResourceManager\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Crawler.cpp">
+      <Filter>Contents\GameObjects\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
-      <Filter>리소스 파일</Filter>
+      <Filter>Windows\Resource</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="small.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="Client.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
   </ItemGroup>
 </Project>
