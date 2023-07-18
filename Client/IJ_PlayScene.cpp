@@ -34,13 +34,13 @@ namespace IJ
 		Transform* tr = player->GetComponent<Transform>();
 		tr->SetPosition(Vector2(400.0f, 400.0f));
 		Animator* at = player->AddComponent<Animator>();
-		at->CreateAnimation(L"Knight_idle", image, Vector2(0.0f, 0.0f), Vector2(64.0f, 128.0f), 9);
+		at->CreateAnimationInAnimator(L"Knight_idle", image, Vector2(0.0f, 0.0f), Vector2(64.0f, 128.0f), 9);
 		at->PlayAnimation(L"Knight_idle", true);
 		at->SetDrawOnCamera(false);
 
 		image = ResourceManager::Load<Texture>(L"Knight_walk"
 			, L"..\\Resources\\Extras\\atlas\\knight_walk_atlas.bmp");
-		at->CreateAnimation(L"Knight_walk", image, Vector2(0.0f, 0.0f), Vector2(64.0f, 128.0f), 7);
+		at->CreateAnimationInAnimator(L"Knight_walk", image, Vector2(0.0f, 0.0f), Vector2(64.0f, 128.0f), 7);
 		at->SetDrawOnCamera(false);
 
 		image = ResourceManager::Load<Texture>(L"PlayBackground"
@@ -82,7 +82,7 @@ namespace IJ
 		tr = crawler->GetComponent<Transform>();
 		tr->SetPosition(Vector2(300.0f, 300.0f));
 		at = crawler->AddComponent<Animator>();
-		at->CreateAnimation(L"Crawler_walk", image, Vector2(0.0f, 0.0f), Vector2(128.0f, 80.0f), 4);
+		at->CreateAnimationInAnimator(L"Crawler_walk", image, Vector2(0.0f, 0.0f), Vector2(128.0f, 80.0f), 4);
 		at->PlayAnimation(L"Crawler_walk", true);
 		at->SetDrawOnCamera(false);
 

@@ -7,6 +7,7 @@ namespace IJ
 {
 	Animator::Animator()
 		: Component(myComponentType::Animator)
+		, myScale(Vector2::One)
 		, isLoop(false)
 		, isDrawOnCamera(false)
 		, myAlpha(1.0f)
@@ -34,7 +35,7 @@ namespace IJ
 			myActivatedAnimation->Render(hdc);
 	}
 
-	void Animator::CreateAnimation(const std::wstring& name
+	Animation* Animator::CreateAnimationInAnimator(const std::wstring& name
 		, Texture* texture
 		, Vector2 leftTop, Vector2 size
 		, UINT spriteLength, Vector2 offset
@@ -43,7 +44,7 @@ namespace IJ
 		Animation* animation = nullptr;
 		animation = ResourceManager::Find<Animation>(name);
 		if (animation != nullptr)
-			return;
+			return animation;
 
 		animation = new Animation();
 		animation->CreateAnimation(name, texture
@@ -93,7 +94,7 @@ namespace IJ
 			idx++;
 		}
 
-		CreateAnimation(name
+		CreateAnimationInAnimator(name
 			, spriteSheet, Vector2(0.0f, 0.0f)
 			, Vector2(width, height), fileCout
 			, offset, duration);

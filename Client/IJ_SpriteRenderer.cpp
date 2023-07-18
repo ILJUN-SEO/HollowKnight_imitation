@@ -28,27 +28,17 @@ namespace IJ
 		if (myTexture == nullptr)
 			return;
 
-		Transform* tr = GetOwner()->GetComponent<Transform>();
-		Math::Vector2 pos = tr->GetPosition();
+		GameObject* gameobj = GetOwner();
+		Transform* tr = gameobj->GetComponent<Transform>();
 
-		if (isDrawOnCamera == false)
-			pos = Camera::GetWinPosition(pos);
-		
-		if (myTexture->GetType() == myTextureType::bmp)
-		{
-			TransparentBlt(hdc, (int)pos.x, (int)pos.y
-				, myTexture->GetWidth() * myScale.x, myTexture->GetHeight() * myScale.y
-				, myTexture->GetHDC(), 0, 0, myTexture->GetWidth(), myTexture->GetHeight(), RGB(255, 0, 255));
-		}
-
-		else if (myTexture->GetType() == myTextureType::png)
-		{
-			Gdiplus::Graphics graphics(hdc);
-			graphics.DrawImage(myTexture->GetImage()
-				, (int)(pos.x - (myTexture->GetWidth() * myScale.x / 2.0f))
-				, (int)(pos.y - (myTexture->GetHeight() * myScale.y / 2.0f))
-				, (int)(myTexture->GetWidth() * myScale.x)
-				, (int)(myTexture->GetHeight() * myScale.y));
-		}
+		myTexture->Render(hdc
+			, tr->GetPosition()
+			, Vector2(myTexture->GetWidth(), myTexture->GetHeight())
+			, Vector2::Zero
+			, Vector2(myTexture->GetWidth(), myTexture->GetHeight())
+			, Vector2::Zero
+			, myScale
+			, isDrawOnCamera
+			, myAlpha);
 	}
 }

@@ -43,31 +43,20 @@ namespace IJ
 		if (myTexture == nullptr)
 			return;
 
+		Sprite sprite = mySpriteSheet[myIndex];
 		Transform* tr = myAnimator->GetOwner()->GetComponent<Transform>();
-		Vector2 pos = tr->GetPosition();
+		Vector2 pos = tr->GetPosition() - (sprite.size / 2.0f) + sprite.offset;
+		Animator* animator = myAnimator;
 
-		if (myAnimator->GetDrawOnCamera() == false)
-			pos = Camera::GetWinPosition(pos);
-		BLENDFUNCTION func = {};
-		func.BlendOp = AC_SRC_OVER;
-		func.BlendFlags = 0;
-		func.AlphaFormat = AC_SRC_ALPHA;
-
-		int alpha = (int)(myAnimator->GetAlpha() * 255.0f);
-		if (alpha <= 0)
-			alpha = 0;
-		func.SourceConstantAlpha = alpha;
-
-		AlphaBlend(hdc, (int)pos.x - (mySpriteSheet[myIndex].size.x / 2.0f) + mySpriteSheet[myIndex].offset.x
-			, (int)pos.y - (mySpriteSheet[myIndex].size.y / 2.0f) + mySpriteSheet[myIndex].offset.y
-			, mySpriteSheet[myIndex].size.x
-			, mySpriteSheet[myIndex].size.y
-			, myTexture->GetHDC()
-			, mySpriteSheet[myIndex].leftTop.x
-			, mySpriteSheet[myIndex].leftTop.y
-			, mySpriteSheet[myIndex].size.x
-			, mySpriteSheet[myIndex].size.y
-			, func);
+		myTexture->Render(hdc
+			, pos
+			, sprite.size
+			, sprite.leftTop
+			, sprite.size
+			, sprite.offset
+			, animator->GetScale()
+			, animator->GetDrawOnCamera()
+			, animator->GetAlpha());
 	}
 
 	void Animation::CreateAnimation(const std::wstring& name, Texture* texture
