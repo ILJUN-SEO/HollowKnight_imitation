@@ -26,6 +26,7 @@ namespace IJ
 
 		Animation* FindAnimation(const std::wstring& name);
 		void PlayAnimation(const std::wstring& name, bool loop = false);
+		bool IsActavatedAnimationComplete() { return myActivatedAnimation->IsComplete(); }
 
 		bool GetDrawOnCamera() { return isDrawOnCamera; }
 		void SetDrawOnCamera(bool value) { isDrawOnCamera = value; }

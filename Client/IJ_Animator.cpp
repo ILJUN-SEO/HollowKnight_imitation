@@ -42,7 +42,7 @@ namespace IJ
 		, float duration)
 	{
 		Animation* animation = nullptr;
-		animation = ResourceManager::Find<Animation>(name);
+		animation = FindAnimation(name);
 		if (animation != nullptr)
 			return animation;
 
@@ -54,6 +54,8 @@ namespace IJ
 
 		myAnimations.insert(std::make_pair(name, animation));
 		ResourceManager::Insert<Animation>(name, animation);
+
+		return animation;
 	}
 
 	void Animator::CreateAnimationFolder(const std::wstring& name
@@ -82,12 +84,16 @@ namespace IJ
 			fileCout++;
 		}
 
-		Texture* spriteSheet = Texture::CreateTexture(name, width * fileCout, height);
+		std::wstring spriteSheetName = name + L"SpriteSheet";
+		Texture* spriteSheet = Texture::CreateTexture(spriteSheetName, width * fileCout, height);
+		spriteSheet->SetType(myTextureType::Alphabmp);
 
 		int idx = 0;
 		for (Texture* texture : textures)
 		{
-			BitBlt(spriteSheet->GetHDC(), width * idx, 0
+			BitBlt(spriteSheet->GetHDC()
+				, (width * idx) + ((width - texture->GetWidth()) / 2.0f)
+				, 0
 				, texture->GetWidth(), texture->GetHeight()
 				, texture->GetHDC(), 0, 0, SRCCOPY);
 

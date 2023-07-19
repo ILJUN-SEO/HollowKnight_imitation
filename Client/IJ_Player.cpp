@@ -8,6 +8,7 @@
 namespace IJ
 {
 	Player::Player()
+		: myState(myPlayerState::Idle)
 	{}
 
 	Player::~Player()
@@ -25,32 +26,32 @@ namespace IJ
 		Animator* anim = GetComponent<Animator>();
 
 		
-		bool myinput = false;
+		bool isInputDetected = false;
 		if (Input::GetKeyPressing(myKeyCode::Up))
 		{
 			pos.y -= 300.0f * Time::DeltaTime();
-			myinput = true;
+			isInputDetected = true;
 		}
 		if (Input::GetKeyPressing(myKeyCode::Left))
 		{
 			anim->PlayAnimation(L"Knight_walk", true);
 
 			pos.x -= 300.0f * Time::DeltaTime();
-			myinput = true;
+			isInputDetected = true;
 		}
 		if (Input::GetKeyPressing(myKeyCode::Down))
 		{
 			pos.y += 300.0f * Time::DeltaTime();
-			myinput = true;
+			isInputDetected = true;
 		}
 		if (Input::GetKeyPressing(myKeyCode::Right))
 		{
 			anim->PlayAnimation(L"Knight_walk", true);
 
 			pos.x += 300.0f * Time::DeltaTime();
-			myinput = true;
+			isInputDetected = true;
 		}
-		if (myinput == false)
+		if (isInputDetected == false)
 		{
 			anim->PlayAnimation(L"Knight_idle", true);
 		}
@@ -62,4 +63,16 @@ namespace IJ
 	{
 		GameObject::Render(hdc);
 	}
+
+	void Player::Idle()
+	{}
+
+	void Player::Move()
+	{}
+
+	void Player::Attack()
+	{}
+
+	void Player::Death()
+	{}
 }

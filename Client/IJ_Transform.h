@@ -15,8 +15,11 @@ namespace IJ
 
 		void SetPosition(Math::Vector2 position) { myPosition = position; }
 		Math::Vector2 GetPosition() { return myPosition; }
+		void SetRotation(float rotate) { myRotation = rotate; }
+		float GetRotation() { return myRotation; }
 
 	private:
 		Math::Vector2 myPosition;
+		float myRotation;
 	};
 }

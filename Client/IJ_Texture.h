@@ -26,6 +26,7 @@ namespace IJ
 			, Vector2 leftTop
 			, Vector2 rightBottom
 			, Vector2 offset = Vector2::Zero
+			, float rotate = 0.0f
 			, Vector2 scale = Vector2::One
 			, bool drawOnCamera = false
 			, float alpha = 1.0f);

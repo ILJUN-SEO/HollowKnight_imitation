@@ -45,7 +45,7 @@ namespace IJ
 
 		Sprite sprite = mySpriteSheet[myIndex];
 		Transform* tr = myAnimator->GetOwner()->GetComponent<Transform>();
-		Vector2 pos = tr->GetPosition() - (sprite.size / 2.0f) + sprite.offset;
+		Vector2 pos = tr->GetPosition();
 		Animator* animator = myAnimator;
 
 		myTexture->Render(hdc
@@ -54,6 +54,7 @@ namespace IJ
 			, sprite.leftTop
 			, sprite.size
 			, sprite.offset
+			, tr->GetRotation()
 			, animator->GetScale()
 			, animator->GetDrawOnCamera()
 			, animator->GetAlpha());
@@ -71,6 +72,13 @@ namespace IJ
 
 			sprite.leftTop.x = lefttop.x + (size.x * i);
 			sprite.leftTop.y = lefttop.y;
+
+			if (sprite.leftTop.x >= texture->GetWidth())
+			{
+				sprite.leftTop.x = sprite.leftTop.x - texture->GetWidth();
+				sprite.leftTop.y = lefttop.y + size.y;
+			}
+
 			sprite.size = size;
 			sprite.offset = offset;
 			sprite.duration = duration;

@@ -4,7 +4,8 @@
 namespace IJ
 {
 	Transform::Transform()
-		:Component(myComponentType::Transform)
+		: Component(myComponentType::Transform)
+		, myRotation(0.0f)
 	{}
 
 	Transform::~Transform()

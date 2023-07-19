@@ -35,6 +35,7 @@ namespace IJ
 		, Vector2 leftTop
 		, Vector2 rightBottom
 		, Vector2 offset
+		, float rotate
 		, Vector2 scale
 		, bool drawOnCamera
 		, float alphainput)
@@ -84,6 +85,11 @@ namespace IJ
 								, Gdiplus::Color(255, 0, 255));
 
 			Gdiplus::Graphics graphics(hdc);
+
+			graphics.TranslateTransform((float)pos.x, (float)pos.y);
+			graphics.RotateTransform(rotate);
+			graphics.TranslateTransform(-(float)pos.x, -(float)pos.y);
+
 			graphics.DrawImage(myImage
 				, Gdiplus::Rect
 				(
@@ -97,6 +103,10 @@ namespace IJ
 				, Gdiplus::UnitPixel
 				, nullptr);
 		}
+
+		Rectangle(hdc
+			, pos.x - 5, pos.y - 5
+			, pos.x + 5, pos.y + 5);
 	}
 
 	Texture* Texture::CreateTexture(const std::wstring& name, UINT width, UINT height)

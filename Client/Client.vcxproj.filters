@@ -85,6 +85,9 @@
     <Filter Include="Contents\GameObjects\Enemy">
       <UniqueIdentifier>{417c5d2a-1bcb-4783-af8f-565b135dc72e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\Component\Collider">
+      <UniqueIdentifier>{03942133-4ee7-4e89-9766-b251932ed765}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonInclude.h">
@@ -189,6 +192,12 @@
     <ClInclude Include="IJ_Crawler.h">
       <Filter>Contents\GameObjects\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="IJ_Collider.h">
+      <Filter>Engine\GameObject\Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_CollisionManager.h">
+      <Filter>Engine\GameObject\Component\Collider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -283,6 +292,12 @@
     </ClCompile>
     <ClCompile Include="IJ_Crawler.cpp">
       <Filter>Contents\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Collider.cpp">
+      <Filter>Engine\GameObject\Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_CollisionManager.cpp">
+      <Filter>Engine\GameObject\Component\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

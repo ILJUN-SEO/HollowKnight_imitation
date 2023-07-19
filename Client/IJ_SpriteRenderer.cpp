@@ -37,6 +37,7 @@ namespace IJ
 			, Vector2::Zero
 			, Vector2(myTexture->GetWidth(), myTexture->GetHeight())
 			, Vector2::Zero
+			, tr->GetRotation()
 			, myScale
 			, isDrawOnCamera
 			, myAlpha);

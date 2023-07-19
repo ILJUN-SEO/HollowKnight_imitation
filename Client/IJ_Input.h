@@ -6,10 +6,12 @@ namespace IJ
 {
 	enum class myKeyCode
 	{
+		One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Zero,
 		Q, W, E, R, T, Y, U, I, O, P,
 		A, S, D, F, G, H, J, K, L,
-		Z, X, C, V, B, N, M, Up,
-		Ctrl, Alt, Space, Left, Down, Right,
+		Z, X, C, V, B, N, M, 
+		Ctrl, Alt, Space, Up, Left, Down, Right,
+		Mouse_L, Mouse_R, Mouse_M,
 		END,
 	};
 

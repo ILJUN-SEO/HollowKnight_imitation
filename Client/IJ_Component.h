@@ -9,6 +9,7 @@ namespace IJ
 		SpriteRenderer,
 		Animation,
 		Animator,
+		Collider,
 		End,
 	};
 
