@@ -88,6 +88,9 @@
     <Filter Include="Engine\_HighLevelInterface">
       <UniqueIdentifier>{4df49601-91f4-4a90-b259-2e438085f022}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\Component\Rigidbody">
+      <UniqueIdentifier>{9f864738-7b12-4486-929e-63031bbce5d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonInclude.h">
@@ -201,6 +204,9 @@
     <ClInclude Include="IJ_Temp_Ground.h">
       <Filter>Contents\GameObjects\Terrain</Filter>
     </ClInclude>
+    <ClInclude Include="IJ_Rigidbody.h">
+      <Filter>Engine\GameObject\Component\Rigidbody</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -304,6 +310,9 @@
     </ClCompile>
     <ClCompile Include="IJ_Temp_Ground.cpp">
       <Filter>Contents\GameObjects\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Rigidbody.cpp">
+      <Filter>Engine\GameObject\Component\Rigidbody</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

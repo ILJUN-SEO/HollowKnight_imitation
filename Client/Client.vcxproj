@@ -152,6 +152,7 @@
     <ClInclude Include="IJ_PlayScene.h" />
     <ClInclude Include="IJ_Resource.h" />
     <ClInclude Include="IJ_ResourceManager.h" />
+    <ClInclude Include="IJ_Rigidbody.h" />
     <ClInclude Include="IJ_Scene.h" />
     <ClInclude Include="IJ_SceneManager.h" />
     <ClInclude Include="IJ_SpriteRenderer.h" />
@@ -187,6 +188,7 @@
     <ClCompile Include="IJ_Math.cpp" />
     <ClCompile Include="IJ_Player.cpp" />
     <ClCompile Include="IJ_Resource.cpp" />
+    <ClCompile Include="IJ_Rigidbody.cpp" />
     <ClCompile Include="IJ_Scene.cpp" />
     <ClCompile Include="IJ_SceneManager.cpp" />
     <ClCompile Include="IJ_SpriteRenderer.cpp" />

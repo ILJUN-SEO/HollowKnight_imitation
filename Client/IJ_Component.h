@@ -10,6 +10,7 @@ namespace IJ
 		Animation,
 		Animator,
 		Collider,
+		Rigidbody,
 		End,
 	};
 
