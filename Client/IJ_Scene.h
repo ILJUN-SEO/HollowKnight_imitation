@@ -18,6 +18,8 @@ namespace IJ
 		void AddGameObject(myLayerType type, GameObject* gameobject) 
 		{ myLayers[(int)type].AddGameObject(gameobject); }
 
+		Layer& GetLayer(myLayerType type) { return myLayers[(UINT)type]; }
+
 	private:
 		std::vector<Layer> myLayers;
 	};

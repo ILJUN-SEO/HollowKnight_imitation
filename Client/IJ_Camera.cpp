@@ -36,6 +36,7 @@ namespace IJ
 		{
 			Transform* tr = myTarget->GetComponent<Transform>();
 			myCameraPosition = tr->GetPosition();
+			myCameraPosition.y -= 200.0f;
 		}
 
 		myWinPosition = myCameraPosition - (myResolution / 2.0f);

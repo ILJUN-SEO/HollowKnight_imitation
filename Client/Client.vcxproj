@@ -155,6 +155,7 @@
     <ClInclude Include="IJ_Scene.h" />
     <ClInclude Include="IJ_SceneManager.h" />
     <ClInclude Include="IJ_SpriteRenderer.h" />
+    <ClInclude Include="IJ_Temp_Ground.h" />
     <ClInclude Include="IJ_Temp_Platform.h" />
     <ClInclude Include="IJ_Texture.h" />
     <ClInclude Include="IJ_Time.h" />
@@ -189,6 +190,7 @@
     <ClCompile Include="IJ_Scene.cpp" />
     <ClCompile Include="IJ_SceneManager.cpp" />
     <ClCompile Include="IJ_SpriteRenderer.cpp" />
+    <ClCompile Include="IJ_Temp_Ground.cpp" />
     <ClCompile Include="IJ_Temp_Platform.cpp" />
     <ClCompile Include="IJ_Texture.cpp" />
     <ClCompile Include="IJ_Time.cpp" />

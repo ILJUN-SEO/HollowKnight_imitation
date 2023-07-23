@@ -10,9 +10,6 @@
     <Filter Include="Engine\Common">
       <UniqueIdentifier>{36dd997f-6dec-4f2b-85df-2f108b6480c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\High_Level_Interface">
-      <UniqueIdentifier>{4df49601-91f4-4a90-b259-2e438085f022}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Time">
       <UniqueIdentifier>{e71ad175-1914-4330-80a6-cd316165f126}</UniqueIdentifier>
     </Filter>
@@ -88,13 +85,16 @@
     <Filter Include="Engine\GameObject\Component\Collider">
       <UniqueIdentifier>{03942133-4ee7-4e89-9766-b251932ed765}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\_HighLevelInterface">
+      <UniqueIdentifier>{4df49601-91f4-4a90-b259-2e438085f022}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonInclude.h">
       <Filter>Engine\Common</Filter>
     </ClInclude>
     <ClInclude Include="IJ_Application.h">
-      <Filter>Engine\High_Level_Interface</Filter>
+      <Filter>Engine\_HighLevelInterface</Filter>
     </ClInclude>
     <ClInclude Include="IJ_Time.h">
       <Filter>Engine\Time</Filter>
@@ -198,6 +198,9 @@
     <ClInclude Include="IJ_CollisionManager.h">
       <Filter>Engine\GameObject\Component\Collider</Filter>
     </ClInclude>
+    <ClInclude Include="IJ_Temp_Ground.h">
+      <Filter>Contents\GameObjects\Terrain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -210,7 +213,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="IJ_Application.cpp">
-      <Filter>Engine\High_Level_Interface</Filter>
+      <Filter>Engine\_HighLevelInterface</Filter>
     </ClCompile>
     <ClCompile Include="IJ_Time.cpp">
       <Filter>Engine\Time</Filter>
@@ -298,6 +301,9 @@
     </ClCompile>
     <ClCompile Include="IJ_CollisionManager.cpp">
       <Filter>Engine\GameObject\Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Temp_Ground.cpp">
+      <Filter>Contents\GameObjects\Terrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

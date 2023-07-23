@@ -11,7 +11,13 @@ namespace IJ
 		{
 			Idle,
 			Move,
+			Jump,
+			Fall,
+			Falling,
 			Attack,
+			Spell,
+			SpellUp,
+			SpellDown,
 			Death,
 			END
 		};
@@ -23,12 +29,25 @@ namespace IJ
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
+		virtual void OnCollisionEnter(class Collider* other) override;
+		virtual void OnCollisionStay(class Collider* other) override;
+		virtual void OnCollisionExit(class Collider* other) override;
+
 		void Idle();
 		void Move();
+		void Jump();
+		void Fall();
+		void Falling();
 		void Attack();
+		void Spell();
+		void SpellUp();
+		void SpellDown();
 		void Death();
 
 	private:
-		myPlayerState myState;
+		myPlayerState myCurrentState;
+		bool isLookingLeft;
+		bool isGrounded;
+		float jumpPressingTime;
 	};
 }

@@ -3,6 +3,7 @@
 #include "IJ_Input.h"
 #include "IJ_SceneManager.h"
 #include "IJ_Camera.h"
+#include "IJ_CollisionManager.h"
 
 
 namespace IJ
@@ -49,6 +50,7 @@ namespace IJ
 		Input::Initialize();
 		Camera::Initialize();
 
+		CollisionManager::Initialize();
 		SceneManager::Initialize();
 	}
 
@@ -64,6 +66,7 @@ namespace IJ
 		Input::Update();
 		Camera::Update();
 
+		CollisionManager::Update();
 		SceneManager::Update();
 	}
 
@@ -76,6 +79,7 @@ namespace IJ
 		DeleteObject(brush);
 		//Time::Render(myBackHDC);
 
+		CollisionManager::Render(myBackHDC);
 		SceneManager::Render(myBackHDC);
 		// 백 버퍼에 그려진 것들을 메인 버퍼에 복사합니다
 		BitBlt(myHDC, 0, 0, myWidth, myHeight

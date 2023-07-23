@@ -104,9 +104,9 @@ namespace IJ
 				, nullptr);
 		}
 
-		Rectangle(hdc
-			, pos.x - 5, pos.y - 5
-			, pos.x + 5, pos.y + 5);
+		//Rectangle(hdc
+		//	, pos.x, pos.y
+		//	, pos.x + 10, pos.y + 10);
 	}
 
 	Texture* Texture::CreateTexture(const std::wstring& name, UINT width, UINT height)

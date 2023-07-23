@@ -27,6 +27,7 @@ namespace IJ
 		virtual void Render(HDC hdc);
 
 		void AddGameObject(GameObject* gameobject) { myGameObjects.push_back(gameobject); }
+		std::vector<GameObject*>& GetGameObjects() { return myGameObjects; }
 
 	private:
 		std::vector<GameObject*> myGameObjects;

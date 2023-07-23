@@ -24,4 +24,13 @@ namespace IJ
 	{
 		GameObject::Render(hdc);
 	}
+
+	void Crawler::OnCollisionEnter(Collider* other)
+	{}
+
+	void Crawler::OnCollisionStay(Collider* other)
+	{}
+
+	void Crawler::OnCollisionExit(Collider* other)
+	{}
 }

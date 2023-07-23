@@ -26,9 +26,9 @@ namespace IJ
 
 	void SceneManager::Update()
 	{
-		if (Input::GetKeyDown(myKeyCode::P))
+		if (Input::GetKeyDown(myKeyCode::One))
 			LoadScene(L"TitleScene");
-		if (Input::GetKeyDown(myKeyCode::O))
+		if (Input::GetKeyDown(myKeyCode::Two))
 			LoadScene(L"PlayScene");
 
 		myActivatedScene->Update();
