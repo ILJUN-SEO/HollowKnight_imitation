@@ -66,7 +66,7 @@ namespace IJ
 	{
 		myTexture = texture;
 
-		for (int i = 0; i < spriteLength; i++)
+		for (UINT i = 0; i < spriteLength; i++)
 		{
 			Sprite sprite = {};
 

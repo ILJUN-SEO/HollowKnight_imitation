@@ -149,6 +149,7 @@
     <ClInclude Include="IJ_ObjectManager.h" />
     <ClInclude Include="IJ_PlayBackground.h" />
     <ClInclude Include="IJ_Player.h" />
+    <ClInclude Include="IJ_PlayerSlash.h" />
     <ClInclude Include="IJ_PlayScene.h" />
     <ClInclude Include="IJ_Resource.h" />
     <ClInclude Include="IJ_ResourceManager.h" />
@@ -177,6 +178,7 @@
     <ClCompile Include="IJ_HUDFrame.cpp" />
     <ClCompile Include="IJ_HUDHealth.cpp" />
     <ClCompile Include="IJ_PlayBackground.cpp" />
+    <ClCompile Include="IJ_PlayerSlash.cpp" />
     <ClCompile Include="IJ_PlayScene.cpp" />
     <ClCompile Include="IJ_ResourceManager.cpp" />
     <ClCompile Include="IJ_Application.cpp" />

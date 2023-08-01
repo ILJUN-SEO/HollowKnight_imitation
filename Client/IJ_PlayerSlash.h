@@ -4,11 +4,11 @@
 
 namespace IJ
 {
-	class Temp_Ground : public GameObject
+	class PlayerSlash : public GameObject
 	{
 	public:
-		Temp_Ground();
-		virtual ~Temp_Ground();
+		PlayerSlash();
+		~PlayerSlash();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -18,7 +18,10 @@ namespace IJ
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
-	private:
+		void SetOwner(GameObject* owner) { myOwner = owner; }
 
+	private:
+		GameObject* myOwner;
+		float myDeathTime;
 	};
 }

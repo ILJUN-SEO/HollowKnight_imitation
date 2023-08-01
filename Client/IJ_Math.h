@@ -4,6 +4,8 @@
 
 namespace IJ::Math
 {
+#define PI 3.141592f
+
 	struct Vector2
 	{
 		Vector2()
@@ -101,9 +103,53 @@ namespace IJ::Math
 			return *this;
 		}
 
+		Vector2& operator *=(const float value)
+		{
+			x *= value;
+			y *= value;
+
+			return *this;
+		}
+
+		//Vector2& operator *=(const Vector2& other)
+		//{
+		//	x *= other.x;
+		//	y *= other.y;
+
+		//	return *this;
+		//}
+
+		Vector2& operator /=(const Vector2& other)
+		{
+			x /= other.x;
+			y /= other.y;
+
+			return *this;
+		}
+
 		bool operator ==(const Vector2& other)
 		{
 			return (x == other.x && y == other.y);
 		}
 	};
+
+	inline Vector2 Rotate(Vector2 vector, float degree)
+	{
+		float radian = (degree / 180.0f) * PI;
+		vector.normalize();
+		float x = cosf(radian) * vector.x - sinf(radian) * vector.y;
+		float y = sinf(radian) * vector.x + cosf(radian) * vector.y;
+
+		return Vector2(x, y);
+	}
+
+	inline float Dot(Vector2& v1, Vector2& v2)
+	{
+		return v1.x * v2.x + v1.y * v2.y;
+	}
+
+	inline float Cross(Vector2 v1, Vector2 v2)
+	{
+		return v1.x * v2.y - v1.y * v2.x;
+	}
 }

@@ -207,6 +207,9 @@
     <ClInclude Include="IJ_Rigidbody.h">
       <Filter>Engine\GameObject\Component\Rigidbody</Filter>
     </ClInclude>
+    <ClInclude Include="IJ_PlayerSlash.h">
+      <Filter>Contents\GameObjects\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -313,6 +316,9 @@
     </ClCompile>
     <ClCompile Include="IJ_Rigidbody.cpp">
       <Filter>Engine\GameObject\Component\Rigidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_PlayerSlash.cpp">
+      <Filter>Contents\GameObjects\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

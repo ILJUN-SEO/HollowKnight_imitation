@@ -46,6 +46,7 @@ namespace IJ
 		void SetType(myTextureType type) { myType = type; }
 		myTextureType GetType() { return myType; }
 		Gdiplus::Image* GetImage() { return myImage; }
+		void SetXFlip() { myImage->RotateFlip(Gdiplus::RotateNoneFlipX); }
 
 		void SetDrawOnCamera(bool value) { isDrawOnCamera = value; }
 		bool GetDrawOnCamera() { return isDrawOnCamera; }

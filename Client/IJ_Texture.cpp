@@ -81,8 +81,8 @@ namespace IJ
 		else if (myType == myTextureType::png)
 		{
 			Gdiplus::ImageAttributes imageAtt = {};
-			imageAtt.SetColorKey(Gdiplus::Color(255, 0, 255)
-								, Gdiplus::Color(255, 0, 255));
+			imageAtt.SetColorKey(Gdiplus::Color(255, 0, 0)
+								, Gdiplus::Color(255, 0, 0));
 
 			Gdiplus::Graphics graphics(hdc);
 
@@ -101,7 +101,7 @@ namespace IJ
 				, leftTop.x, leftTop.y
 				, rightBottom.x, rightBottom.y
 				, Gdiplus::UnitPixel
-				, nullptr);
+				, &imageAtt);
 		}
 
 		//Rectangle(hdc

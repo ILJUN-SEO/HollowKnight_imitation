@@ -28,6 +28,7 @@ namespace IJ
 		Vector2 GetSize() { return mySize; }
 		void SetOffset(Vector2 offset) { myOffset = offset; }
 		Vector2 GetOffset() { return myOffset; }
+		void ForceSetOnCollision(bool value) { isOnCollision = value; }
 
 	private:
 		static UINT myCollisionIDCount;

@@ -12,6 +12,7 @@ namespace IJ::InputObject
 		T* gameobject = new T();
 		Scene* scene = SceneManager::GetActivatedScene();
 		scene->AddGameObject(type, gameobject);
+		gameobject->Initialize();
 
 		return gameobject;
 	}

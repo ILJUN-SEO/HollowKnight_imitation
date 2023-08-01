@@ -33,6 +33,11 @@ namespace IJ
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+		void SetState(myPlayerState state) { myCurrentState = state; }
+		myPlayerState GetState() { return myCurrentState; }
+		void SetLookingLeft(bool value) { isLookingLeft = value; }
+		bool GetLookingLeft() { return isLookingLeft; }
+
 		void Idle();
 		void Move();
 		void Jump();
@@ -49,5 +54,6 @@ namespace IJ
 		bool isLookingLeft;
 		bool isGrounded;
 		float jumpPressingTime;
+		bool isAttacking;
 	};
 }

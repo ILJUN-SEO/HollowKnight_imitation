@@ -8,6 +8,14 @@ namespace IJ
 	class GameObject : public Entity
 	{
 	public:
+		enum class myGameObjectState
+		{
+			Active,
+			Pause,
+			Dead,
+			END,
+		};
+
 		GameObject();
 		virtual ~GameObject();
 
@@ -18,6 +26,10 @@ namespace IJ
 		virtual void OnCollisionEnter(class Collider* other);
 		virtual void OnCollisionStay(class Collider* other);
 		virtual void OnCollisionExit(class Collider* other);
+
+		friend static __forceinline void Destroy(GameObject* gameObject);
+		void Pause() { myCurrentGOState = myGameObjectState::Pause; }
+		myGameObjectState GetGameObjectState() { return myCurrentGOState; }
 
 		template <typename T>
 		T* AddComponent()
@@ -44,6 +56,12 @@ namespace IJ
 		}
 
 	private:
+		void Death() { myCurrentGOState = myGameObjectState::Dead; }
+
 		std::vector<Component*> myComponents;
+		myGameObjectState myCurrentGOState;
 	};
+
+	static __forceinline void Destroy(GameObject* gameObject) { gameObject->Death(); }
+
 }

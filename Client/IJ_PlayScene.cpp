@@ -8,8 +8,10 @@
 #include "IJ_Camera.h"
 #include "IJ_Animator.h"
 #include "IJ_CollisionManager.h"
+#include "IJ_Rigidbody.h"
 
 #include "IJ_Player.h"
+#include "IJ_PlayerSlash.h"
 #include "IJ_Temp_Platform.h"
 #include "IJ_Temp_Ground.h"
 #include "IJ_HUDFrame.h"
@@ -32,31 +34,35 @@ namespace IJ
 	{	
 		// 플레이어 관련
 		Texture* image = ResourceManager::Load<Texture>(L"Knight_atlas"
-			, L"..\\Resources\\Extras\\atlas\\knight_atlas.png");
+			, L"..\\Resources\\Extras\\atlas\\knight_atlas_test.png");
 		Player* player = InputObject::Instantiate<Player>(myLayerType::Player);
 		Transform* tr = player->GetComponent<Transform>();
 		tr->SetPosition(Vector2(800.0f, 600.0f));
+		Rigidbody* rb = player->AddComponent<Rigidbody>();
+
 		Animator* at = player->AddComponent<Animator>();
 		at->CreateAnimationInAnimator(L"Knight_idle_left", image, Vector2(0.0f, 0.0f), Vector2(64.0f, 128.0f), 9);
 		at->CreateAnimationInAnimator(L"Knight_idle_right", image, Vector2(0.0f, 128.0f), Vector2(64.0f, 128.0f), 9);
 		at->CreateAnimationInAnimator(L"Knight_walk_left", image, Vector2(0.0f, 256.0f), Vector2(64.0f, 128.0f), 7);
 		at->CreateAnimationInAnimator(L"Knight_walk_right", image, Vector2(0.0f, 384.0f), Vector2(64.0f, 128.0f), 7);
-		at->CreateAnimationInAnimator(L"Knight_jump_left", image, Vector2(0.0f, 512.0f), Vector2(96.0f, 128.0f), 6);
-		at->CreateAnimationInAnimator(L"Knight_jump_right", image, Vector2(0.0f, 640.0f), Vector2(96.0f, 128.0f), 6);
-		at->CreateAnimationInAnimator(L"Knight_fall_left", image, Vector2(0.0f, 768.0f), Vector2(96.0f, 128.0f), 6);
-		at->CreateAnimationInAnimator(L"Knight_fall_right", image, Vector2(0.0f, 896.0f), Vector2(96.0f, 128.0f), 6);
-		at->CreateAnimationInAnimator(L"Knight_falling_left", image, Vector2(288.0f, 768.0f), Vector2(96.0f, 128.0f), 3);
-		at->CreateAnimationInAnimator(L"Knight_falling_right", image, Vector2(288.0f, 896.0f), Vector2(96.0f, 128.0f), 3);
-		at->CreateAnimationInAnimator(L"Knight_attack_left", image, Vector2(0.0f, 1024.0f), Vector2(128.0f, 128.0f), 5);
-		at->CreateAnimationInAnimator(L"Knight_attack_right", image, Vector2(0.0f, 1152.0f), Vector2(128.0f, 128.0f), 5);
+		at->CreateAnimationInAnimator(L"Knight_jump_left", image, Vector2(0.0f, 512.0f), Vector2(96.0f, 136.0f), 6);
+		at->CreateAnimationInAnimator(L"Knight_jump_right", image, Vector2(0.0f, 646.0f), Vector2(96.0f, 136.0f), 6);
+		at->CreateAnimationInAnimator(L"Knight_fall_left", image, Vector2(0.0f, 784.0f), Vector2(96.0f, 144.0f), 6);
+		at->CreateAnimationInAnimator(L"Knight_fall_right", image, Vector2(0.0f, 928.0f), Vector2(96.0f, 144.0f), 6);
+		at->CreateAnimationInAnimator(L"Knight_falling_left", image, Vector2(288.0f, 784.0f), Vector2(96.0f, 144.0f), 3);
+		at->CreateAnimationInAnimator(L"Knight_falling_right", image, Vector2(288.0f, 928.0f), Vector2(96.0f, 144.0f), 3);
+		at->CreateAnimationInAnimator(L"Knight_attack_left", image, Vector2(0.0f, 1072.0f), Vector2(128.0f, 128.0f), 5);
+		at->CreateAnimationInAnimator(L"Knight_attack_right", image, Vector2(0.0f, 1200.0f), Vector2(128.0f, 128.0f), 5);
 
-		//at->PlayAnimation(L"Knight_idle_left", true);
-		//image = ResourceManager::Load<Texture>(L"Knight_walk"
-		//	, L"..\\Resources\\Extras\\atlas\\knight_walk_atlas.bmp");
-		//at->CreateAnimationInAnimator(L"Knight_walk_left", image, Vector2(0.0f, 0.0f), Vector2(64.0f, 128.0f), 7);
-		//at->SetDrawOnCamera(false);
 		Collider* col = player->AddComponent<Collider>();
 		col->SetSize(Vector2(64.0f, 128.0f));
+
+		//image = ResourceManager::Load<Texture>(L"SlashEffect"
+		//	, L"..\\Resources\\Extras\\atlas\\SlashEffect.png");
+		//PlayerSlash* slash = InputObject::Instantiate<PlayerSlash>(myLayerType::Player);
+		//at = slash->GetComponent<Animator>();
+		//at->CreateAnimationInAnimator(L"Slash_left", image, Vector2(0.0f, 0.0f), Vector2(160.0f, 112.0f), 5, Vector2(-100.0f, 0.0f));
+		//at->CreateAnimationInAnimator(L"Slash_right", image, Vector2(0.0f, 112.0f), Vector2(160.0f, 112.0f), 5, Vector2(100.0f, 0.0f));
 
 		// 배경 관련
 		image = ResourceManager::Load<Texture>(L"PlayBackground"
@@ -75,7 +81,9 @@ namespace IJ
 		sr->SetTexture(image);
 		sr->SetScale(Vector2::One);
 		sr->SetDrawOnCamera(false);
-		tempplatform->GetComponent<Transform>()->SetPosition(Vector2(400.0f, 600.0f));
+		tempplatform->GetComponent<Transform>()->SetPosition(Vector2(800.0f, 500.0f));
+		col = tempplatform->AddComponent<Collider>();
+		col->SetSize(Vector2(93.0f, 59.0f));
 
 		image = ResourceManager::Load<Texture>(L"Temp_Ground"
 			, L"..\\Resources\\Extras\\Terrain\\temp_ground.bmp");
@@ -118,6 +126,7 @@ namespace IJ
 
 		CollisionManager::CollisionLayerCheck(myLayerType::Player, myLayerType::Enemy, true);
 		CollisionManager::CollisionLayerCheck(myLayerType::Player, myLayerType::Terrain, true);
+		CollisionManager::CollisionLayerCheck(myLayerType::Enemy, myLayerType::Terrain, true);
 		Camera::SetTarget(player);
 	}
 

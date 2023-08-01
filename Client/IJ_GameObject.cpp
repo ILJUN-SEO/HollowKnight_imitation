@@ -6,6 +6,7 @@
 namespace IJ
 {
 	GameObject::GameObject()
+		: myCurrentGOState(myGameObjectState::Active)
 	{
 		AddComponent<Transform>();
 	}
