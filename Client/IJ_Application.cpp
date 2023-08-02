@@ -4,6 +4,7 @@
 #include "IJ_SceneManager.h"
 #include "IJ_Camera.h"
 #include "IJ_CollisionManager.h"
+#include "IJ_SoundManager.h"
 
 
 namespace IJ
@@ -48,6 +49,7 @@ namespace IJ
 		// 초기화가 필요한 클래스들의 초기화를 해줍니다
 		Time::Initialize();
 		Input::Initialize();
+		SoundManager::Initialize();
 		Camera::Initialize();
 
 		CollisionManager::Initialize();

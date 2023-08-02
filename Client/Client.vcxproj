@@ -156,6 +156,8 @@
     <ClInclude Include="IJ_Rigidbody.h" />
     <ClInclude Include="IJ_Scene.h" />
     <ClInclude Include="IJ_SceneManager.h" />
+    <ClInclude Include="IJ_Sound.h" />
+    <ClInclude Include="IJ_SoundManager.h" />
     <ClInclude Include="IJ_SpriteRenderer.h" />
     <ClInclude Include="IJ_Temp_Ground.h" />
     <ClInclude Include="IJ_Temp_Platform.h" />
@@ -193,6 +195,8 @@
     <ClCompile Include="IJ_Rigidbody.cpp" />
     <ClCompile Include="IJ_Scene.cpp" />
     <ClCompile Include="IJ_SceneManager.cpp" />
+    <ClCompile Include="IJ_Sound.cpp" />
+    <ClCompile Include="IJ_SoundManager.cpp" />
     <ClCompile Include="IJ_SpriteRenderer.cpp" />
     <ClCompile Include="IJ_Temp_Ground.cpp" />
     <ClCompile Include="IJ_Temp_Platform.cpp" />

@@ -91,6 +91,9 @@
     <Filter Include="Engine\GameObject\Component\Rigidbody">
       <UniqueIdentifier>{9f864738-7b12-4486-929e-63031bbce5d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ResourceManager\Sound">
+      <UniqueIdentifier>{fec212a6-813c-4b9d-8bdc-a9119002064c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonInclude.h">
@@ -210,6 +213,12 @@
     <ClInclude Include="IJ_PlayerSlash.h">
       <Filter>Contents\GameObjects\Player</Filter>
     </ClInclude>
+    <ClInclude Include="IJ_Sound.h">
+      <Filter>Engine\ResourceManager\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_SoundManager.h">
+      <Filter>Engine\ResourceManager\Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -319,6 +328,12 @@
     </ClCompile>
     <ClCompile Include="IJ_PlayerSlash.cpp">
       <Filter>Contents\GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Sound.cpp">
+      <Filter>Engine\ResourceManager\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_SoundManager.cpp">
+      <Filter>Engine\ResourceManager\Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
