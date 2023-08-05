@@ -13,6 +13,7 @@ namespace IJ
 		void Run();
 		void Update();
 		void Render();
+		void Release();
 
 		HWND GetHWND() { return myHWND; }
 		HDC GetHDC() { return myHDC; }

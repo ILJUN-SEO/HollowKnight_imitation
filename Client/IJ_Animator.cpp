@@ -14,7 +14,13 @@ namespace IJ
 	{}
 
 	Animator::~Animator()
-	{}
+	{
+		for (auto iter : myAnimations)
+		{
+			delete iter.second;
+			iter.second = nullptr;
+		}
+	}
 
 	void Animator::Initialize()
 	{}
@@ -53,7 +59,6 @@ namespace IJ
 		animation->SetAnimator(this);
 
 		myAnimations.insert(std::make_pair(name, animation));
-		ResourceManager::Insert<Animation>(name, animation);
 
 		return animation;
 	}

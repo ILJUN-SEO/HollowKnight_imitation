@@ -7,7 +7,13 @@ namespace IJ
 	{}
 
 	Layer::~Layer()
-	{}
+	{
+		for (GameObject* obj : myGameObjects)
+		{
+			delete obj;
+			obj = nullptr;
+		}
+	}
 
 	void Layer::Initialize()
 	{}
@@ -37,7 +43,13 @@ namespace IJ
 			iter != myGameObjects.end();)
 		{
 			if ((*iter)->GetGameObjectState() == GameObject::myGameObjectState::Dead)
+			{
+				GameObject* deadObj = *iter;
+				delete deadObj;
+				deadObj = nullptr;
+
 				iter = myGameObjects.erase(iter);
+			}
 			else
 				iter++;
 		}

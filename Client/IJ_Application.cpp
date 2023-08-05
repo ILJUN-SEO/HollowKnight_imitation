@@ -87,4 +87,7 @@ namespace IJ
 		BitBlt(myHDC, 0, 0, myWidth, myHeight
 			, myBackHDC, 0, 0, SRCCOPY);
 	}
+
+	void Application::Release()
+	{}
 }

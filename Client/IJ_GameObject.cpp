@@ -12,7 +12,13 @@ namespace IJ
 	}
 
 	GameObject::~GameObject()
-	{}
+	{
+		for (Component* comp : myComponents)
+		{
+			delete comp;
+			comp = nullptr;
+		}
+	}
 
 	void GameObject::Initialize()
 	{}

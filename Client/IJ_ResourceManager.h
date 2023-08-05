@@ -50,6 +50,15 @@ namespace IJ
 			myResources.insert(std::make_pair(name, resource));
 		}
 
+		static void Release()
+		{
+			for (auto iter : myResources)
+			{
+				delete iter.second;
+				iter.second = nullptr;
+			}
+		}
+
 	private:
 		static std::map<std::wstring, Resource*> myResources;
 	};

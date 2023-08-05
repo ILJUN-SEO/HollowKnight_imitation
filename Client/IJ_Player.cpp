@@ -26,7 +26,29 @@ namespace IJ
 	{}
 
 	void Player::Initialize()
-	{}
+	{
+		Transform* tr = GetComponent<Transform>();
+		Rigidbody* rb = AddComponent<Rigidbody>();
+		Texture* img = ResourceManager::Load<Texture>(L"Knight_atlas"
+			, L"..\\Resources\\Extras\\atlas\\knight_atlas_test.png");
+		Collider* col = AddComponent<Collider>();
+		Animator* at = AddComponent<Animator>();
+
+		col->SetSize(Vector2(64.0f, 128.0f));
+
+		at->CreateAnimationInAnimator(L"Knight_idle_left", img, Vector2(0.0f, 0.0f), Vector2(64.0f, 128.0f), 9);
+		at->CreateAnimationInAnimator(L"Knight_idle_right", img, Vector2(0.0f, 128.0f), Vector2(64.0f, 128.0f), 9);
+		at->CreateAnimationInAnimator(L"Knight_walk_left", img, Vector2(0.0f, 256.0f), Vector2(64.0f, 128.0f), 7);
+		at->CreateAnimationInAnimator(L"Knight_walk_right", img, Vector2(0.0f, 384.0f), Vector2(64.0f, 128.0f), 7);
+		at->CreateAnimationInAnimator(L"Knight_jump_left", img, Vector2(0.0f, 512.0f), Vector2(96.0f, 136.0f), 6);
+		at->CreateAnimationInAnimator(L"Knight_jump_right", img, Vector2(0.0f, 646.0f), Vector2(96.0f, 136.0f), 6);
+		at->CreateAnimationInAnimator(L"Knight_fall_left", img, Vector2(0.0f, 784.0f), Vector2(96.0f, 144.0f), 6);
+		at->CreateAnimationInAnimator(L"Knight_fall_right", img, Vector2(0.0f, 928.0f), Vector2(96.0f, 144.0f), 6);
+		at->CreateAnimationInAnimator(L"Knight_falling_left", img, Vector2(288.0f, 784.0f), Vector2(96.0f, 144.0f), 3);
+		at->CreateAnimationInAnimator(L"Knight_falling_right", img, Vector2(288.0f, 928.0f), Vector2(96.0f, 144.0f), 3);
+		at->CreateAnimationInAnimator(L"Knight_attack_left", img, Vector2(0.0f, 1072.0f), Vector2(128.0f, 128.0f), 5);
+		at->CreateAnimationInAnimator(L"Knight_attack_right", img, Vector2(0.0f, 1200.0f), Vector2(128.0f, 128.0f), 5);
+	}
 
 	void Player::Update()
 	{
@@ -48,6 +70,9 @@ namespace IJ
 			break;
 		case IJ::Player::myPlayerState::Falling:
 			Falling();
+			break;
+		case IJ::Player::myPlayerState::Dash:
+			Dash();
 			break;
 		case IJ::Player::myPlayerState::Attack:
 			Attack();
@@ -86,6 +111,7 @@ namespace IJ
 		Animator* animator = GetComponent<Animator>();
 
 		jumpPressingTime = 0.0f;
+		isAttacking = false;
 
 		if (isLookingLeft)
 			animator->PlayAnimation(L"Knight_idle_left", true);
@@ -114,6 +140,7 @@ namespace IJ
 	{
 		Transform* transform = GetComponent<Transform>();
 		Vector2 position = transform->GetPosition();
+		Rigidbody* rigidbody = GetComponent<Rigidbody>();
 		Animator* animator = GetComponent<Animator>();
 
 		if (isLookingLeft)
@@ -178,10 +205,17 @@ namespace IJ
 
 		if (Input::GetKeyPressing(myKeyCode::D))
 		{
-			if (jumpPressingTime < 0.6f)
+			if (jumpPressingTime < 0.4f)
 			{
 				Vector2 velocity = rigidbody->GetVelocity();
 				velocity.y = -600.0f;
+				rigidbody->SetVelocity(velocity);
+				jumpPressingTime += Time::DeltaTime();
+			}
+			else if (0.4f <= jumpPressingTime && jumpPressingTime < 0.6f)
+			{
+				Vector2 velocity = rigidbody->GetVelocity();
+				velocity.y = -300.0f;
 				rigidbody->SetVelocity(velocity);
 				jumpPressingTime += Time::DeltaTime();
 			}
@@ -281,6 +315,13 @@ namespace IJ
 			myCurrentState = myPlayerState::Idle;
 
 		tr->SetPosition(position);
+	}
+
+	void Player::Dash()
+	{
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPosition();
+		Rigidbody* rb = GetComponent<Rigidbody>();
 	}
 
 	void Player::Attack()

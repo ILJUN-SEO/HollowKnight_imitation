@@ -39,6 +39,15 @@ namespace IJ
 		myActivatedScene->Render(hdc);
 	}
 
+	void SceneManager::Release()
+	{
+		for (auto iter : myScenes)
+		{
+			delete iter.second;
+			iter.second = nullptr;
+		}
+	}
+
 	Scene* SceneManager::LoadScene(const std::wstring& scenename)
 	{
 		std::map<std::wstring, Scene*>::iterator iter = myScenes.find(scenename);

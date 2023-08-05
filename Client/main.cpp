@@ -6,6 +6,8 @@
 
 // 내가 추가한 헤더
 #include "IJ_Application.h"
+#include "IJ_ResourceManager.h"
+#include "IJ_SceneManager.h"
 
 #define MAX_LOADSTRING 100
 
@@ -35,6 +37,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: 여기에 코드를 입력합니다.
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+        //디버그 터미널에 메모리 누수가 일어난 부분을 번호로 표시해줍니다
+    //_CrtSetBreakAlloc(NUMBER);
+        //CrtSetDbgFlag 에서 얻은 번호를 넣으면 그 메모리가 생성될 때 중단점을 만들어줍니다
 
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -74,10 +80,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
     }
 
-    if (msg.message == WM_QUIT)
-    {
-        // 동적 할당을 해제하는 곳
-    }
+    //if (msg.message == WM_QUIT)
+    //{
+    //    // 동적 할당을 해제하는 곳
+    //}
+
+    // 동적 할당을 해제하는 곳
+    application.Release();
+    IJ::SceneManager::Release();
+    IJ::ResourceManager::Release();
 
     Gdiplus::GdiplusShutdown(gdiplusToken);
 

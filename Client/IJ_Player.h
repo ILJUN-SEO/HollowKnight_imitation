@@ -14,6 +14,7 @@ namespace IJ
 			Jump,
 			Fall,
 			Falling,
+			Dash,
 			Attack,
 			Spell,
 			SpellUp,
@@ -43,6 +44,7 @@ namespace IJ
 		void Jump();
 		void Fall();
 		void Falling();
+		void Dash();
 		void Attack();
 		void Spell();
 		void SpellUp();

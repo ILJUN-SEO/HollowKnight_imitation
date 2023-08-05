@@ -37,11 +37,13 @@ namespace IJ
 			, L"..\\Resources\\Extras\\atlas\\knight_atlas_test.png");
 		Player* player = InputObject::Instantiate<Player>(myLayerType::Player);
 		Transform* tr = player->GetComponent<Transform>();
-		tr->SetPosition(Vector2(800.0f, 600.0f));
-		Rigidbody* rb = player->AddComponent<Rigidbody>();
+		Rigidbody* rb = player->GetComponent<Rigidbody>();
+		Collider* col = player->GetComponent<Collider>();
+		Animator* at = player->GetComponent<Animator>();
 
-		Animator* at = player->AddComponent<Animator>();
-		at->CreateAnimationInAnimator(L"Knight_idle_left", image, Vector2(0.0f, 0.0f), Vector2(64.0f, 128.0f), 9);
+		tr->SetPosition(Vector2(800.0f, 600.0f));
+
+		/*at->CreateAnimationInAnimator(L"Knight_idle_left", image, Vector2(0.0f, 0.0f), Vector2(64.0f, 128.0f), 9);
 		at->CreateAnimationInAnimator(L"Knight_idle_right", image, Vector2(0.0f, 128.0f), Vector2(64.0f, 128.0f), 9);
 		at->CreateAnimationInAnimator(L"Knight_walk_left", image, Vector2(0.0f, 256.0f), Vector2(64.0f, 128.0f), 7);
 		at->CreateAnimationInAnimator(L"Knight_walk_right", image, Vector2(0.0f, 384.0f), Vector2(64.0f, 128.0f), 7);
@@ -52,10 +54,9 @@ namespace IJ
 		at->CreateAnimationInAnimator(L"Knight_falling_left", image, Vector2(288.0f, 784.0f), Vector2(96.0f, 144.0f), 3);
 		at->CreateAnimationInAnimator(L"Knight_falling_right", image, Vector2(288.0f, 928.0f), Vector2(96.0f, 144.0f), 3);
 		at->CreateAnimationInAnimator(L"Knight_attack_left", image, Vector2(0.0f, 1072.0f), Vector2(128.0f, 128.0f), 5);
-		at->CreateAnimationInAnimator(L"Knight_attack_right", image, Vector2(0.0f, 1200.0f), Vector2(128.0f, 128.0f), 5);
+		at->CreateAnimationInAnimator(L"Knight_attack_right", image, Vector2(0.0f, 1200.0f), Vector2(128.0f, 128.0f), 5);*/
 
-		Collider* col = player->AddComponent<Collider>();
-		col->SetSize(Vector2(64.0f, 128.0f));
+		//col->SetSize(Vector2(64.0f, 128.0f));
 
 		//image = ResourceManager::Load<Texture>(L"SlashEffect"
 		//	, L"..\\Resources\\Extras\\atlas\\SlashEffect.png");
