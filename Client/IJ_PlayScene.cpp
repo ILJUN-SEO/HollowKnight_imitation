@@ -77,7 +77,7 @@ namespace IJ
 		// 지형 관련
 		image = ResourceManager::Load<Texture>(L"Temp_Platform"
 			, L"..\\Resources\\Extras\\Terrain\\temp_platform.png");
-		Temp_Platform* tempplatform = InputObject::Instantiate<Temp_Platform>(myLayerType::Terrain);
+		Temp_Ground* tempplatform = InputObject::Instantiate<Temp_Ground>(myLayerType::Terrain);
 		sr = tempplatform->AddComponent<SpriteRenderer>();
 		sr->SetTexture(image);
 		sr->SetScale(Vector2::One);
@@ -104,17 +104,17 @@ namespace IJ
 		sr->SetDrawOnCamera(true);
 		hudframe->GetComponent<Transform>()->SetPosition(Vector2(150.0f, 100.0f));
 
-		image = ResourceManager::Load<Texture>(L"HUDHealth"
-			, L"..\\Resources\\Extras\\HUD\\Health_idle\\Health_idle.png");
-		HUDHealth* hudhealth = InputObject::Instantiate<HUDHealth>(myLayerType::UI);
-		sr = hudhealth->AddComponent<SpriteRenderer>();
-		sr->SetTexture(image);
-		sr->SetDrawOnCamera(true);
-		hudhealth->GetComponent<Transform>()->SetPosition(Vector2(250.f, 100.0f));
+		//image = ResourceManager::Load<Texture>(L"HUDHealth"
+		//	, L"..\\Resources\\Extras\\HUD\\Health_idle\\Health_idle.png");
+		//HUDHealth* hudhealth1 = InputObject::Instantiate<HUDHealth>(myLayerType::UI);
+		//sr = hudhealth1->AddComponent<SpriteRenderer>();
+		//sr->SetTexture(image);
+		//sr->SetDrawOnCamera(true);
+		//hudhealth1->GetComponent<Transform>()->SetPosition(Vector2(250.f, 100.0f));
 
 		// 적 관련
 		image = ResourceManager::Load<Texture>(L"Crawler_walk"
-			, L"..\\Resources\\Extras\\atlas\\crawler_walk_atlas.bmp");
+			, L"..\\Resources\\Extras\\atlas\\crawler_walk_atlas.png");
 		Crawler* crawler = InputObject::Instantiate<Crawler>(myLayerType::Enemy);
 		tr = crawler->GetComponent<Transform>();
 		tr->SetPosition(Vector2(200.0f, 600.0f));
@@ -127,6 +127,7 @@ namespace IJ
 
 		CollisionManager::CollisionLayerCheck(myLayerType::Player, myLayerType::Enemy, true);
 		CollisionManager::CollisionLayerCheck(myLayerType::Player, myLayerType::Terrain, true);
+		CollisionManager::CollisionLayerCheck(myLayerType::PlayerSlash, myLayerType::Enemy, true);
 		CollisionManager::CollisionLayerCheck(myLayerType::Enemy, myLayerType::Terrain, true);
 		Camera::SetTarget(player);
 	}

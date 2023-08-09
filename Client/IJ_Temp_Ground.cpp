@@ -31,7 +31,6 @@ namespace IJ
 		Player* player = dynamic_cast<Player*>(other->GetOwner());
 		Transform* playertr = player->GetComponent<Transform>();
 		Vector2 playerPos = playertr->GetPosition();
-		Rigidbody* playerrb = player->GetComponent<Rigidbody>();
 
 		float len = fabs(other->GetPosition().y - this->GetComponent<Collider>()->GetPosition().y);
 		float scale = fabs(other->GetSize().y / 2.0f + this->GetComponent<Collider>()->GetSize().y / 2.0f);
@@ -44,7 +43,7 @@ namespace IJ
 				playertr->SetPosition(playerPos);
 			}
 
-			playerrb->SetGrounded(true);
+			player->SetPlayerGrounded(true);
 			player->SetState(Player::myPlayerState::Idle);
 		}
 
@@ -60,7 +59,6 @@ namespace IJ
 		Player* player = dynamic_cast<Player*>(other->GetOwner());
 		Transform* playertr = player->GetComponent<Transform>();
 		Vector2 playerPos = playertr->GetPosition();
-		Rigidbody* playerrb = player->GetComponent<Rigidbody>();
 
 		if (other->GetPosition().x < this->GetComponent<Collider>()->GetPosition().x - (this->GetComponent<Collider>()->GetSize().x / 2.0f) - (other->GetSize().x / 2.0f))
 		{
@@ -72,11 +70,10 @@ namespace IJ
 	void Temp_Ground::OnCollisionExit(Collider* other)
 	{
 		Player* player = dynamic_cast<Player*>(other->GetOwner());
-		Rigidbody* rb = player->GetComponent<Rigidbody>();
 
-		if (player->GetState() != Player::myPlayerState::Jump)
+		if (player->GetState() != Player::myPlayerState::Jump && player->GetState() != Player::myPlayerState::JumpAttack)
 		{
-			rb->SetGrounded(false);
+			player->SetPlayerGrounded(false);
 			player->SetState(Player::myPlayerState::Fall);
 		}
 	}

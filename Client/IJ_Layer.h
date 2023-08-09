@@ -11,6 +11,7 @@ namespace IJ
 		Terrain,
 		Enemy,
 		Player,
+		PlayerSlash,
 		Effect,
 		UI,
 		END,

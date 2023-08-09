@@ -9,6 +9,7 @@
 #include "IJ_ResourceManager.h"
 #include "IJ_Texture.h"
 
+#include "IJ_HUDHealth.h"
 #include "IJ_PlayerSlash.h"
 
 
@@ -20,6 +21,8 @@ namespace IJ
 		, isGrounded(false)
 		, jumpPressingTime(0.0f)
 		, isAttacking(false)
+		, playerHealth(5)
+		, playerMana(0)
 	{}
 
 	Player::~Player()
@@ -28,7 +31,6 @@ namespace IJ
 	void Player::Initialize()
 	{
 		Transform* tr = GetComponent<Transform>();
-		Rigidbody* rb = AddComponent<Rigidbody>();
 		Texture* img = ResourceManager::Load<Texture>(L"Knight_atlas"
 			, L"..\\Resources\\Extras\\atlas\\knight_atlas_test.png");
 		Collider* col = AddComponent<Collider>();
@@ -48,6 +50,10 @@ namespace IJ
 		at->CreateAnimationInAnimator(L"Knight_falling_right", img, Vector2(288.0f, 928.0f), Vector2(96.0f, 144.0f), 3);
 		at->CreateAnimationInAnimator(L"Knight_attack_left", img, Vector2(0.0f, 1072.0f), Vector2(128.0f, 128.0f), 5);
 		at->CreateAnimationInAnimator(L"Knight_attack_right", img, Vector2(0.0f, 1200.0f), Vector2(128.0f, 128.0f), 5);
+
+		img = ResourceManager::Load<Texture>(L"HUD_Health"
+			, L"..\\Resources\\Extras\\HUD\\HUDHealth.png");
+		HUDHealth* hp1 = InputObject::Instantiate<HUDHealth>(myLayerType::UI);
 	}
 
 	void Player::Update()
@@ -77,13 +83,20 @@ namespace IJ
 		case IJ::Player::myPlayerState::Attack:
 			Attack();
 			break;
+		case IJ::Player::myPlayerState::JumpAttack:
+			JumpAttack();
+			break;
+		case IJ::Player::myPlayerState::FallAttack:
+			FallAttack();
+			break;
+		case IJ::Player::myPlayerState::Focus:
+			Focus();
+			break;
 		case IJ::Player::myPlayerState::Spell:
-			break;
-		case IJ::Player::myPlayerState::SpellUp:
-			break;
-		case IJ::Player::myPlayerState::SpellDown:
+			Spell();
 			break;
 		case IJ::Player::myPlayerState::Death:
+			Death();
 			break;
 		case IJ::Player::myPlayerState::END:
 			break;
@@ -140,7 +153,7 @@ namespace IJ
 	{
 		Transform* transform = GetComponent<Transform>();
 		Vector2 position = transform->GetPosition();
-		Rigidbody* rigidbody = GetComponent<Rigidbody>();
+		//Rigidbody* rigidbody = GetComponent<Rigidbody>();
 		Animator* animator = GetComponent<Animator>();
 
 		if (isLookingLeft)
@@ -158,9 +171,7 @@ namespace IJ
 			position.x += 300.0f * Time::DeltaTime();
 			isLookingLeft = false;
 		}
-
-		if (Input::GetKeyDown(myKeyCode::Down))
-			position = Vector2(800.0f, 600.0f);
+		transform->SetPosition(position);
 
 		if (Input::GetKeyDown(myKeyCode::D))
 			myCurrentState = myPlayerState::Jump;
@@ -177,15 +188,14 @@ namespace IJ
 			myCurrentState = myPlayerState::Idle;
 		}
 
-		transform->SetPosition(position);
 	}
 
 	void Player::Jump()
 	{
-		Transform* tr = GetComponent<Transform>();
-		Vector2 position = tr->GetPosition();
+		Transform* transform = GetComponent<Transform>();
+		Vector2 position = transform->GetPosition();
 		Animator* animator = GetComponent<Animator>();
-		Rigidbody* rigidbody = GetComponent<Rigidbody>();
+		//Rigidbody* rigidbody = GetComponent<Rigidbody>();
 
 		if (isLookingLeft)
 			animator->PlayAnimation(L"Knight_jump_left");
@@ -207,59 +217,44 @@ namespace IJ
 		{
 			if (jumpPressingTime < 0.4f)
 			{
-				Vector2 velocity = rigidbody->GetVelocity();
-				velocity.y = -600.0f;
-				rigidbody->SetVelocity(velocity);
+				position.y -= 600.0f * Time::DeltaTime();
 				jumpPressingTime += Time::DeltaTime();
 			}
 			else if (0.4f <= jumpPressingTime && jumpPressingTime < 0.6f)
 			{
-				Vector2 velocity = rigidbody->GetVelocity();
-				velocity.y = -300.0f;
-				rigidbody->SetVelocity(velocity);
+				position.y -= 300.0f * Time::DeltaTime();
 				jumpPressingTime += Time::DeltaTime();
 			}
 			else
-			{
-				Vector2 velocity = rigidbody->GetVelocity();
-				velocity.y = 0.0f;
-				rigidbody->SetVelocity(velocity);
-				//jumpPressingTime = 0.0f;
 				myCurrentState = myPlayerState::Fall;
-			}
 		}
-		
-		if (Input::GetKeyUp(myKeyCode::D))
-		{
-			Vector2 velocity = rigidbody->GetVelocity();
-			velocity.y = 0.0f;
-			rigidbody->SetVelocity(velocity);
-			//jumpPressingTime = 0.0f;
-			myCurrentState = myPlayerState::Fall;
-		}
+		transform->SetPosition(position);
+		isGrounded = false;
 
-		tr->SetPosition(position);
-		rigidbody->SetGrounded(false);
+		if (Input::GetKeyUp(myKeyCode::D))
+			myCurrentState = myPlayerState::Fall;
+
+		if (Input::GetKeyDown(myKeyCode::S))
+			myCurrentState = myPlayerState::JumpAttack;
 	}
 
 	void Player::Fall()
 	{
-		Transform* tr = GetComponent<Transform>();
-		Vector2 position = tr->GetPosition();
+		Transform* transform = GetComponent<Transform>();
+		Vector2 position = transform->GetPosition();
 		Animator* animator = GetComponent<Animator>();
-		Rigidbody* rb = GetComponent<Rigidbody>();
+		//Rigidbody* rb = GetComponent<Rigidbody>();
 
 		jumpPressingTime = 0.0f;
+		isAttacking = false;
+
+		position.y += 600.0f * Time::DeltaTime();
 
 		if (isLookingLeft)
 			animator->PlayAnimation(L"Knight_fall_left");
 		else
 			animator->PlayAnimation(L"Knight_fall_right");
 
-		Vector2 velocity = rb->GetVelocity();
-		velocity.y = 600.0f;
-		rb->SetVelocity(velocity);
-
 		if (Input::GetKeyPressing(myKeyCode::Left))
 		{
 			position.x -= 300.0f * Time::DeltaTime();
@@ -270,30 +265,30 @@ namespace IJ
 			position.x += 300.0f * Time::DeltaTime();
 			isLookingLeft = false;
 		}
+		transform->SetPosition(position);
 
 		if (isGrounded)
 			myCurrentState = myPlayerState::Idle;
 		if (animator->IsActavatedAnimationComplete())
 			myCurrentState = myPlayerState::Falling;
 
-		tr->SetPosition(position);
+		if (Input::GetKeyDown(myKeyCode::S))
+			myCurrentState = myPlayerState::FallAttack;
 	}
 
 	void Player::Falling()
 	{
-		Transform* tr = GetComponent<Transform>();
-		Vector2 position = tr->GetPosition();
+		Transform* transform = GetComponent<Transform>();
+		Vector2 position = transform->GetPosition();
 		Animator* animator = GetComponent<Animator>();
-		Rigidbody* rb = GetComponent<Rigidbody>();
+		//Rigidbody* rb = GetComponent<Rigidbody>();
 
 		if (isLookingLeft)
 			animator->PlayAnimation(L"Knight_falling_left", true);
 		else
 			animator->PlayAnimation(L"Knight_falling_right", true);
 
-		Vector2 velocity = rb->GetVelocity();
-		velocity.y = 600.0f;
-		rb->SetVelocity(velocity);
+		position.y += 600.0f * Time::DeltaTime();
 
 		if (Input::GetKeyPressing(myKeyCode::Left))
 		{
@@ -305,40 +300,41 @@ namespace IJ
 			position.x += 300.0f * Time::DeltaTime();
 			isLookingLeft = false;
 		}
-
 		if (Input::GetKeyDown(myKeyCode::I))
 		{
+			// 디버그용 위치 초기화
 			position = Vector2(800.0f, 600.0f);
 			myCurrentState = myPlayerState::Idle;
 		}
+		transform->SetPosition(position);
+
 		if (isGrounded)
 			myCurrentState = myPlayerState::Idle;
 
-		tr->SetPosition(position);
+		if (Input::GetKeyDown(myKeyCode::S))
+			myCurrentState = myPlayerState::FallAttack;
 	}
 
 	void Player::Dash()
 	{
-		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPosition();
-		Rigidbody* rb = GetComponent<Rigidbody>();
+		Transform* transform = GetComponent<Transform>();
+		Vector2 position = transform->GetPosition();
 	}
 
 	void Player::Attack()
 	{
-		Transform* tr = GetComponent<Transform>();
-		Vector2 position = tr->GetPosition();
+		Transform* transform = GetComponent<Transform>();
+		Vector2 position = transform->GetPosition();
+		//Rigidbody* rigidbody = GetComponent<Rigidbody>();
 		Animator* animator = GetComponent<Animator>();
 
 		if (Input::GetKeyPressing(myKeyCode::Left))
 		{
 			position.x -= 300.0f * Time::DeltaTime();
-			//isLookingLeft = true;
 		}
 		else if (Input::GetKeyPressing(myKeyCode::Right))
 		{
 			position.x += 300.0f * Time::DeltaTime();
-			//isLookingLeft = false;
 		}
 
 		if (isAttacking == false)
@@ -352,10 +348,9 @@ namespace IJ
 
 			Texture* texture = ResourceManager::Load<Texture>(L"SlashEffect"
 				, L"..\\Resources\\Extras\\atlas\\SlashEffect.png");
-			PlayerSlash* playerslash = InputObject::Instantiate<PlayerSlash>(myLayerType::Player);
+			PlayerSlash* playerslash = InputObject::Instantiate<PlayerSlash>(myLayerType::PlayerSlash);
 			playerslash->SetOwner(this);
 			Transform* slash_tr = playerslash->GetComponent<Transform>();
-			//slash_tr->SetPosition(tr->GetPosition());
 			Animator* slash_at = playerslash->AddComponent<Animator>();
 			slash_at->CreateAnimationInAnimator(L"Slash_left", texture, Vector2(0.0f, 0.0f), Vector2(160.0f, 112.0f), 4, Vector2(-100.0f, 0.0f));
 			slash_at->CreateAnimationInAnimator(L"Slash_right", texture, Vector2(0.0f, 112.0f), Vector2(160.0f, 112.0f), 4, Vector2(100.0f, 0.0f));
@@ -372,8 +367,6 @@ namespace IJ
 				slash_col->SetSize(Vector2(160.0f, 112.0f));
 				slash_col->SetOffset(Vector2(100.0f, 0.0f));
 			}
-
-			//InputObject::Instantiate<PlayerSlash>(myLayerType::Player);
 		}
 
 		if (animator->IsActavatedAnimationComplete())
@@ -382,17 +375,153 @@ namespace IJ
 			myCurrentState = myPlayerState::Idle;
 		}
 
-		tr->SetPosition(position);
-		//slash_tr->SetPosition(position);
+		transform->SetPosition(position);
 	}
 
+	void Player::JumpAttack()
+	{
+		Transform* transform = GetComponent<Transform>();
+		Vector2 position = transform->GetPosition();
+		Animator* animator = GetComponent<Animator>();
+		//Rigidbody* rigidbody = GetComponent<Rigidbody>();
+
+		if (Input::GetKeyPressing(myKeyCode::Left))
+		{
+			position.x -= 300.0f * Time::DeltaTime();
+		}
+		else if (Input::GetKeyPressing(myKeyCode::Right))
+		{
+			position.x += 300.0f * Time::DeltaTime();
+		}
+
+		if (Input::GetKeyPressing(myKeyCode::D))
+		{
+			if (jumpPressingTime < 0.4f)
+			{
+				position.y -= 600.0f * Time::DeltaTime();
+				jumpPressingTime += Time::DeltaTime();
+			}
+			else if (0.4f <= jumpPressingTime && jumpPressingTime < 0.6f)
+			{
+				position.y -= 300.0f * Time::DeltaTime();
+				jumpPressingTime += Time::DeltaTime();
+			}
+			else
+			{
+				myCurrentState = myPlayerState::Fall;
+			}
+		}
+		if (Input::GetKeyUp(myKeyCode::D))
+		{
+			myCurrentState = myPlayerState::Fall;
+		}
+		transform->SetPosition(position);
+
+		if (isAttacking == false)
+		{
+			isAttacking = true;
+
+			if (isLookingLeft)
+				animator->PlayAnimation(L"Knight_attack_left");
+			else
+				animator->PlayAnimation(L"Knight_attack_right");
+
+			Texture* texture = ResourceManager::Load<Texture>(L"SlashEffect"
+				, L"..\\Resources\\Extras\\atlas\\SlashEffect.png");
+			PlayerSlash* playerslash = InputObject::Instantiate<PlayerSlash>(myLayerType::PlayerSlash);
+			playerslash->SetOwner(this);
+			Transform* slash_tr = playerslash->GetComponent<Transform>();
+			Animator* slash_at = playerslash->AddComponent<Animator>();
+			slash_at->CreateAnimationInAnimator(L"Slash_left", texture, Vector2(0.0f, 0.0f), Vector2(160.0f, 112.0f), 4, Vector2(-100.0f, 0.0f));
+			slash_at->CreateAnimationInAnimator(L"Slash_right", texture, Vector2(0.0f, 112.0f), Vector2(160.0f, 112.0f), 4, Vector2(100.0f, 0.0f));
+			Collider* slash_col = playerslash->AddComponent<Collider>();
+			if (isLookingLeft)
+			{
+				slash_at->PlayAnimation(L"Slash_left", false);
+				slash_col->SetSize(Vector2(160.0f, 112.0f));
+				slash_col->SetOffset(Vector2(-100.0f, 0.0f));
+			}
+			else
+			{
+				slash_at->PlayAnimation(L"Slash_right", false);
+				slash_col->SetSize(Vector2(160.0f, 112.0f));
+				slash_col->SetOffset(Vector2(100.0f, 0.0f));
+			}
+		}
+
+		if (animator->IsActavatedAnimationComplete())
+		{
+			isAttacking = false;
+			myCurrentState = myPlayerState::Fall;
+		}
+	}
+
+	void Player::FallAttack()
+	{
+		Transform* transform = GetComponent<Transform>();
+		Vector2 position = transform->GetPosition();
+		Animator* animator = GetComponent<Animator>();
+		//Rigidbody* rigidbody = GetComponent<Rigidbody>();
+
+		if (Input::GetKeyPressing(myKeyCode::Left))
+		{
+			position.x -= 300.0f * Time::DeltaTime();
+		}
+		else if (Input::GetKeyPressing(myKeyCode::Right))
+		{
+			position.x += 300.0f * Time::DeltaTime();
+		}
+
+		position.y += 600.0f * Time::DeltaTime();
+
+		transform->SetPosition(position);
+
+		if (isAttacking == false)
+		{
+			isAttacking = true;
+
+			if (isLookingLeft)
+				animator->PlayAnimation(L"Knight_attack_left");
+			else
+				animator->PlayAnimation(L"Knight_attack_right");
+
+			Texture* texture = ResourceManager::Load<Texture>(L"SlashEffect"
+				, L"..\\Resources\\Extras\\atlas\\SlashEffect.png");
+			PlayerSlash* playerslash = InputObject::Instantiate<PlayerSlash>(myLayerType::PlayerSlash);
+			playerslash->SetOwner(this);
+			Transform* slash_tr = playerslash->GetComponent<Transform>();
+			Animator* slash_at = playerslash->AddComponent<Animator>();
+			slash_at->CreateAnimationInAnimator(L"Slash_left", texture, Vector2(0.0f, 0.0f), Vector2(160.0f, 112.0f), 4, Vector2(-100.0f, 0.0f));
+			slash_at->CreateAnimationInAnimator(L"Slash_right", texture, Vector2(0.0f, 112.0f), Vector2(160.0f, 112.0f), 4, Vector2(100.0f, 0.0f));
+			Collider* slash_col = playerslash->AddComponent<Collider>();
+			if (isLookingLeft)
+			{
+				slash_at->PlayAnimation(L"Slash_left", false);
+				slash_col->SetSize(Vector2(160.0f, 112.0f));
+				slash_col->SetOffset(Vector2(-100.0f, 0.0f));
+			}
+			else
+			{
+				slash_at->PlayAnimation(L"Slash_right", false);
+				slash_col->SetSize(Vector2(160.0f, 112.0f));
+				slash_col->SetOffset(Vector2(100.0f, 0.0f));
+			}
+		}
+
+		if (animator->IsActavatedAnimationComplete())
+		{
+			isAttacking = false;
+			myCurrentState = myPlayerState::Falling;
+		}
+
+		if (isGrounded)
+			myCurrentState = myPlayerState::Idle;
+	}
+
+	void Player::Focus()
+	{}
+
 	void Player::Spell()
-	{}
-
-	void Player::SpellUp()
-	{}
-
-	void Player::SpellDown()
 	{}
 
 	void Player::Death()

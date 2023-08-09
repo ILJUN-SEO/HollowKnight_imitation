@@ -18,11 +18,11 @@ namespace IJ
 		Animation* CreateAnimationInAnimator(const std::wstring& name
 			, class Texture* texture
 			, Vector2 leftTop, Vector2 size, UINT spriteLength
-			, Vector2 offset = Vector2::Zero, float duration = 0.1f);
+			, Vector2 offset = Vector2::Zero, float duration = 0.05f);
 
 		void CreateAnimationFolder(const std::wstring& name
 			, const std::wstring& path
-			, Vector2 offset = Vector2::Zero, float duration = 0.1f);
+			, Vector2 offset = Vector2::Zero, float duration = 0.05f);
 
 		Animation* FindAnimation(const std::wstring& name);
 		void PlayAnimation(const std::wstring& name, bool loop = false);

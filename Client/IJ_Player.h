@@ -16,9 +16,10 @@ namespace IJ
 			Falling,
 			Dash,
 			Attack,
+			JumpAttack,
+			FallAttack,
+			Focus,
 			Spell,
-			SpellUp,
-			SpellDown,
 			Death,
 			END
 		};
@@ -38,6 +39,8 @@ namespace IJ
 		myPlayerState GetState() { return myCurrentState; }
 		void SetLookingLeft(bool value) { isLookingLeft = value; }
 		bool GetLookingLeft() { return isLookingLeft; }
+		void SetPlayerGrounded(bool value) { isGrounded = value; }
+		bool GetPlayerGrounded() { return isGrounded; }
 
 		void Idle();
 		void Move();
@@ -46,9 +49,10 @@ namespace IJ
 		void Falling();
 		void Dash();
 		void Attack();
+		void JumpAttack();
+		void FallAttack();
+		void Focus();
 		void Spell();
-		void SpellUp();
-		void SpellDown();
 		void Death();
 
 	private:
@@ -57,5 +61,8 @@ namespace IJ
 		bool isGrounded;
 		float jumpPressingTime;
 		bool isAttacking;
+
+		UINT playerHealth;
+		UINT playerMana;
 	};
 }
