@@ -20,6 +20,7 @@ namespace IJ
 		, isLookingLeft(true)
 		, isGrounded(false)
 		, jumpPressingTime(0.0f)
+		, damageStunTime(0.0f)
 		, isAttacking(false)
 		, playerHealth(5)
 		, playerMana(0)
@@ -38,6 +39,9 @@ namespace IJ
 
 		col->SetSize(Vector2(64.0f, 128.0f));
 
+		//at->SetScale(Vector2(0.6f, 0.6f));
+		//col->SetScale(0.6f);
+
 		at->CreateAnimationInAnimator(L"Knight_idle_left", img, Vector2(0.0f, 0.0f), Vector2(64.0f, 128.0f), 9);
 		at->CreateAnimationInAnimator(L"Knight_idle_right", img, Vector2(0.0f, 128.0f), Vector2(64.0f, 128.0f), 9);
 		at->CreateAnimationInAnimator(L"Knight_walk_left", img, Vector2(0.0f, 256.0f), Vector2(64.0f, 128.0f), 7);
@@ -51,9 +55,23 @@ namespace IJ
 		at->CreateAnimationInAnimator(L"Knight_attack_left", img, Vector2(0.0f, 1072.0f), Vector2(128.0f, 128.0f), 5);
 		at->CreateAnimationInAnimator(L"Knight_attack_right", img, Vector2(0.0f, 1200.0f), Vector2(128.0f, 128.0f), 5);
 
-		img = ResourceManager::Load<Texture>(L"HUD_Health"
-			, L"..\\Resources\\Extras\\HUD\\HUDHealth.png");
 		HUDHealth* hp1 = InputObject::Instantiate<HUDHealth>(myLayerType::UI);
+		HUDHealth* hp2 = InputObject::Instantiate<HUDHealth>(myLayerType::UI);
+		HUDHealth* hp3 = InputObject::Instantiate<HUDHealth>(myLayerType::UI);
+		HUDHealth* hp4 = InputObject::Instantiate<HUDHealth>(myLayerType::UI);
+		HUDHealth* hp5 = InputObject::Instantiate<HUDHealth>(myLayerType::UI);
+
+		myHealth.push_back(hp1);
+		myHealth.push_back(hp2);
+		myHealth.push_back(hp3);
+		myHealth.push_back(hp4);
+		myHealth.push_back(hp5);
+
+		hp1->GetComponent<Transform>()->SetPosition(Vector2(200.0f, 80.0f));
+		hp2->GetComponent<Transform>()->SetPosition(Vector2(300.0f, 80.0f));
+		hp3->GetComponent<Transform>()->SetPosition(Vector2(400.0f, 80.0f));
+		hp4->GetComponent<Transform>()->SetPosition(Vector2(500.0f, 80.0f));
+		hp5->GetComponent<Transform>()->SetPosition(Vector2(600.0f, 80.0f));
 	}
 
 	void Player::Update()
@@ -98,10 +116,26 @@ namespace IJ
 		case IJ::Player::myPlayerState::Death:
 			Death();
 			break;
+		case IJ::Player::myPlayerState::Damaged:
+			Damaged();
+			break;
 		case IJ::Player::myPlayerState::END:
 			break;
 		default:
 			break;
+		}
+
+		for (size_t i = 0; i < myHealth.size(); i++)
+		{
+			if (i + 1 > playerHealth)
+				myHealth[i]->SetActivated(false);
+		}
+
+		if (Input::GetKeyDown(myKeyCode::I))
+		{
+			// 디버그용 위치 초기화
+			GetComponent<Transform>()->SetPosition(Vector2(2300.0f, 4600.0f));
+			myCurrentState = myPlayerState::Fall;
 		}
 	}
 
@@ -124,6 +158,7 @@ namespace IJ
 		Animator* animator = GetComponent<Animator>();
 
 		jumpPressingTime = 0.0f;
+		damageStunTime = 0.0f;
 		isAttacking = false;
 
 		if (isLookingLeft)
@@ -300,12 +335,6 @@ namespace IJ
 			position.x += 300.0f * Time::DeltaTime();
 			isLookingLeft = false;
 		}
-		if (Input::GetKeyDown(myKeyCode::I))
-		{
-			// 디버그용 위치 초기화
-			position = Vector2(800.0f, 600.0f);
-			myCurrentState = myPlayerState::Idle;
-		}
 		transform->SetPosition(position);
 
 		if (isGrounded)
@@ -346,26 +375,19 @@ namespace IJ
 			else
 				animator->PlayAnimation(L"Knight_attack_right");
 
-			Texture* texture = ResourceManager::Load<Texture>(L"SlashEffect"
-				, L"..\\Resources\\Extras\\atlas\\SlashEffect.png");
 			PlayerSlash* playerslash = InputObject::Instantiate<PlayerSlash>(myLayerType::PlayerSlash);
 			playerslash->SetOwner(this);
-			Transform* slash_tr = playerslash->GetComponent<Transform>();
-			Animator* slash_at = playerslash->AddComponent<Animator>();
-			slash_at->CreateAnimationInAnimator(L"Slash_left", texture, Vector2(0.0f, 0.0f), Vector2(160.0f, 112.0f), 4, Vector2(-100.0f, 0.0f));
-			slash_at->CreateAnimationInAnimator(L"Slash_right", texture, Vector2(0.0f, 112.0f), Vector2(160.0f, 112.0f), 4, Vector2(100.0f, 0.0f));
-			Collider* slash_col = playerslash->AddComponent<Collider>();
 			if (isLookingLeft)
 			{
-				slash_at->PlayAnimation(L"Slash_left", false);
-				slash_col->SetSize(Vector2(160.0f, 112.0f));
-				slash_col->SetOffset(Vector2(-100.0f, 0.0f));
+				playerslash->GetComponent<Animator>()->PlayAnimation(L"Slash_left", false);
+				playerslash->GetComponent<Collider>()->SetSize(Vector2(160.0f, 112.0f));
+				playerslash->GetComponent<Collider>()->SetOffset(Vector2(-100.0f, 0.0f));
 			}
 			else
 			{
-				slash_at->PlayAnimation(L"Slash_right", false);
-				slash_col->SetSize(Vector2(160.0f, 112.0f));
-				slash_col->SetOffset(Vector2(100.0f, 0.0f));
+				playerslash->GetComponent<Animator>()->PlayAnimation(L"Slash_right", false);
+				playerslash->GetComponent<Collider>()->SetSize(Vector2(160.0f, 112.0f));
+				playerslash->GetComponent<Collider>()->SetOffset(Vector2(100.0f, 0.0f));
 			}
 		}
 
@@ -426,26 +448,19 @@ namespace IJ
 			else
 				animator->PlayAnimation(L"Knight_attack_right");
 
-			Texture* texture = ResourceManager::Load<Texture>(L"SlashEffect"
-				, L"..\\Resources\\Extras\\atlas\\SlashEffect.png");
 			PlayerSlash* playerslash = InputObject::Instantiate<PlayerSlash>(myLayerType::PlayerSlash);
 			playerslash->SetOwner(this);
-			Transform* slash_tr = playerslash->GetComponent<Transform>();
-			Animator* slash_at = playerslash->AddComponent<Animator>();
-			slash_at->CreateAnimationInAnimator(L"Slash_left", texture, Vector2(0.0f, 0.0f), Vector2(160.0f, 112.0f), 4, Vector2(-100.0f, 0.0f));
-			slash_at->CreateAnimationInAnimator(L"Slash_right", texture, Vector2(0.0f, 112.0f), Vector2(160.0f, 112.0f), 4, Vector2(100.0f, 0.0f));
-			Collider* slash_col = playerslash->AddComponent<Collider>();
 			if (isLookingLeft)
 			{
-				slash_at->PlayAnimation(L"Slash_left", false);
-				slash_col->SetSize(Vector2(160.0f, 112.0f));
-				slash_col->SetOffset(Vector2(-100.0f, 0.0f));
+				playerslash->GetComponent<Animator>()->PlayAnimation(L"Slash_left", false);
+				playerslash->GetComponent<Collider>()->SetSize(Vector2(160.0f, 112.0f));
+				playerslash->GetComponent<Collider>()->SetOffset(Vector2(-100.0f, 0.0f));
 			}
 			else
 			{
-				slash_at->PlayAnimation(L"Slash_right", false);
-				slash_col->SetSize(Vector2(160.0f, 112.0f));
-				slash_col->SetOffset(Vector2(100.0f, 0.0f));
+				playerslash->GetComponent<Animator>()->PlayAnimation(L"Slash_right", false);
+				playerslash->GetComponent<Collider>()->SetSize(Vector2(160.0f, 112.0f));
+				playerslash->GetComponent<Collider>()->SetOffset(Vector2(100.0f, 0.0f));
 			}
 		}
 
@@ -485,26 +500,19 @@ namespace IJ
 			else
 				animator->PlayAnimation(L"Knight_attack_right");
 
-			Texture* texture = ResourceManager::Load<Texture>(L"SlashEffect"
-				, L"..\\Resources\\Extras\\atlas\\SlashEffect.png");
 			PlayerSlash* playerslash = InputObject::Instantiate<PlayerSlash>(myLayerType::PlayerSlash);
 			playerslash->SetOwner(this);
-			Transform* slash_tr = playerslash->GetComponent<Transform>();
-			Animator* slash_at = playerslash->AddComponent<Animator>();
-			slash_at->CreateAnimationInAnimator(L"Slash_left", texture, Vector2(0.0f, 0.0f), Vector2(160.0f, 112.0f), 4, Vector2(-100.0f, 0.0f));
-			slash_at->CreateAnimationInAnimator(L"Slash_right", texture, Vector2(0.0f, 112.0f), Vector2(160.0f, 112.0f), 4, Vector2(100.0f, 0.0f));
-			Collider* slash_col = playerslash->AddComponent<Collider>();
 			if (isLookingLeft)
 			{
-				slash_at->PlayAnimation(L"Slash_left", false);
-				slash_col->SetSize(Vector2(160.0f, 112.0f));
-				slash_col->SetOffset(Vector2(-100.0f, 0.0f));
+				playerslash->GetComponent<Animator>()->PlayAnimation(L"Slash_left", false);
+				playerslash->GetComponent<Collider>()->SetSize(Vector2(160.0f, 112.0f));
+				playerslash->GetComponent<Collider>()->SetOffset(Vector2(-100.0f, 0.0f));
 			}
 			else
 			{
-				slash_at->PlayAnimation(L"Slash_right", false);
-				slash_col->SetSize(Vector2(160.0f, 112.0f));
-				slash_col->SetOffset(Vector2(100.0f, 0.0f));
+				playerslash->GetComponent<Animator>()->PlayAnimation(L"Slash_right", false);
+				playerslash->GetComponent<Collider>()->SetSize(Vector2(160.0f, 112.0f));
+				playerslash->GetComponent<Collider>()->SetOffset(Vector2(100.0f, 0.0f));
 			}
 		}
 
@@ -523,6 +531,30 @@ namespace IJ
 
 	void Player::Spell()
 	{}
+
+	void Player::Damaged()
+	{
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPosition();
+
+		if (damageStunTime == 0.0f)
+		{
+			playerHealth--;
+			isGrounded = false;
+		}
+		
+
+		if (isLookingLeft)
+			pos.x += 300.0f * Time::DeltaTime();
+		else
+			pos.x -= 300.0f * Time::DeltaTime();
+		pos.y -= 150.0f * Time::DeltaTime();
+		tr->SetPosition(pos);
+
+		damageStunTime += Time::DeltaTime();
+		if (damageStunTime > 0.25f)
+			myCurrentState = Player::myPlayerState::Fall;
+	}
 
 	void Player::Death()
 	{}

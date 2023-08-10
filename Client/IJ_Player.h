@@ -1,5 +1,6 @@
 #pragma once
 #include "IJ_GameObject.h"
+#include "IJ_HUDHealth.h"
 
 
 namespace IJ
@@ -20,6 +21,7 @@ namespace IJ
 			FallAttack,
 			Focus,
 			Spell,
+			Damaged,
 			Death,
 			END
 		};
@@ -35,7 +37,12 @@ namespace IJ
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
-		void SetState(myPlayerState state) { myCurrentState = state; }
+		void SetState(myPlayerState state) 
+		{
+			if (this == nullptr)
+				return;
+			myCurrentState = state; 
+		}
 		myPlayerState GetState() { return myCurrentState; }
 		void SetLookingLeft(bool value) { isLookingLeft = value; }
 		bool GetLookingLeft() { return isLookingLeft; }
@@ -53,6 +60,7 @@ namespace IJ
 		void FallAttack();
 		void Focus();
 		void Spell();
+		void Damaged();
 		void Death();
 
 	private:
@@ -60,9 +68,11 @@ namespace IJ
 		bool isLookingLeft;
 		bool isGrounded;
 		float jumpPressingTime;
+		float damageStunTime;
 		bool isAttacking;
 
-		UINT playerHealth;
-		UINT playerMana;
+		int playerHealth;
+		int playerMana;
+		std::vector<HUDHealth*> myHealth;
 	};
 }

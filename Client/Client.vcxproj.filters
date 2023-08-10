@@ -219,6 +219,12 @@
     <ClInclude Include="IJ_SoundManager.h">
       <Filter>Engine\ResourceManager\Sound</Filter>
     </ClInclude>
+    <ClInclude Include="IJ_Wall.h">
+      <Filter>Contents\GameObjects\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Ground.h">
+      <Filter>Contents\GameObjects\Terrain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -334,6 +340,12 @@
     </ClCompile>
     <ClCompile Include="IJ_SoundManager.cpp">
       <Filter>Engine\ResourceManager\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Wall.cpp">
+      <Filter>Contents\GameObjects\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Ground.cpp">
+      <Filter>Contents\GameObjects\Terrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

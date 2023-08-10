@@ -25,10 +25,11 @@ namespace IJ
 		void SetPosiiton(Vector2 position) { myPosition = position; }
 		Vector2 GetPosition() { return myPosition; }
 		void SetSize(Vector2 size) { mySize = size; }
-		Vector2 GetSize() { return mySize; }
+		Vector2 GetSize() { return mySize * myScale; }
+		void SetScale(float scale) { myScale = scale; }
+		float GetScale() { return myScale; }
 		void SetOffset(Vector2 offset) { myOffset = offset; }
 		Vector2 GetOffset() { return myOffset; }
-		void ForceSetOnCollision(bool value) { isOnCollision = value; }
 
 	private:
 		static UINT myCollisionIDCount;
@@ -37,6 +38,7 @@ namespace IJ
 
 		Vector2 myPosition;
 		Vector2 mySize;
+		float myScale;
 		Vector2 myOffset;
 		bool isDrawOnCamera;
 	};

@@ -141,6 +141,7 @@
     <ClInclude Include="IJ_Crawler.h" />
     <ClInclude Include="IJ_Entity.h" />
     <ClInclude Include="IJ_GameObject.h" />
+    <ClInclude Include="IJ_Ground.h" />
     <ClInclude Include="IJ_HUDFrame.h" />
     <ClInclude Include="IJ_HUDHealth.h" />
     <ClInclude Include="IJ_Input.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="IJ_TitleScene_Background.h" />
     <ClInclude Include="IJ_TitleScene_Title.h" />
     <ClInclude Include="IJ_Transform.h" />
+    <ClInclude Include="IJ_Wall.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -177,6 +179,7 @@
     <ClCompile Include="IJ_Collider.cpp" />
     <ClCompile Include="IJ_CollisionManager.cpp" />
     <ClCompile Include="IJ_Crawler.cpp" />
+    <ClCompile Include="IJ_Ground.cpp" />
     <ClCompile Include="IJ_HUDFrame.cpp" />
     <ClCompile Include="IJ_HUDHealth.cpp" />
     <ClCompile Include="IJ_PlayBackground.cpp" />
@@ -206,6 +209,7 @@
     <ClCompile Include="IJ_TitleScene_Background.cpp" />
     <ClCompile Include="IJ_TitleScene_Title.cpp" />
     <ClCompile Include="IJ_Transform.cpp" />
+    <ClCompile Include="IJ_Wall.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

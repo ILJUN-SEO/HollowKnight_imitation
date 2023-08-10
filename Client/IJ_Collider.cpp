@@ -2,6 +2,7 @@
 #include "IJ_Transform.h"
 #include "IJ_GameObject.h"
 #include "IJ_Camera.h"
+#include "IJ_Input.h"
 
 namespace IJ
 {
@@ -13,6 +14,7 @@ namespace IJ
 		, isOnCollision(false)
 		, myPosition(Vector2::Zero)
 		, mySize(Vector2::Zero)
+		, myScale(1.0f)
 		, myOffset(Vector2::Zero)
 		, isDrawOnCamera(false)
 	{
@@ -36,14 +38,13 @@ namespace IJ
 
 		myPosition = pos + myOffset;
 
-		pos.x -= mySize.x / 2.0f;
-		pos.y -= mySize.y / 2.0f;
+		pos.x -= (mySize.x * myScale) / 2.0f;
+		pos.y -= (mySize.y * myScale) / 2.0f;
 		pos.x += myOffset.x;
 		pos.y += myOffset.y;
 
 		if (isDrawOnCamera == false)
 			pos = Camera::GetWinPosition(pos);
-
 
 		HBRUSH transparentBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, transparentBrush);
@@ -57,7 +58,7 @@ namespace IJ
 
 		Rectangle(hdc
 			, pos.x, pos.y
-			, pos.x + mySize.x, pos.y + mySize.y);
+			, pos.x + (mySize.x * myScale), pos.y + (mySize.y * myScale));
 
 		SelectObject(hdc, oldPen);
 		DeleteObject(pen);

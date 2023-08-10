@@ -1,5 +1,5 @@
 #pragma once
-#include "IJ_GameObject.h"
+#include "IJ_Player.h"
 
 
 namespace IJ
@@ -18,10 +18,10 @@ namespace IJ
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
-		void SetOwner(GameObject* owner) { myOwner = owner; }
+		void SetOwner(Player* owner) { myPlayer = owner; }
 
 	private:
-		GameObject* myOwner;
+		Player* myPlayer;
 		float myDeathTime;
 	};
 }

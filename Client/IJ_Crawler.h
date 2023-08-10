@@ -7,6 +7,14 @@ namespace IJ
 	class Crawler : public GameObject
 	{
 	public:
+		enum class myCrawlerState
+		{
+			Walk,
+			Turn,
+			Dead,
+			END,
+		};
+
 		Crawler();
 		virtual ~Crawler();
 
@@ -18,7 +26,17 @@ namespace IJ
 		virtual void OnCollisionStay(class Collider* other);
 		virtual void OnCollisionExit(class Collider* other);
 
-	private:
+		void Damaged(int damage) { crawlerHP -= damage; }
 
+		void Walk();
+		void Turn();
+		void Dead();
+
+	private:
+		myCrawlerState myCurrentState;
+		float turnTime;
+		bool isLookingLeft;
+
+		UINT crawlerHP;
 	};
 }

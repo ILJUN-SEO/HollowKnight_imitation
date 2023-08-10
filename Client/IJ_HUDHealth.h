@@ -14,7 +14,10 @@ namespace IJ
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
-	private:
+		void SetActivated(bool value) { isActivated = value; }
+		bool GetActivated() { return isActivated; }
 
+	private:
+		bool isActivated;
 	};
 }

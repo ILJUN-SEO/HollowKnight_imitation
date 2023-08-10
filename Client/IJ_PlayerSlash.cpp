@@ -2,13 +2,21 @@
 #include "IJ_GameObject.h"
 #include "IJ_Player.h"
 #include "IJ_Transform.h"
+#include "IJ_Animator.h"
+#include "IJ_Collider.h"
 #include "IJ_Time.h"
+#include "IJ_Texture.h"
+#include "IJ_ResourceManager.h"
+
+#include "IJ_Crawler.h"
 
 
 namespace IJ
 {
+	using namespace Math;
+
 	PlayerSlash::PlayerSlash()
-		: myOwner(nullptr)
+		: myPlayer(nullptr)
 		, myDeathTime(0.5f)
 	{}
 
@@ -16,17 +24,26 @@ namespace IJ
 	{}
 
 	void PlayerSlash::Initialize()
-	{}
+	{
+		Texture* texture = ResourceManager::Load<Texture>(L"SlashEffect"
+			, L"..\\Resources\\Extras\\atlas\\SlashEffect.png");
+		Transform* slash_tr = GetComponent<Transform>();
+		Animator* slash_at = AddComponent<Animator>();
+		slash_at->CreateAnimationInAnimator(L"Slash_left", texture, Vector2(0.0f, 0.0f), Vector2(160.0f, 112.0f), 4, Vector2(-100.0f, 0.0f) * slash_at->GetScale(), 0.05f);
+		slash_at->CreateAnimationInAnimator(L"Slash_right", texture, Vector2(0.0f, 112.0f), Vector2(160.0f, 112.0f), 4, Vector2(100.0f, 0.0f) * slash_at->GetScale(), 0.05f);
+		Collider* slash_col = AddComponent<Collider>();
+		
+	}
 
 	void PlayerSlash::Update()
 	{
 		GameObject::Update();
 
 		Transform* tr = GetComponent<Transform>();
-		tr->SetPosition(myOwner->GetComponent<Transform>()->GetPosition());
+		tr->SetPosition(myPlayer->GetComponent<Transform>()->GetPosition());
 
 		myDeathTime -= Time::DeltaTime();
-		if (myDeathTime < 0.0f)
+		if (myDeathTime < 0.0f || GetComponent<Animator>()->IsActavatedAnimationComplete())
 		{
 			Destroy(this);
 		}
@@ -38,7 +55,10 @@ namespace IJ
 	}
 
 	void PlayerSlash::OnCollisionEnter(Collider* other)
-	{}
+	{
+		Crawler* enemy = dynamic_cast<Crawler*>(other->GetOwner());
+		enemy->Damaged(1);
+	}
 
 	void PlayerSlash::OnCollisionStay(Collider* other)
 	{}
