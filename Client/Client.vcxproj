@@ -135,6 +135,7 @@
     <ClInclude Include="IJ_Animator.h" />
     <ClInclude Include="IJ_Application.h" />
     <ClInclude Include="IJ_Buzzer.h" />
+    <ClInclude Include="IJ_BuzzerTrigger.h" />
     <ClInclude Include="IJ_Camera.h" />
     <ClInclude Include="IJ_Collider.h" />
     <ClInclude Include="IJ_CollisionManager.h" />
@@ -177,6 +178,7 @@
     <ClCompile Include="IJ_Animation.cpp" />
     <ClCompile Include="IJ_Animator.cpp" />
     <ClCompile Include="IJ_Buzzer.cpp" />
+    <ClCompile Include="IJ_BuzzerTrigger.cpp" />
     <ClCompile Include="IJ_Camera.cpp" />
     <ClCompile Include="IJ_Collider.cpp" />
     <ClCompile Include="IJ_CollisionManager.cpp" />

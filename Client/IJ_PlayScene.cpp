@@ -19,6 +19,7 @@
 #include "IJ_HUDHealth.h"
 #include "IJ_PlayBackground.h"
 #include "IJ_Crawler.h"
+#include "IJ_Buzzer.h"
 
 
 extern IJ::Application application;
@@ -132,23 +133,15 @@ namespace IJ
 		col->SetSize(Vector2(1230, 200.0f));
 
 		// UI 包访
-		//image = ResourceManager::Load<Texture>(L"HUDFrame"
-		//	, L"..\\Resources\\Extras\\HUD\\HUDFrame.png");
-		//HUDFrame* hudframe = InputObject::Instantiate<HUDFrame>(myLayerType::UI);
-		//sr = hudframe->AddComponent<SpriteRenderer>();
-		//sr->SetTexture(image);
-		//sr->SetDrawOnCamera(true);
-		//hudframe->GetComponent<Transform>()->SetPosition(Vector2(150.0f, 100.0f));
-
-		
 
 		// 利 包访
 		Crawler* crawler1 = InputObject::Instantiate<Crawler>(myLayerType::Enemy);
 		crawler1->GetComponent<Transform>()->SetPosition(Vector2(3600.0f, 5116.0f));
-
 		Crawler* crawler2 = InputObject::Instantiate<Crawler>(myLayerType::Enemy);
-		crawler2->GetComponent<Transform>()->SetPosition(Vector2(4600.0f, 5116.0f));
-		
+		crawler2->GetComponent<Transform>()->SetPosition(Vector2(5100.0f, 5116.0f));
+
+		Buzzer* buzzer1 = InputObject::Instantiate<Buzzer>(myLayerType::Enemy);
+		buzzer1->GetComponent<Transform>()->SetPosition(Vector2(2000.0f, 4800.0f));
 
 		// 面倒 包访
 		CollisionManager::CollisionLayerCheck(myLayerType::Player, myLayerType::Enemy, true);

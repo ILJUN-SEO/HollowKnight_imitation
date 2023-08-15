@@ -16,19 +16,22 @@ namespace IJ
 		virtual void Update();
 		virtual void Render(HDC hdc);
 
-		void AddForce(Vector2 force) { myForce = force; }
+		void AddForce(Vector2 force) { myForce += force; }
+
 		void SetMass(float mass) { myMass = mass; }
-		void SetGrounded(bool value) { isGrounded = value; }
 		void SetVelocity(Vector2 velocity) { myVelocity = velocity; }
+		void SetEnableGravity(bool value) { isEnableGravity = value; }
+		void SetGrounded(bool value) { isGrounded = value; }
 		Vector2 GetVelocity() { return myVelocity; }
+		void SetMaxVelocity(Vector2 maxVelocity) { myMaxVelocity = maxVelocity; }
 
 	private:
 		float myMass;
 
 		float myFriction;
-		float myStaticFriction;
-		float myKineticFriction;
-		float myFrictionCoefficient;
+		//float myStaticFriction;
+		//float myKineticFriction;
+		//float myFrictionCoefficient;
 
 		Vector2 myForce;
 		Vector2 myAccelation;

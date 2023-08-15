@@ -9,6 +9,7 @@
 #include "IJ_ResourceManager.h"
 
 #include "IJ_Crawler.h"
+#include "IJ_Buzzer.h"
 
 
 namespace IJ
@@ -29,10 +30,9 @@ namespace IJ
 			, L"..\\Resources\\Extras\\atlas\\SlashEffect.png");
 		Transform* slash_tr = GetComponent<Transform>();
 		Animator* slash_at = AddComponent<Animator>();
-		slash_at->CreateAnimationInAnimator(L"Slash_left", texture, Vector2(0.0f, 0.0f), Vector2(160.0f, 112.0f), 4, Vector2(-100.0f, 0.0f) * slash_at->GetScale(), 0.05f);
-		slash_at->CreateAnimationInAnimator(L"Slash_right", texture, Vector2(0.0f, 112.0f), Vector2(160.0f, 112.0f), 4, Vector2(100.0f, 0.0f) * slash_at->GetScale(), 0.05f);
+		slash_at->CreateAnimationInAnimator(L"Slash_left", texture, Vector2(0.0f, 0.0f), Vector2(160.0f, 112.0f), 3, Vector2(-100.0f, 0.0f) * slash_at->GetScale());
+		slash_at->CreateAnimationInAnimator(L"Slash_right", texture, Vector2(0.0f, 112.0f), Vector2(160.0f, 112.0f), 3, Vector2(100.0f, 0.0f) * slash_at->GetScale());
 		Collider* slash_col = AddComponent<Collider>();
-		
 	}
 
 	void PlayerSlash::Update()
@@ -56,8 +56,12 @@ namespace IJ
 
 	void PlayerSlash::OnCollisionEnter(Collider* other)
 	{
-		Crawler* enemy = dynamic_cast<Crawler*>(other->GetOwner());
-		enemy->Damaged(1);
+		Crawler* crawler = dynamic_cast<Crawler*>(other->GetOwner());
+		if (crawler != nullptr)
+			crawler->Damaged(1);
+		Buzzer* buzzer = dynamic_cast<Buzzer*>(other->GetOwner());
+		if (buzzer != nullptr)
+			buzzer->SetBuzzerState(Buzzer::myBuzzerState::Dead);
 	}
 
 	void PlayerSlash::OnCollisionStay(Collider* other)

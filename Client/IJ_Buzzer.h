@@ -1,6 +1,8 @@
 #pragma once
 #include "IJ_GameObject.h"
 
+#include "IJ_Player.h"
+
 
 namespace IJ
 {
@@ -27,9 +29,20 @@ namespace IJ
 		virtual void OnCollisionStay(class Collider* other);
 		virtual void OnCollisionExit(class Collider* other);
 
+		void Idle();
+		void Startle();
+		void Chase();
+		void Dead();
+
+		myBuzzerState GetBuzzerState() { return myCurrentState; }
+		void SetBuzzerState(myBuzzerState state) { myCurrentState = state; }
+		void SetTarget(Player* player) { myTarget = player; }
+
 	private:
 		myBuzzerState myCurrentState;
 		UINT buzzerHP;
 		bool isLookingLeft;
+
+		Player* myTarget;
 	};
 }

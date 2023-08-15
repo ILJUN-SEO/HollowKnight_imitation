@@ -27,12 +27,12 @@ namespace IJ
 			, L"..\\Resources\\Extras\\atlas\\crawler_atlas.png");
 		Animator* animator = AddComponent<Animator>();
 		Collider* collider = AddComponent<Collider>();
+
 		animator->CreateAnimationInAnimator(L"Crawler_walk_left", image, Vector2(0.0f, 0.0f), Vector2(128.0f, 88.0f), 4);
 		animator->CreateAnimationInAnimator(L"Crawler_walk_right", image, Vector2(0.0f, 88.0f), Vector2(128.0f, 88.0f), 4);
 		animator->CreateAnimationInAnimator(L"Crawler_turn_left", image, Vector2(0.0f, 176.0f), Vector2(128.0f, 88.0f), 2);
 		animator->CreateAnimationInAnimator(L"Crawler_turn_right", image, Vector2(0.0f, 264.0f), Vector2(128.0f, 88.0f), 2);
 		animator->CreateAnimationInAnimator(L"Crawler_dead", image, Vector2(0.0f, 352.0f), Vector2(128.0f, 88.0f), 1);
-
 
 		collider->SetSize(Vector2(128.0f, 80.f));
 	}
@@ -68,27 +68,20 @@ namespace IJ
 	}
 
 	void Crawler::OnCollisionEnter(Collider* other)
-	{
-		Player* player = dynamic_cast<Player*>(other->GetOwner());
-		if (myCurrentState != Crawler::myCrawlerState::Dead && player->GetPlayerInvincible() == false)
-		{
-			//if (GetComponent<Transform>()->GetPosition().x < player->GetComponent<Transform>()->GetPosition().x)
-			//	player->SetLookingLeft(true);
-			//else
-			//	player->SetLookingLeft(false);
-			player->SetState(Player::myPlayerState::Damaged);
-		}
-	}
+	{}
 	void Crawler::OnCollisionStay(Collider* other)
 	{
 		Player* player = dynamic_cast<Player*>(other->GetOwner());
-		if (myCurrentState != Crawler::myCrawlerState::Dead && player->GetPlayerInvincible() == false)
+		if (player != nullptr)
 		{
-			//if (GetComponent<Transform>()->GetPosition().x < player->GetComponent<Transform>()->GetPosition().x)
-			//	player->SetLookingLeft(true);
-			//else
-			//	player->SetLookingLeft(false);
-			player->SetState(Player::myPlayerState::Damaged);
+			if (myCurrentState != Crawler::myCrawlerState::Dead && player->GetPlayerInvincible() == false)
+			{
+				if (GetComponent<Transform>()->GetPosition().x < player->GetComponent<Transform>()->GetPosition().x)
+					player->SetLookingLeft(true);
+				else
+					player->SetLookingLeft(false);
+				player->SetState(Player::myPlayerState::Damaged);
+			}
 		}
 	}
 	void Crawler::OnCollisionExit(Collider* other)
