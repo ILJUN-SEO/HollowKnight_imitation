@@ -43,11 +43,13 @@ namespace IJ
 		Animator* at = player->GetComponent<Animator>();
 
 		tr->SetPosition(Vector2(2300.0f, 4500.0f));
+		player->SetLookingLeft(false);
 		player->SetState(Player::myPlayerState::Fall);
+
 
 		// 배경 관련
 		image = ResourceManager::Load<Texture>(L"KingsPassStage"
-			, L"..\\Resources\\Extras\\Stage\\Kingspass_Edited_big_tblt3.bmp");
+			, L"..\\Resources\\Extras\\Stage\\Kingspass_Edited_big_tblt.bmp");
 		PlayBackground* kingspass = InputObject::Instantiate<PlayBackground>(myLayerType::Background);
 		kingspass->GetComponent<Transform>()->SetPosition(Vector2(6000.0f, 3000.0f));
 		SpriteRenderer* sr = kingspass->AddComponent<SpriteRenderer>();

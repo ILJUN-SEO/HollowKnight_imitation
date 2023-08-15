@@ -48,6 +48,12 @@ namespace IJ
 		bool GetLookingLeft() { return isLookingLeft; }
 		void SetPlayerGrounded(bool value) { isGrounded = value; }
 		bool GetPlayerGrounded() { return isGrounded; }
+		bool GetPlayerInvincible()
+		{ 
+			if (this == nullptr)
+				return false;
+			return damageInvincibleTime <= 2.0f; 
+		}
 
 		void Idle();
 		void Move();
@@ -63,13 +69,19 @@ namespace IJ
 		void Damaged();
 		void Death();
 
+		void MoveFunc(Math::Vector2* pos);
+		void JumpFunc(Math::Vector2* pos);
+		void AttackFunc();
+
 	private:
 		myPlayerState myCurrentState;
 		bool isLookingLeft;
 		bool isGrounded;
 		float jumpPressingTime;
 		float damageStunTime;
+		float damageInvincibleTime;
 		bool isAttacking;
+		float attackCooldown;
 
 		int playerHealth;
 		int playerMana;

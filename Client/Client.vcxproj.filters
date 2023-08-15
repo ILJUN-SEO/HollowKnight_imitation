@@ -225,6 +225,9 @@
     <ClInclude Include="IJ_Ground.h">
       <Filter>Contents\GameObjects\Terrain</Filter>
     </ClInclude>
+    <ClInclude Include="IJ_Buzzer.h">
+      <Filter>Contents\GameObjects\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -346,6 +349,9 @@
     </ClCompile>
     <ClCompile Include="IJ_Ground.cpp">
       <Filter>Contents\GameObjects\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Buzzer.cpp">
+      <Filter>Contents\GameObjects\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

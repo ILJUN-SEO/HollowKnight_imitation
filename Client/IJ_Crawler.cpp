@@ -14,11 +14,10 @@ namespace IJ
 {
 	Crawler::Crawler()
 		: myCurrentState(Crawler::myCrawlerState::Walk)
-		, turnTime(0.0f)
+		, crawlerHP(2)
 		, isLookingLeft(true)
-		, crawlerHP(3)
+		, turnTime(0.0f)
 	{}
-
 	Crawler::~Crawler()
 	{}
 
@@ -71,8 +70,7 @@ namespace IJ
 	void Crawler::OnCollisionEnter(Collider* other)
 	{
 		Player* player = dynamic_cast<Player*>(other->GetOwner());
-		PlayerSlash* slash = dynamic_cast<PlayerSlash*>(other->GetOwner());
-		if (myCurrentState != Crawler::myCrawlerState::Dead)
+		if (myCurrentState != Crawler::myCrawlerState::Dead && player->GetPlayerInvincible() == false)
 		{
 			//if (GetComponent<Transform>()->GetPosition().x < player->GetComponent<Transform>()->GetPosition().x)
 			//	player->SetLookingLeft(true);
@@ -82,7 +80,17 @@ namespace IJ
 		}
 	}
 	void Crawler::OnCollisionStay(Collider* other)
-	{}
+	{
+		Player* player = dynamic_cast<Player*>(other->GetOwner());
+		if (myCurrentState != Crawler::myCrawlerState::Dead && player->GetPlayerInvincible() == false)
+		{
+			//if (GetComponent<Transform>()->GetPosition().x < player->GetComponent<Transform>()->GetPosition().x)
+			//	player->SetLookingLeft(true);
+			//else
+			//	player->SetLookingLeft(false);
+			player->SetState(Player::myPlayerState::Damaged);
+		}
+	}
 	void Crawler::OnCollisionExit(Collider* other)
 	{}
 
