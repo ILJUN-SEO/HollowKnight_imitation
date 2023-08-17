@@ -82,6 +82,66 @@ namespace IJ
 		col = gr5->AddComponent<Collider>();
 		col->SetSize(Vector2(950.0f, 200.0f));
 
+		Ground* gr6 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
+		gr6->GetComponent<Transform>()->SetPosition(Vector2(7485.0f, 4580.0f));
+		col = gr6->AddComponent<Collider>();
+		col->SetSize(Vector2(260.0f, 200.0f));
+
+		Ground* gr7 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
+		gr7->GetComponent<Transform>()->SetPosition(Vector2(7255.0f, 4355.0f));
+		col = gr7->AddComponent<Collider>();
+		col->SetSize(Vector2(160.0f, 200.0f));
+
+		Ground* gr8 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
+		gr8->GetComponent<Transform>()->SetPosition(Vector2(6380.0f, 4140.0f));
+		col = gr8->AddComponent<Collider>();
+		col->SetSize(Vector2(1580.0f, 200.0f));
+
+		Ground* gr9 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
+		gr9->GetComponent<Transform>()->SetPosition(Vector2(4965.0f, 4355.0f));
+		col = gr9->AddComponent<Collider>();
+		col->SetSize(Vector2(1230, 200.0f));
+
+		Ground* gr10 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
+		gr10->GetComponent<Transform>()->SetPosition(Vector2(4675.0f, 3170.0f));
+		col = gr10->AddComponent<Collider>();
+		col->SetSize(Vector2(230.0f, 120.0f));
+
+		Ground* gr11 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
+		gr11->GetComponent<Transform>()->SetPosition(Vector2(4470.0f, 3060.0f));
+		col = gr11->AddComponent<Collider>();
+		col->SetSize(Vector2(160.0f, 120.0f));
+
+		Ground* gr12 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
+		gr12->GetComponent<Transform>()->SetPosition(Vector2(4250.0f, 2925.0f));
+		col = gr12->AddComponent<Collider>();
+		col->SetSize(Vector2(280.0f, 200.0f));
+
+		Ground* gr13 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
+		gr13->GetComponent<Transform>()->SetPosition(Vector2(4040.0f, 2700.0f));
+		col = gr13->AddComponent<Collider>();
+		col->SetSize(Vector2(120.0f, 200.0f));
+
+		Ground* gr14 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
+		gr14->GetComponent<Transform>()->SetPosition(Vector2(3830.0f, 2520.0f));
+		col = gr14->AddComponent<Collider>();
+		col->SetSize(Vector2(300.0f, 200.0f));
+
+		Ground* gr15 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
+		gr15->GetComponent<Transform>()->SetPosition(Vector2(4690.0f, 2425.0f));
+		col = gr15->AddComponent<Collider>();
+		col->SetSize(Vector2(630.0f, 120.0f));
+
+		Ground* gr16 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
+		gr16->GetComponent<Transform>()->SetPosition(Vector2(5200.0f, 2310.0f));
+		col = gr16->AddComponent<Collider>();
+		col->SetSize(Vector2(400.0f, 100.0f));
+
+		Ground* gr17 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
+		gr17->GetComponent<Transform>()->SetPosition(Vector2(8110.0f, 2225.0f));
+		col = gr17->AddComponent<Collider>();
+		col->SetSize(Vector2(5400.0f, 50.0f));
+
 		Ground* pf1 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
 		pf1->GetComponent<Transform>()->SetPosition(Vector2(8680.0f, 5285.0f));
 		col = pf1->AddComponent<Collider>();
@@ -112,25 +172,30 @@ namespace IJ
 		col = pf6->AddComponent<Collider>();
 		col->SetSize(Vector2(120.0f, 100.0f));
 
-		Ground* gr6 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
-		gr6->GetComponent<Transform>()->SetPosition(Vector2(7485.0f, 4580.0f));
-		col = gr6->AddComponent<Collider>();
-		col->SetSize(Vector2(260.0f, 200.0f));
+		Ground* pf7 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
+		pf7->GetComponent<Transform>()->SetPosition(Vector2(4555.0f, 4055.0f));
+		col = pf7->AddComponent<Collider>();
+		col->SetSize(Vector2(160.0f, 50.0f));
 
-		Ground* gr7 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
-		gr7->GetComponent<Transform>()->SetPosition(Vector2(7255.0f, 4355.0f));
-		col = gr7->AddComponent<Collider>();
-		col->SetSize(Vector2(160.0f, 200.0f));
+		Ground* pf8 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
+		pf8->GetComponent<Transform>()->SetPosition(Vector2(4830.0f, 3865.0f));
+		col = pf8->AddComponent<Collider>();
+		col->SetSize(Vector2(120.0f, 100.0f));
 
-		Ground* gr8 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
-		gr8->GetComponent<Transform>()->SetPosition(Vector2(6380.0f, 4140.0f));
-		col = gr8->AddComponent<Collider>();
-		col->SetSize(Vector2(1580.0f, 200.0f));
+		Ground* pf9 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
+		pf9->GetComponent<Transform>()->SetPosition(Vector2(5140.0f, 3740.0f));
+		col = pf9->AddComponent<Collider>();
+		col->SetSize(Vector2(120.0f, 150.0f));
 
-		Ground* gr9 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
-		gr9->GetComponent<Transform>()->SetPosition(Vector2(4965.0f, 4355.0f));
-		col = gr9->AddComponent<Collider>();
-		col->SetSize(Vector2(1230, 200.0f));
+		Ground* pf10 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
+		pf10->GetComponent<Transform>()->SetPosition(Vector2(5395.0f, 3510.0f));
+		col = pf10->AddComponent<Collider>();
+		col->SetSize(Vector2(150.0f, 50.0f));
+
+		Ground* pf11 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
+		pf11->GetComponent<Transform>()->SetPosition(Vector2(4990.0f, 3355.0f));
+		col = pf11->AddComponent<Collider>();
+		col->SetSize(Vector2(230.0f, 60.0f));
 
 		// UI 관련
 
@@ -139,9 +204,17 @@ namespace IJ
 		crawler1->GetComponent<Transform>()->SetPosition(Vector2(3600.0f, 5116.0f));
 		Crawler* crawler2 = InputObject::Instantiate<Crawler>(myLayerType::Enemy);
 		crawler2->GetComponent<Transform>()->SetPosition(Vector2(5100.0f, 5116.0f));
+		Crawler* crawler3 = InputObject::Instantiate<Crawler>(myLayerType::Enemy);
+		crawler3->GetComponent<Transform>()->SetPosition(Vector2(7300.0f, 5116.0f));
+		Crawler* crawler4 = InputObject::Instantiate<Crawler>(myLayerType::Enemy);
+		crawler4->GetComponent<Transform>()->SetPosition(Vector2(8650.0f, 5460.0f));
+		Crawler* crawler5 = InputObject::Instantiate<Crawler>(myLayerType::Enemy);
+		crawler5->GetComponent<Transform>()->SetPosition(Vector2(4820.0f, 2320.0f));
 
 		Buzzer* buzzer1 = InputObject::Instantiate<Buzzer>(myLayerType::Enemy);
-		buzzer1->GetComponent<Transform>()->SetPosition(Vector2(2000.0f, 4800.0f));
+		buzzer1->GetComponent<Transform>()->SetPosition(Vector2(5000.0f, 3900.0f));
+		Buzzer* buzzer2 = InputObject::Instantiate<Buzzer>(myLayerType::Enemy);
+		buzzer2->GetComponent<Transform>()->SetPosition(Vector2(4700.0f, 2900.0f));
 
 		// 충돌 관련
 		CollisionManager::CollisionLayerCheck(myLayerType::Player, myLayerType::Enemy, true);
