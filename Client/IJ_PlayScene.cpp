@@ -209,7 +209,7 @@ namespace IJ
 		Crawler* crawler4 = InputObject::Instantiate<Crawler>(myLayerType::Enemy);
 		crawler4->GetComponent<Transform>()->SetPosition(Vector2(8650.0f, 5460.0f));
 		Crawler* crawler5 = InputObject::Instantiate<Crawler>(myLayerType::Enemy);
-		crawler5->GetComponent<Transform>()->SetPosition(Vector2(4820.0f, 2320.0f));
+		crawler5->GetComponent<Transform>()->SetPosition(Vector2(6500.0f, 2240.0f));
 
 		Buzzer* buzzer1 = InputObject::Instantiate<Buzzer>(myLayerType::Enemy);
 		buzzer1->GetComponent<Transform>()->SetPosition(Vector2(5000.0f, 3900.0f));

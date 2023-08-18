@@ -20,7 +20,18 @@ namespace IJ
 
 		Layer& GetLayer(myLayerType type) { return myLayers[(UINT)type]; }
 
+		void ToggleShowCollider()
+		{
+			if (isShowCollider == true)
+				isShowCollider = false;
+			else
+				isShowCollider = true;
+		}
+		bool GetShowCollider() { return isShowCollider; }
+
 	private:
 		std::vector<Layer> myLayers;
+
+		bool isShowCollider;
 	};
 }

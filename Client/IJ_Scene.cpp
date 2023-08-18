@@ -1,9 +1,11 @@
 #include "IJ_Scene.h"
+#include "IJ_Input.h"
 
 
 namespace IJ
 {
 	Scene::Scene()
+		: isShowCollider(false)
 	{
 		myLayers.resize((int)myLayerType::END);
 	}
@@ -20,6 +22,9 @@ namespace IJ
 		{
 			layer.Update();
 		}
+
+		if (Input::GetKeyDown(myKeyCode::P))
+			ToggleShowCollider();
 	}
 
 	void Scene::Render(HDC hdc)

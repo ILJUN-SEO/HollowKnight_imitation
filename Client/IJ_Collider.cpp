@@ -3,6 +3,8 @@
 #include "IJ_GameObject.h"
 #include "IJ_Camera.h"
 #include "IJ_Input.h"
+#include "IJ_SceneManager.h"
+#include "IJ_Scene.h"
 
 namespace IJ
 {
@@ -29,7 +31,20 @@ namespace IJ
 	{}
 
 	void Collider::Update()
-	{}
+	{
+		//Transform* tr = GetOwner()->GetComponent<Transform>();
+		//Vector2 pos = tr->GetPosition();
+
+		//myPosition = pos + myOffset;
+
+		//pos.x -= (mySize.x * myScale) / 2.0f;
+		//pos.y -= (mySize.y * myScale) / 2.0f;
+		//pos.x += myOffset.x;
+		//pos.y += myOffset.y;
+
+		//if (isDrawOnCamera == false)
+		//	pos = Camera::GetWinPosition(pos);
+	}
 
 	void Collider::Render(HDC hdc)
 	{
@@ -46,24 +61,27 @@ namespace IJ
 		if (isDrawOnCamera == false)
 			pos = Camera::GetWinPosition(pos);
 
-		HBRUSH transparentBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
-		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, transparentBrush);
+		if (SceneManager::GetActivatedScene()->GetShowCollider() == true)
+		{
+			HBRUSH transparentBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+			HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, transparentBrush);
 
-		HPEN pen = NULL;
-		if (isOnCollision)
-			pen = CreatePen(PS_SOLID, 2, RGB(255, 50, 50));
-		else
-			pen = CreatePen(PS_SOLID, 2, RGB(50, 50, 255));
-		HPEN oldPen = (HPEN)SelectObject(hdc, pen);
+			HPEN pen = NULL;
+			if (isOnCollision)
+				pen = CreatePen(PS_SOLID, 2, RGB(255, 50, 50));
+			else
+				pen = CreatePen(PS_SOLID, 2, RGB(50, 50, 255));
+			HPEN oldPen = (HPEN)SelectObject(hdc, pen);
 
-		Rectangle(hdc
-			, pos.x, pos.y
-			, pos.x + (mySize.x * myScale), pos.y + (mySize.y * myScale));
+			Rectangle(hdc
+				, pos.x, pos.y
+				, pos.x + (mySize.x * myScale), pos.y + (mySize.y * myScale));
 
-		SelectObject(hdc, oldPen);
-		DeleteObject(pen);
-		SelectObject(hdc, oldBrush);
-		DeleteObject(transparentBrush);
+			SelectObject(hdc, oldPen);
+			DeleteObject(pen);
+			SelectObject(hdc, oldBrush);
+			DeleteObject(transparentBrush);
+		}
 	}
 
 	void Collider::OnCollisionEnter(Collider* other)
