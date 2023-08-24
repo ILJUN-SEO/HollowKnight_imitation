@@ -234,6 +234,10 @@
     <ClInclude Include="IJ_BuzzerTrigger.h">
       <Filter>Contents\GameObjects\Enemy\Buzzer</Filter>
     </ClInclude>
+    <ClInclude Include="IJ_HUDMana.h">
+      <Filter>Contents\GameObjects\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_PlayerFirball.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -362,6 +366,10 @@
     <ClCompile Include="IJ_BuzzerTrigger.cpp">
       <Filter>Contents\GameObjects\Enemy\Buzzer</Filter>
     </ClCompile>
+    <ClCompile Include="IJ_HUDMana.cpp">
+      <Filter>Contents\GameObjects\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_PlayerFirball.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">

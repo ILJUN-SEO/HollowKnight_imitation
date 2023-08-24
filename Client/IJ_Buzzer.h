@@ -29,6 +29,8 @@ namespace IJ
 		virtual void OnCollisionStay(class Collider* other);
 		virtual void OnCollisionExit(class Collider* other);
 
+		void Damaged(int damage) { buzzerHP -= damage; }
+
 		void Idle();
 		void Startle();
 		void Chase();

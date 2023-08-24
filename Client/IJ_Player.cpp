@@ -9,7 +9,10 @@
 #include "IJ_ResourceManager.h"
 #include "IJ_Texture.h"
 
+#include "IJ_HUDFrame.h"
 #include "IJ_HUDHealth.h"
+#include "IJ_HUDMana.h"
+
 #include "IJ_PlayerSlash.h"
 
 
@@ -24,7 +27,10 @@ namespace IJ
 		, damageInvincibleTime(0.0f)
 		, isAttacking(false)
 		, attackCooldown(0.5f)
+		, altSlashTrigger(false)
+		, playerMaxHealth(5)
 		, playerHealth(5)
+		, playerMaxMana(12)
 		, playerMana(0)
 	{}
 
@@ -35,42 +41,93 @@ namespace IJ
 	{
 		Transform* tr = GetComponent<Transform>();
 		Texture* img = ResourceManager::Load<Texture>(L"Knight_atlas"
-			, L"..\\Resources\\Extras\\atlas\\knight_atlas_test.png");
+			, L"..\\Resources\\Extras\\atlas\\knight_atlas.png");
 		Collider* col = AddComponent<Collider>();
 		Animator* at = AddComponent<Animator>();
 
-		col->SetSize(Vector2(64.0f, 128.0f));
+		col->SetSize(Vector2(60.0f, 130.0f));
 
-		at->CreateAnimationInAnimator(L"Knight_idle_left", img, Vector2(0.0f, 0.0f), Vector2(64.0f, 128.0f), 9);
-		at->CreateAnimationInAnimator(L"Knight_idle_right", img, Vector2(0.0f, 128.0f), Vector2(64.0f, 128.0f), 9);
-		at->CreateAnimationInAnimator(L"Knight_walk_left", img, Vector2(0.0f, 256.0f), Vector2(64.0f, 128.0f), 7);
-		at->CreateAnimationInAnimator(L"Knight_walk_right", img, Vector2(0.0f, 384.0f), Vector2(64.0f, 128.0f), 7);
-		at->CreateAnimationInAnimator(L"Knight_jump_left", img, Vector2(0.0f, 512.0f), Vector2(96.0f, 136.0f), 6);
-		at->CreateAnimationInAnimator(L"Knight_jump_right", img, Vector2(0.0f, 646.0f), Vector2(96.0f, 136.0f), 6);
-		at->CreateAnimationInAnimator(L"Knight_fall_left", img, Vector2(0.0f, 784.0f), Vector2(96.0f, 144.0f), 6);
-		at->CreateAnimationInAnimator(L"Knight_fall_right", img, Vector2(0.0f, 928.0f), Vector2(96.0f, 144.0f), 6);
-		at->CreateAnimationInAnimator(L"Knight_falling_left", img, Vector2(288.0f, 784.0f), Vector2(96.0f, 144.0f), 3);
-		at->CreateAnimationInAnimator(L"Knight_falling_right", img, Vector2(288.0f, 928.0f), Vector2(96.0f, 144.0f), 3);
-		at->CreateAnimationInAnimator(L"Knight_attack_left", img, Vector2(0.0f, 1072.0f), Vector2(128.0f, 128.0f), 5);
-		at->CreateAnimationInAnimator(L"Knight_attack_right", img, Vector2(0.0f, 1200.0f), Vector2(128.0f, 128.0f), 5);
+		at->CreateAnimationInAnimator(L"Knight_idle_left", img, Vector2(0.0f, 0.0f), Vector2(70.0f, 140.0f), 9);
+		at->CreateAnimationInAnimator(L"Knight_idle_right", img, Vector2(0.0f, 140.0f), Vector2(70.0f, 140.0f), 9);
+		at->CreateAnimationInAnimator(L"Knight_walk_left", img, Vector2(0.0f, 280.0f), Vector2(70.0f, 140.0f), 7);
+		at->CreateAnimationInAnimator(L"Knight_walk_right", img, Vector2(0.0f, 420.0f), Vector2(70.0f, 140.0f), 7);
+		at->CreateAnimationInAnimator(L"Knight_jump_left", img, Vector2(0.0f, 560.0f), Vector2(100.0f, 150.0f), 6);
+		at->CreateAnimationInAnimator(L"Knight_jump_right", img, Vector2(0.0f, 710.0f), Vector2(100.0f, 150.0f), 6);
+		at->CreateAnimationInAnimator(L"Knight_fall_left", img, Vector2(0.0f, 860.0f), Vector2(100.0f, 150.0f), 6);
+		at->CreateAnimationInAnimator(L"Knight_fall_right", img, Vector2(0.0f, 1010.0f), Vector2(100.0f, 150.0f), 6);
+		at->CreateAnimationInAnimator(L"Knight_falling_left", img, Vector2(300.0f, 860.0f), Vector2(100.0f, 150.0f), 3);
+		at->CreateAnimationInAnimator(L"Knight_falling_right", img, Vector2(300.0f, 1010.0f), Vector2(100.0f, 150.0f), 3);
+		at->CreateAnimationInAnimator(L"Knight_attack_left", img, Vector2(0.0f, 1160.0f), Vector2(120.0f, 140.0f), 5);
+		at->CreateAnimationInAnimator(L"Knight_attack_right", img, Vector2(0.0f, 1300.0f), Vector2(120.0f, 140.0f), 5);
+		at->CreateAnimationInAnimator(L"Knight_attack_alt_left", img, Vector2(0.0f, 1440.0f), Vector2(170.0f, 140.0f), 5);
+		at->CreateAnimationInAnimator(L"Knight_attack_alt_right", img, Vector2(0.0f, 1580.0f), Vector2(170.0f, 140.0f), 5);
+
+		HUDFrame* hudFrame = InputObject::Instantiate<HUDFrame>(myLayerType::UI);
 
 		HUDHealth* hp1 = InputObject::Instantiate<HUDHealth>(myLayerType::UI);
-		HUDHealth* hp2 = InputObject::Instantiate<HUDHealth>(myLayerType::UI);
-		HUDHealth* hp3 = InputObject::Instantiate<HUDHealth>(myLayerType::UI);
-		HUDHealth* hp4 = InputObject::Instantiate<HUDHealth>(myLayerType::UI);
-		HUDHealth* hp5 = InputObject::Instantiate<HUDHealth>(myLayerType::UI);
-
+		hp1->GetComponent<Transform>()->SetPosition(Vector2(200.0f, 80.0f));
 		myHealth.push_back(hp1);
+		HUDHealth* hp2 = InputObject::Instantiate<HUDHealth>(myLayerType::UI);
+		hp2->GetComponent<Transform>()->SetPosition(Vector2(300.0f, 80.0f));
 		myHealth.push_back(hp2);
+		HUDHealth* hp3 = InputObject::Instantiate<HUDHealth>(myLayerType::UI);
+		hp3->GetComponent<Transform>()->SetPosition(Vector2(400.0f, 80.0f));
 		myHealth.push_back(hp3);
+		HUDHealth* hp4 = InputObject::Instantiate<HUDHealth>(myLayerType::UI);
+		hp4->GetComponent<Transform>()->SetPosition(Vector2(500.0f, 80.0f));
 		myHealth.push_back(hp4);
+		HUDHealth* hp5 = InputObject::Instantiate<HUDHealth>(myLayerType::UI);
+		hp5->GetComponent<Transform>()->SetPosition(Vector2(600.0f, 80.0f));
 		myHealth.push_back(hp5);
 
-		hp1->GetComponent<Transform>()->SetPosition(Vector2(200.0f, 80.0f));
-		hp2->GetComponent<Transform>()->SetPosition(Vector2(300.0f, 80.0f));
-		hp3->GetComponent<Transform>()->SetPosition(Vector2(400.0f, 80.0f));
-		hp4->GetComponent<Transform>()->SetPosition(Vector2(500.0f, 80.0f));
-		hp5->GetComponent<Transform>()->SetPosition(Vector2(600.0f, 80.0f));
+		HUDMana* mp1 = InputObject::Instantiate<HUDMana>(myLayerType::UI);
+		mp1->GetComponent<Transform>()->SetPosition(Vector2(94.0f, 170.0f));
+		mp1->AssignAnimation(L"Mana_01");
+		myMana.push_back(mp1);
+		HUDMana* mp2 = InputObject::Instantiate<HUDMana>(myLayerType::UI);
+		mp2->GetComponent<Transform>()->SetPosition(Vector2(94.0f, 160.0f));
+		mp2->AssignAnimation(L"Mana_02");
+		myMana.push_back(mp2);
+		HUDMana* mp3 = InputObject::Instantiate<HUDMana>(myLayerType::UI);
+		mp3->GetComponent<Transform>()->SetPosition(Vector2(94.0f, 150.0f));
+		mp3->AssignAnimation(L"Mana_03");
+		myMana.push_back(mp3);
+		HUDMana* mp4 = InputObject::Instantiate<HUDMana>(myLayerType::UI);
+		mp4->GetComponent<Transform>()->SetPosition(Vector2(94.0f, 140.0f));
+		mp4->AssignAnimation(L"Mana_04");
+		myMana.push_back(mp4);
+		HUDMana* mp5 = InputObject::Instantiate<HUDMana>(myLayerType::UI);
+		mp5->GetComponent<Transform>()->SetPosition(Vector2(94.0f, 130.0f));
+		mp5->AssignAnimation(L"Mana_05");
+		myMana.push_back(mp5);
+		HUDMana* mp6 = InputObject::Instantiate<HUDMana>(myLayerType::UI);
+		mp6->GetComponent<Transform>()->SetPosition(Vector2(94.0f, 120.0f));
+		mp6->AssignAnimation(L"Mana_06");
+		myMana.push_back(mp6);
+		HUDMana* mp7 = InputObject::Instantiate<HUDMana>(myLayerType::UI);
+		mp7->GetComponent<Transform>()->SetPosition(Vector2(94.0f, 110.0f));
+		mp7->AssignAnimation(L"Mana_07");
+		myMana.push_back(mp7);
+		HUDMana* mp8 = InputObject::Instantiate<HUDMana>(myLayerType::UI);
+		mp8->GetComponent<Transform>()->SetPosition(Vector2(94.0f, 100.0f));
+		mp8->AssignAnimation(L"Mana_08");
+		myMana.push_back(mp8);
+		HUDMana* mp9 = InputObject::Instantiate<HUDMana>(myLayerType::UI);
+		mp9->GetComponent<Transform>()->SetPosition(Vector2(94.0f, 90.0f));
+		mp9->AssignAnimation(L"Mana_09");
+		myMana.push_back(mp9);
+		HUDMana* mp10 = InputObject::Instantiate<HUDMana>(myLayerType::UI);
+		mp10->GetComponent<Transform>()->SetPosition(Vector2(94.0f, 80.0f));
+		mp10->AssignAnimation(L"Mana_10");
+		myMana.push_back(mp10);
+		HUDMana* mp11 = InputObject::Instantiate<HUDMana>(myLayerType::UI);
+		mp11->GetComponent<Transform>()->SetPosition(Vector2(94.0f, 70.0f));
+		mp11->AssignAnimation(L"Mana_11");
+		myMana.push_back(mp11);
+		HUDMana* mp12 = InputObject::Instantiate<HUDMana>(myLayerType::UI);
+		mp12->GetComponent<Transform>()->SetPosition(Vector2(94.0f, 60.0f));
+		mp12->AssignAnimation(L"Mana_12");
+		myMana.push_back(mp12);
 	}
 
 	void Player::Update()
@@ -78,8 +135,14 @@ namespace IJ
 		GameObject::Update();
 		if (attackCooldown < 3.0f)
 			attackCooldown += Time::DeltaTime();
+		if (attackCooldown > 1.0f)
+			altSlashTrigger = false;
 		if (damageInvincibleTime < 5.0f)
 			damageInvincibleTime += Time::DeltaTime();
+		if (playerHealth > playerMaxHealth)
+			playerHealth = playerMaxHealth;
+		if (playerMana > playerMaxMana)
+			playerMana = playerMaxMana;
 
 		switch (myCurrentState)
 		{
@@ -132,6 +195,16 @@ namespace IJ
 		{
 			if (i + 1 > playerHealth)
 				myHealth[i]->SetActivated(false);
+			else
+				myHealth[i]->SetActivated(true);
+		}
+
+		for (size_t i = 0; i < myMana.size(); i++)
+		{
+			if (i + 1 > playerMana)
+				myMana[i]->SetActivated(false);
+			else
+				myMana[i]->SetActivated(true);
 		}
 
 		if (Input::GetKeyDown(myKeyCode::I))
@@ -139,6 +212,16 @@ namespace IJ
 			// 디버그용 위치 초기화
 			GetComponent<Transform>()->SetPosition(Vector2(2300.0f, 4600.0f));
 			myCurrentState = myPlayerState::Fall;
+		}
+		if (Input::GetKeyDown(myKeyCode::U))
+		{
+			// 디버그용 체력회복
+			HealthPlus();
+		}
+		if (Input::GetKeyDown(myKeyCode::Y))
+		{
+			// 디버그용 마나 회복
+			ManaPlus();
 		}
 	}
 
@@ -469,25 +552,54 @@ namespace IJ
 		if (isAttacking == false && attackCooldown >= 0.5f)
 		{
 			isAttacking = true;
-			attackCooldown = 0.0f;
 
 			if (isLookingLeft)
-				animator->PlayAnimation(L"Knight_attack_left");
+			{
+				if (altSlashTrigger)
+					animator->PlayAnimation(L"Knight_attack_alt_left");
+				else
+					animator->PlayAnimation(L"Knight_attack_left");
+			}
 			else
-				animator->PlayAnimation(L"Knight_attack_right");
+			{
+				if (altSlashTrigger)
+					animator->PlayAnimation(L"Knight_attack_alt_right");
+				else
+					animator->PlayAnimation(L"Knight_attack_right");
+			}
+
+			attackCooldown = 0.0f;
 
 			PlayerSlash* playerslash = InputObject::Instantiate<PlayerSlash>(myLayerType::PlayerSlash);
 			playerslash->SetOwner(this);
 			if (isLookingLeft)
 			{
-				playerslash->GetComponent<Animator>()->PlayAnimation(L"Slash_left", false);
-				playerslash->GetComponent<Collider>()->SetSize(Vector2(160.0f, 112.0f));
+				if (altSlashTrigger)
+				{
+					playerslash->GetComponent<Animator>()->PlayAnimation(L"Slash_left", false);
+					altSlashTrigger = false;
+				}
+				else
+				{
+					playerslash->GetComponent<Animator>()->PlayAnimation(L"Slash_left", false);
+					altSlashTrigger = true;
+				}
+				playerslash->GetComponent<Collider>()->SetSize(Vector2(160.0f, 100.0f));
 				playerslash->GetComponent<Collider>()->SetOffset(Vector2(-100.0f, 0.0f));
 			}
 			else
 			{
-				playerslash->GetComponent<Animator>()->PlayAnimation(L"Slash_right", false);
-				playerslash->GetComponent<Collider>()->SetSize(Vector2(160.0f, 112.0f));
+				if (altSlashTrigger)
+				{
+					playerslash->GetComponent<Animator>()->PlayAnimation(L"Slash_right", false);
+					altSlashTrigger = false;
+				}
+				else
+				{
+					playerslash->GetComponent<Animator>()->PlayAnimation(L"Slash_right", false);
+					altSlashTrigger = true;
+				}
+				playerslash->GetComponent<Collider>()->SetSize(Vector2(160.0f, 100.0f));
 				playerslash->GetComponent<Collider>()->SetOffset(Vector2(100.0f, 0.0f));
 			}
 		}

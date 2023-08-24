@@ -146,12 +146,14 @@
     <ClInclude Include="IJ_Ground.h" />
     <ClInclude Include="IJ_HUDFrame.h" />
     <ClInclude Include="IJ_HUDHealth.h" />
+    <ClInclude Include="IJ_HUDMana.h" />
     <ClInclude Include="IJ_Input.h" />
     <ClInclude Include="IJ_Layer.h" />
     <ClInclude Include="IJ_Math.h" />
     <ClInclude Include="IJ_ObjectManager.h" />
     <ClInclude Include="IJ_PlayBackground.h" />
     <ClInclude Include="IJ_Player.h" />
+    <ClInclude Include="IJ_PlayerFirball.h" />
     <ClInclude Include="IJ_PlayerSlash.h" />
     <ClInclude Include="IJ_PlayScene.h" />
     <ClInclude Include="IJ_Resource.h" />
@@ -186,7 +188,9 @@
     <ClCompile Include="IJ_Ground.cpp" />
     <ClCompile Include="IJ_HUDFrame.cpp" />
     <ClCompile Include="IJ_HUDHealth.cpp" />
+    <ClCompile Include="IJ_HUDMana.cpp" />
     <ClCompile Include="IJ_PlayBackground.cpp" />
+    <ClCompile Include="IJ_PlayerFirball.cpp" />
     <ClCompile Include="IJ_PlayerSlash.cpp" />
     <ClCompile Include="IJ_PlayScene.cpp" />
     <ClCompile Include="IJ_ResourceManager.cpp" />

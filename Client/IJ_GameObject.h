@@ -29,6 +29,7 @@ namespace IJ
 
 		friend static __forceinline void Destroy(GameObject* gameObject);
 		void Pause() { myCurrentGOState = myGameObjectState::Pause; }
+		void Active() { myCurrentGOState = myGameObjectState::Active; }
 		myGameObjectState GetGameObjectState() { return myCurrentGOState; }
 
 		template <typename T>

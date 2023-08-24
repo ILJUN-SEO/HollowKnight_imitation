@@ -35,8 +35,6 @@ namespace IJ
 	void PlayScene::Initialize()
 	{	
 		// 플레이어 관련
-		Texture* image = ResourceManager::Load<Texture>(L"Knight_atlas"
-			, L"..\\Resources\\Extras\\atlas\\knight_atlas_test.png");
 		Player* player = InputObject::Instantiate<Player>(myLayerType::Player);
 		Transform* tr = player->GetComponent<Transform>();
 		Rigidbody* rb = player->GetComponent<Rigidbody>();
@@ -49,7 +47,7 @@ namespace IJ
 
 
 		// 배경 관련
-		image = ResourceManager::Load<Texture>(L"KingsPassStage"
+		Texture* image = ResourceManager::Load<Texture>(L"KingsPassStage"
 			, L"..\\Resources\\Extras\\Stage\\Kingspass_Edited_big_tblt.bmp");
 		PlayBackground* kingspass = InputObject::Instantiate<PlayBackground>(myLayerType::Background);
 		kingspass->GetComponent<Transform>()->SetPosition(Vector2(6000.0f, 3000.0f));
@@ -209,7 +207,7 @@ namespace IJ
 		Crawler* crawler4 = InputObject::Instantiate<Crawler>(myLayerType::Enemy);
 		crawler4->GetComponent<Transform>()->SetPosition(Vector2(8650.0f, 5460.0f));
 		Crawler* crawler5 = InputObject::Instantiate<Crawler>(myLayerType::Enemy);
-		crawler5->GetComponent<Transform>()->SetPosition(Vector2(6500.0f, 2240.0f));
+		crawler5->GetComponent<Transform>()->SetPosition(Vector2(6500.0f, 2160.0f));
 
 		Buzzer* buzzer1 = InputObject::Instantiate<Buzzer>(myLayerType::Enemy);
 		buzzer1->GetComponent<Transform>()->SetPosition(Vector2(5000.0f, 3900.0f));

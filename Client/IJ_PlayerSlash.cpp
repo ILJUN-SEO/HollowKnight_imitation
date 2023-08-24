@@ -30,8 +30,14 @@ namespace IJ
 			, L"..\\Resources\\Extras\\atlas\\SlashEffect.png");
 		Transform* slash_tr = GetComponent<Transform>();
 		Animator* slash_at = AddComponent<Animator>();
-		slash_at->CreateAnimationInAnimator(L"Slash_left", texture, Vector2(0.0f, 0.0f), Vector2(160.0f, 112.0f), 3, Vector2(-100.0f, 0.0f) * slash_at->GetScale());
-		slash_at->CreateAnimationInAnimator(L"Slash_right", texture, Vector2(0.0f, 112.0f), Vector2(160.0f, 112.0f), 3, Vector2(100.0f, 0.0f) * slash_at->GetScale());
+		slash_at->CreateAnimationInAnimator(L"Slash_left", texture, Vector2(0.0f, 0.0f), Vector2(320.0f, 140.0f), 3, Vector2(-50.0f, -20.0f));
+		slash_at->CreateAnimationInAnimator(L"Slash_right", texture, Vector2(0.0f, 140.0f), Vector2(320.0f, 140.0f), 3, Vector2(50.0f, -20.0f));
+		//slash_at->CreateAnimationInAnimator(L"Slash_alt_left", texture, Vector2(0.0f, 280.0f), Vector2(320.0f, 140.0f), 3, Vector2(-50.0f, 0.0f));
+		//slash_at->CreateAnimationInAnimator(L"Slash_alt_right", texture, Vector2(0.0f, 420.0f), Vector2(320.0f, 140.0f), 3, Vector2(50.0f, 0.0f));
+		slash_at->CreateAnimationInAnimator(L"Slash_up_left", texture, Vector2(0.0f, 444.0f), Vector2(170.0f, 180.0f), 3, Vector2(0.0f, -100.0f));
+		slash_at->CreateAnimationInAnimator(L"Slash_up_right", texture, Vector2(0.0f, 624.0f), Vector2(170.0f, 180.0f), 3, Vector2(0.0f, -100.0f));
+		slash_at->CreateAnimationInAnimator(L"Slash_down_left", texture, Vector2(0.0f, 804.0f), Vector2(190.0f, 210.0f), 3, Vector2(0.0f, 100.0f));
+		slash_at->CreateAnimationInAnimator(L"Slash_down_right", texture, Vector2(0.0f, 1014.0f), Vector2(190.0f, 210.0f), 3, Vector2(0.0f, 100.0f));
 		Collider* slash_col = AddComponent<Collider>();
 	}
 
@@ -58,10 +64,16 @@ namespace IJ
 	{
 		Crawler* crawler = dynamic_cast<Crawler*>(other->GetOwner());
 		if (crawler != nullptr)
+		{
 			crawler->Damaged(1);
+			myPlayer->ManaPlus();
+		}
 		Buzzer* buzzer = dynamic_cast<Buzzer*>(other->GetOwner());
 		if (buzzer != nullptr)
+		{
 			buzzer->SetBuzzerState(Buzzer::myBuzzerState::Dead);
+			myPlayer->ManaPlus();
+		}
 	}
 
 	void PlayerSlash::OnCollisionStay(Collider* other)

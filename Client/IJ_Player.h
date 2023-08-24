@@ -1,6 +1,7 @@
 #pragma once
 #include "IJ_GameObject.h"
 #include "IJ_HUDHealth.h"
+#include "IJ_HUDMana.h"
 
 
 namespace IJ
@@ -63,6 +64,9 @@ namespace IJ
 		void JumpFunc(Math::Vector2* pos);
 		void AttackFunc();
 
+		void ManaPlus() { playerMana++; }
+		void HealthPlus() { playerHealth++; }
+
 	private:
 		myPlayerState myCurrentState;
 		bool isLookingLeft;
@@ -72,9 +76,13 @@ namespace IJ
 		float damageInvincibleTime;
 		bool isAttacking;
 		float attackCooldown;
+		bool altSlashTrigger;
 
+		int playerMaxHealth;
 		int playerHealth;
+		int playerMaxMana;
 		int playerMana;
 		std::vector<HUDHealth*> myHealth;
+		std::vector<HUDMana*> myMana;
 	};
 }

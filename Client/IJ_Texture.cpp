@@ -81,8 +81,8 @@ namespace IJ
 		else if (myType == myTextureType::png)
 		{
 			Gdiplus::ImageAttributes imageAtt = {};
-			imageAtt.SetColorKey(Gdiplus::Color(255, 0, 0)
-								, Gdiplus::Color(255, 0, 0));
+			imageAtt.SetColorKey(Gdiplus::Color(235, 0, 0)
+								, Gdiplus::Color(255, 20, 20));
 
 			Gdiplus::Graphics graphics(hdc);
 
