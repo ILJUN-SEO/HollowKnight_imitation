@@ -16,7 +16,7 @@ namespace IJ
 	void HUDMana::Initialize()
 	{
 		Texture* image = ResourceManager::Load<Texture>(L"HUDMana"
-			, L"..\\Resources\\Extras\\HUD\\Mana\\ManaOrb_full.png");
+			, L"..\\Resources\\Extras\\HUD\\ManaOrb_full.png");
 		Animator* animator = AddComponent<Animator>();
 		animator->SetDrawOnCamera(true);
 		animator->CreateAnimationInAnimator(L"Mana_01", image, Vector2(0.0f, 110.0f), Vector2(128.0f, 10.0f), 1);

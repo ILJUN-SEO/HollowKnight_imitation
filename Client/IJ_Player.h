@@ -21,6 +21,7 @@ namespace IJ
 			JumpAttack,
 			FallAttack,
 			Focus,
+			FocusGet,
 			Spell,
 			Damaged,
 			Death,
@@ -56,33 +57,40 @@ namespace IJ
 		void JumpAttack();
 		void FallAttack();
 		void Focus();
+		void FocusGet();
 		void Spell();
 		void Damaged();
 		void Death();
 
 		void MoveFunc(Math::Vector2* pos);
 		void JumpFunc(Math::Vector2* pos);
+		void FallFunc(Math::Vector2* pos);
 		void AttackFunc();
+		void SpellFunc();
 
 		void ManaPlus() { playerMana++; }
 		void HealthPlus() { playerHealth++; }
+		void SetRecoilTime(float recoil) { recoilTime = recoil; }
 
 	private:
 		myPlayerState myCurrentState;
-		bool isLookingLeft;
-		bool isGrounded;
-		float jumpPressingTime;
-		float damageStunTime;
-		float damageInvincibleTime;
-		bool isAttacking;
-		float attackCooldown;
-		bool altSlashTrigger;
-
 		int playerMaxHealth;
 		int playerHealth;
 		int playerMaxMana;
 		int playerMana;
 		std::vector<HUDHealth*> myHealth;
 		std::vector<HUDMana*> myMana;
+
+		bool isLookingLeft;
+		bool isGrounded;
+
+		float jumpPressingTime;
+		float damageStunTime;
+		float damageInvincibleTime;
+		bool isAttacking;
+		float attackCooldown;
+		bool altSlashTrigger;
+		float focusTime;
+		float recoilTime;
 	};
 }

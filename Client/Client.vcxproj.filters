@@ -97,6 +97,9 @@
     <Filter Include="Contents\GameObjects\Enemy\Buzzer">
       <UniqueIdentifier>{1d6398a7-63aa-48ff-add5-8ad1c4803195}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObjects\Effect">
+      <UniqueIdentifier>{85ac8581-37b3-48bb-be33-fe2b174a6acf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonInclude.h">
@@ -168,9 +171,6 @@
     <ClInclude Include="IJ_PlayScene.h">
       <Filter>Contents\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="IJ_Temp_Platform.h">
-      <Filter>Contents\GameObjects\Terrain</Filter>
-    </ClInclude>
     <ClInclude Include="IJ_HUDFrame.h">
       <Filter>Contents\GameObjects\UI</Filter>
     </ClInclude>
@@ -207,9 +207,6 @@
     <ClInclude Include="IJ_CollisionManager.h">
       <Filter>Engine\GameObject\Component\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="IJ_Temp_Ground.h">
-      <Filter>Contents\GameObjects\Terrain</Filter>
-    </ClInclude>
     <ClInclude Include="IJ_Rigidbody.h">
       <Filter>Engine\GameObject\Component\Rigidbody</Filter>
     </ClInclude>
@@ -237,7 +234,15 @@
     <ClInclude Include="IJ_HUDMana.h">
       <Filter>Contents\GameObjects\UI</Filter>
     </ClInclude>
-    <ClInclude Include="IJ_PlayerFirball.h" />
+    <ClInclude Include="IJ_PlayerFireball.h">
+      <Filter>Contents\GameObjects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_Splat.h">
+      <Filter>Contents\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_SwordStrike.h">
+      <Filter>Contents\GameObjects\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -312,9 +317,6 @@
     <ClCompile Include="IJ_PlayScene.cpp">
       <Filter>Contents\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="IJ_Temp_Platform.cpp">
-      <Filter>Contents\GameObjects\Terrain</Filter>
-    </ClCompile>
     <ClCompile Include="IJ_HUDFrame.cpp">
       <Filter>Contents\GameObjects\UI</Filter>
     </ClCompile>
@@ -338,9 +340,6 @@
     </ClCompile>
     <ClCompile Include="IJ_CollisionManager.cpp">
       <Filter>Engine\GameObject\Component\Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="IJ_Temp_Ground.cpp">
-      <Filter>Contents\GameObjects\Terrain</Filter>
     </ClCompile>
     <ClCompile Include="IJ_Rigidbody.cpp">
       <Filter>Engine\GameObject\Component\Rigidbody</Filter>
@@ -369,7 +368,15 @@
     <ClCompile Include="IJ_HUDMana.cpp">
       <Filter>Contents\GameObjects\UI</Filter>
     </ClCompile>
-    <ClCompile Include="IJ_PlayerFirball.cpp" />
+    <ClCompile Include="IJ_PlayerFireball.cpp">
+      <Filter>Contents\GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_Splat.cpp">
+      <Filter>Contents\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_SwordStrike.cpp">
+      <Filter>Contents\GameObjects\Effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">

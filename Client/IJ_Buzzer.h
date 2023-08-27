@@ -42,7 +42,7 @@ namespace IJ
 
 	private:
 		myBuzzerState myCurrentState;
-		UINT buzzerHP;
+		int buzzerHP;
 		bool isLookingLeft;
 
 		Player* myTarget;

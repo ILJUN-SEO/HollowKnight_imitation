@@ -8,7 +8,7 @@ namespace IJ
 	{
 	public:
 		PlayerSlash();
-		~PlayerSlash();
+		virtual ~PlayerSlash();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -19,9 +19,13 @@ namespace IJ
 		virtual void OnCollisionExit(class Collider* other) override;
 
 		void SetOwner(Player* owner) { myPlayer = owner; }
+		void SetDownSlashTrigger(bool value) { downSlashTrigger = value; }
+		bool GetDownSlashTrigger() { return downSlashTrigger; }
 
 	private:
 		Player* myPlayer;
 		float myDeathTime;
+		bool downSlashTrigger;
+		bool alreadyHit;
 	};
 }

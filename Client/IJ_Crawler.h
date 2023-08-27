@@ -27,6 +27,7 @@ namespace IJ
 		virtual void OnCollisionExit(class Collider* other);
 
 		void Damaged(int damage) { crawlerHP -= damage; }
+		myCrawlerState GetCrawlerState() { return myCurrentState; }
 
 		void Walk();
 		void Turn();
@@ -34,7 +35,7 @@ namespace IJ
 
 	private:
 		myCrawlerState myCurrentState;
-		UINT crawlerHP;
+		int crawlerHP;
 		bool isLookingLeft;
 		float turnTime;
 	};
