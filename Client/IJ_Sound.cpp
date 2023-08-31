@@ -95,7 +95,10 @@ namespace IJ
 
 	void Sound::Play(bool loop)
 	{
-		mySoundBuffer->SetCurrentPosition(0);
+		if (this == nullptr)
+			return;
+
+		//mySoundBuffer->SetCurrentPosition(0);
 
 		if (loop)
 			mySoundBuffer->Play(0, 0, DSBPLAY_LOOPING);
@@ -104,6 +107,9 @@ namespace IJ
 	}
 	void Sound::Stop(bool reset)
 	{
+		if (this == nullptr)
+			return;
+
 		mySoundBuffer->Stop();
 
 		if (reset)

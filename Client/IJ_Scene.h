@@ -1,6 +1,7 @@
 #pragma once
 #include "IJ_Entity.h"
 #include "IJ_Layer.h"
+#include "IJ_Sound.h"
 
 
 namespace IJ
@@ -29,9 +30,13 @@ namespace IJ
 		}
 		bool GetShowCollider() { return isShowCollider; }
 
+		void SetBGM(Sound* sound) { myBGM = sound; }
+		Sound* GetBGM() { return myBGM; }
+
 	private:
 		std::vector<Layer> myLayers;
 
 		bool isShowCollider;
+		Sound* myBGM;
 	};
 }

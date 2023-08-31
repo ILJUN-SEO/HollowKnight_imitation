@@ -11,6 +11,7 @@ namespace IJ
 		Animator,
 		Collider,
 		Rigidbody,
+		SoundPlayer,
 		End,
 	};
 

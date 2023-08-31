@@ -1,5 +1,6 @@
 #pragma once
 #include "IJ_Scene.h"
+#include "IJ_TitleScene_Title.h"
 
 
 namespace IJ
@@ -15,6 +16,6 @@ namespace IJ
 		virtual void Render(HDC hdc) override;
 
 	private:
-
+		std::vector<TitleScene_Title*> myMenu;
 	};
 }

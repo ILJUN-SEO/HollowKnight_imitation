@@ -134,6 +134,7 @@
     <ClInclude Include="IJ_Animation.h" />
     <ClInclude Include="IJ_Animator.h" />
     <ClInclude Include="IJ_Application.h" />
+    <ClInclude Include="IJ_BossScene.h" />
     <ClInclude Include="IJ_Buzzer.h" />
     <ClInclude Include="IJ_BuzzerTrigger.h" />
     <ClInclude Include="IJ_Camera.h" />
@@ -142,6 +143,7 @@
     <ClInclude Include="IJ_Component.h" />
     <ClInclude Include="IJ_Crawler.h" />
     <ClInclude Include="IJ_Entity.h" />
+    <ClInclude Include="IJ_FalseKnight.h" />
     <ClInclude Include="IJ_GameObject.h" />
     <ClInclude Include="IJ_Ground.h" />
     <ClInclude Include="IJ_HUDFrame.h" />
@@ -154,6 +156,7 @@
     <ClInclude Include="IJ_PlayBackground.h" />
     <ClInclude Include="IJ_Player.h" />
     <ClInclude Include="IJ_PlayerFireball.h" />
+    <ClInclude Include="IJ_PlayerHitEffect.h" />
     <ClInclude Include="IJ_PlayerSlash.h" />
     <ClInclude Include="IJ_PlayScene.h" />
     <ClInclude Include="IJ_Resource.h" />
@@ -163,6 +166,7 @@
     <ClInclude Include="IJ_SceneManager.h" />
     <ClInclude Include="IJ_Sound.h" />
     <ClInclude Include="IJ_SoundManager.h" />
+    <ClInclude Include="IJ_SoundTrigger.h" />
     <ClInclude Include="IJ_Splat.h" />
     <ClInclude Include="IJ_SpriteRenderer.h" />
     <ClInclude Include="IJ_SwordStrike.h" />
@@ -179,18 +183,21 @@
   <ItemGroup>
     <ClCompile Include="IJ_Animation.cpp" />
     <ClCompile Include="IJ_Animator.cpp" />
+    <ClCompile Include="IJ_BossScene.cpp" />
     <ClCompile Include="IJ_Buzzer.cpp" />
     <ClCompile Include="IJ_BuzzerTrigger.cpp" />
     <ClCompile Include="IJ_Camera.cpp" />
     <ClCompile Include="IJ_Collider.cpp" />
     <ClCompile Include="IJ_CollisionManager.cpp" />
     <ClCompile Include="IJ_Crawler.cpp" />
+    <ClCompile Include="IJ_FalseKnight.cpp" />
     <ClCompile Include="IJ_Ground.cpp" />
     <ClCompile Include="IJ_HUDFrame.cpp" />
     <ClCompile Include="IJ_HUDHealth.cpp" />
     <ClCompile Include="IJ_HUDMana.cpp" />
     <ClCompile Include="IJ_PlayBackground.cpp" />
     <ClCompile Include="IJ_PlayerFireball.cpp" />
+    <ClCompile Include="IJ_PlayerHitEffect.cpp" />
     <ClCompile Include="IJ_PlayerSlash.cpp" />
     <ClCompile Include="IJ_PlayScene.cpp" />
     <ClCompile Include="IJ_ResourceManager.cpp" />
@@ -208,6 +215,7 @@
     <ClCompile Include="IJ_SceneManager.cpp" />
     <ClCompile Include="IJ_Sound.cpp" />
     <ClCompile Include="IJ_SoundManager.cpp" />
+    <ClCompile Include="IJ_SoundTrigger.cpp" />
     <ClCompile Include="IJ_Splat.cpp" />
     <ClCompile Include="IJ_SpriteRenderer.cpp" />
     <ClCompile Include="IJ_SwordStrike.cpp" />

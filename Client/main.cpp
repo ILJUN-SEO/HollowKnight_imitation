@@ -39,7 +39,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // TODO: 여기에 코드를 입력합니다.
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
         //디버그 터미널에 메모리 누수가 일어난 부분을 번호로 표시해줍니다
-    //_CrtSetBreakAlloc(NUMBER);
+    //_CrtSetBreakAlloc(321);
         //CrtSetDbgFlag 에서 얻은 번호를 넣으면 그 메모리가 생성될 때 중단점을 만들어줍니다
 
     // 전역 문자열을 초기화합니다.

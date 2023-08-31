@@ -65,6 +65,7 @@ namespace IJ
 		void MoveFunc(Math::Vector2* pos);
 		void JumpFunc(Math::Vector2* pos);
 		void FallFunc(Math::Vector2* pos);
+		bool RecoilFunc(Math::Vector2* pos);
 		void AttackFunc();
 		void SpellFunc();
 

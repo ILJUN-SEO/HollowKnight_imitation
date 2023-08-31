@@ -38,6 +38,7 @@ namespace IJ
 
 		myBuzzerState GetBuzzerState() { return myCurrentState; }
 		void SetBuzzerState(myBuzzerState state) { myCurrentState = state; }
+		int GetBuzzerHP() { return buzzerHP; }
 		void SetTarget(Player* player) { myTarget = player; }
 
 	private:

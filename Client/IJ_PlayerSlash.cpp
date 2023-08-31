@@ -45,6 +45,12 @@ namespace IJ
 		slash_at->CreateAnimationInAnimator(L"Slash_down_left", texture, Vector2(0.0f, 944.0f), Vector2(182.0f, 209.0f), 3, Vector2(0.0f, 100.0f));
 		slash_at->CreateAnimationInAnimator(L"Slash_down_right", texture, Vector2(0.0f, 1153.0f), Vector2(182.0f, 209.0f), 3, Vector2(0.0f, 100.0f));
 		Collider* slash_col = AddComponent<Collider>();
+
+		Sound* sound = ResourceManager::Load<Sound>(L"Sword_swing", L"..\\Resources\\Sound\\player\\sword_1.wav");
+		sound->SetVolume(20.0f);
+		sound->Play(false);
+		sound = ResourceManager::Load<Sound>(L"Sword_hit", L"..\\Resources\\Sound\\enemy_damage.wav");
+		//sound = 
 	}
 
 	void PlayerSlash::Update()
@@ -68,6 +74,8 @@ namespace IJ
 
 	void PlayerSlash::OnCollisionEnter(Collider* other)
 	{
+		Sound* sound = ResourceManager::Load<Sound>(L"Sword_hit", L"..\\Resources\\Sound\\enemy_damage.wav");
+
 		Crawler* crawler = dynamic_cast<Crawler*>(other->GetOwner());
 		if (crawler != nullptr)
 		{
@@ -76,13 +84,22 @@ namespace IJ
 				alreadyHit = true;
 
 				crawler->Damaged(1);
+				if (crawler->GetCrawlerHP() <= 0)
+					ResourceManager::Load<Sound>(L"Enemy_death", L"..\\Resources\\Sound\\enemy_death_sword.wav")->Play(false);
 				myPlayer->ManaPlus();
 
 				SwordStrike* swordstrike = InputObject::Instantiate<SwordStrike>(myLayerType::Effect);
-				swordstrike->GetComponent<Transform>()->SetPosition(Vector2(crawler->GetComponent<Transform>()->GetPosition()));
+				swordstrike->GetComponent<Transform>()->SetPosition(crawler->GetComponent<Transform>()->GetPosition());
+
+				sound->Play(false);
 
 				if (downSlashTrigger)
+				{
 					myPlayer->SetRecoilTime(0.0f);
+					Vector2 playerpos = myPlayer->GetComponent<Transform>()->GetPosition();
+					myPlayer->RecoilFunc(&playerpos);
+					myPlayer->GetComponent<Transform>()->SetPosition(playerpos);
+				}
 			}
 		}
 		Buzzer* buzzer = dynamic_cast<Buzzer*>(other->GetOwner());
@@ -93,13 +110,21 @@ namespace IJ
 				alreadyHit = true;
 
 				buzzer->Damaged(1);
+				if (buzzer->GetBuzzerHP() <= 0)
+					ResourceManager::Load<Sound>(L"Enemy_death", L"..\\Resources\\Sound\\enemy_death_sword.wav")->Play(false);
 				myPlayer->ManaPlus();
 
 				SwordStrike* swordstrike = InputObject::Instantiate<SwordStrike>(myLayerType::Effect);
 				swordstrike->GetComponent<Transform>()->SetPosition(Vector2(buzzer->GetComponent<Transform>()->GetPosition()));
 
+				sound->Play(false);
+
 				if (downSlashTrigger)
+				{
 					myPlayer->SetRecoilTime(0.0f);
+					Vector2 playerpos = myPlayer->GetComponent<Transform>()->GetPosition();
+					myPlayer->RecoilFunc(&playerpos);
+				}
 			}
 		}
 	}

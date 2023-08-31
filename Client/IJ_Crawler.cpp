@@ -1,13 +1,19 @@
 #include "IJ_Crawler.h"
 #include "IJ_Time.h"
+#include "IJ_ObjectManager.h"
+
 #include "IJ_Transform.h"
 #include "IJ_Animator.h"
 #include "IJ_Collider.h"
+
 #include "IJ_ResourceManager.h"
 #include "IJ_Texture.h"
+#include "IJ_Sound.h"
 
 #include "IJ_Player.h"
 #include "IJ_PlayerSlash.h"
+#include "IJ_SoundTrigger.h"
+#include "IJ_PlayerHitEffect.h"
 
 
 namespace IJ
@@ -17,6 +23,9 @@ namespace IJ
 		, crawlerHP(2)
 		, isLookingLeft(true)
 		, turnTime(0.0f)
+		, myCrawlerSound(nullptr)
+		, isSoundStarted(false)
+		, isPlayerNearby(false)
 	{}
 	Crawler::~Crawler()
 	{}
@@ -35,6 +44,11 @@ namespace IJ
 		animator->CreateAnimationInAnimator(L"Crawler_dead", image, Vector2(0.0f, 352.0f), Vector2(128.0f, 88.0f), 1);
 
 		collider->SetSize(Vector2(128.0f, 80.f));
+
+		SoundTrigger* soundtrigger = InputObject::Instantiate<SoundTrigger>(myLayerType::Enemy);
+		soundtrigger->SetOwner(this);
+
+		ResourceManager::Load<Sound>(L"Knight_damaged", L"..\\Resources\\Sound\\player\\hero_damage.wav");
 	}
 
 	void Crawler::Update()
@@ -59,7 +73,9 @@ namespace IJ
 		}
 
 		if (crawlerHP <= 0)
+		{
 			myCurrentState = myCrawlerState::Dead;
+		}
 	}
 
 	void Crawler::Render(HDC hdc)
@@ -81,6 +97,11 @@ namespace IJ
 				else
 					player->SetLookingLeft(false);
 				player->SetState(Player::myPlayerState::Damaged);
+				ResourceManager::Find<Sound>(L"Knight_damaged")->Play(false);
+
+				PlayerHitEffect* playerhit = InputObject::Instantiate<PlayerHitEffect>(myLayerType::Effect);
+				//playerhit->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
+				playerhit->SetOwner(player);
 			}
 		}
 	}
@@ -108,6 +129,23 @@ namespace IJ
 
 		if (turnTime >= 5.0f)
 			myCurrentState = myCrawlerState::Turn;
+
+		if (isPlayerNearby && myCurrentState != myCrawlerState::Dead)
+		{
+			if (isSoundStarted == false)
+			{
+				myCrawlerSound->Play(true);
+				isSoundStarted = true;
+			}
+		}
+		else
+		{
+			if (isSoundStarted == true)
+			{
+				myCrawlerSound->Stop(true);
+				isSoundStarted = false;
+			}
+		}
 	}
 
 	void Crawler::Turn()
@@ -135,5 +173,9 @@ namespace IJ
 	{
 		Animator* at = GetComponent<Animator>();
 		at->PlayAnimation(L"Crawler_dead");
+
+		
+		myCrawlerSound->Stop(true);
+		isSoundStarted = false;
 	}
 }

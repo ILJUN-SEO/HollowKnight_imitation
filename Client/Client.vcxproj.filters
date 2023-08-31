@@ -243,6 +243,16 @@
     <ClInclude Include="IJ_SwordStrike.h">
       <Filter>Contents\GameObjects\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="IJ_SoundTrigger.h">
+      <Filter>Contents\GameObjects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_PlayerHitEffect.h">
+      <Filter>Contents\GameObjects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_BossScene.h">
+      <Filter>Contents\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_FalseKnight.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -377,6 +387,16 @@
     <ClCompile Include="IJ_SwordStrike.cpp">
       <Filter>Contents\GameObjects\Effect</Filter>
     </ClCompile>
+    <ClCompile Include="IJ_SoundTrigger.cpp">
+      <Filter>Contents\GameObjects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_PlayerHitEffect.cpp">
+      <Filter>Contents\GameObjects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_BossScene.cpp">
+      <Filter>Contents\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_FalseKnight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">

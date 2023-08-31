@@ -7,10 +7,12 @@
 #include "IJ_ObjectManager.h"
 #include "IJ_ResourceManager.h"
 #include "IJ_Texture.h"
+#include "IJ_Sound.h"
 
 #include "IJ_BuzzerTrigger.h"
 #include "IJ_Player.h"
 #include "IJ_PlayerSlash.h"
+#include "IJ_PlayerHitEffect.h"
 
 
 namespace IJ
@@ -46,6 +48,10 @@ namespace IJ
 
 		BuzzerTrigger* trigger = InputObject::Instantiate<BuzzerTrigger>(myLayerType::Enemy);
 		trigger->SetOwner(this);
+
+		ResourceManager::Load<Sound>(L"Buzzer_startle", L"..\\Resources\\Sound\\buzzer\\buzzer_startle_01.wav");
+		ResourceManager::Load<Sound>(L"Buzzer_fly", L"..\\Resources\\Sound\\buzzer\\buzzer_fly.wav");
+		ResourceManager::Load<Sound>(L"Knight_damaged", L"..\\Resources\\Sound\\player\\hero_damage.wav");
 	}
 	void Buzzer::Update()
 	{
@@ -87,7 +93,14 @@ namespace IJ
 		if (player != nullptr)
 		{
 			if (myCurrentState != myBuzzerState::Dead && player->GetPlayerInvincible() == false)
+			{
 				player->SetState(Player::myPlayerState::Damaged);
+				ResourceManager::Find<Sound>(L"Knight_damaged")->Play(false);
+
+				PlayerHitEffect* playerhit = InputObject::Instantiate<PlayerHitEffect>(myLayerType::Effect);
+				//playerhit->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
+				playerhit->SetOwner(player);
+			}
 		}
 	}
 	void Buzzer::OnCollisionExit(Collider* other)

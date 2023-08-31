@@ -3,6 +3,9 @@
 #include "IJ_Collider.h"
 #include "IJ_Transform.h"
 
+#include "IJ_ResourceManager.h"
+#include "IJ_Sound.h"
+
 
 namespace IJ
 {
@@ -37,6 +40,8 @@ namespace IJ
 		Player* player = dynamic_cast<Player*>(other->GetOwner());
 		if (player != nullptr && myBuzzer->GetBuzzerState() == Buzzer::myBuzzerState::Idle)
 		{
+			Sound* sound = ResourceManager::Load<Sound>(L"Buzzer_startle", L"..\\Resources\\Sound\\buzzer\\buzzer_startle_01.wav");
+			sound->Play(false);
 			myBuzzer->SetBuzzerState(Buzzer::myBuzzerState::Startle);
 			myBuzzer->SetTarget(player);
 		}

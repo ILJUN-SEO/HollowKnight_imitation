@@ -6,6 +6,7 @@
 #include "IJ_ResourceManager.h"
 #include "IJ_Resource.h"
 #include "IJ_Texture.h"
+#include "IJ_Sound.h"
 
 #include "IJ_Animator.h"
 #include "IJ_Transform.h"
@@ -22,7 +23,7 @@
 namespace IJ
 {
 	PlayerFireball::PlayerFireball()
-		: myDeathTime(2.0f)
+		: myDeathTime(1.0f)
 		, isLookingLeft(true)
 	{}
 	PlayerFireball::~PlayerFireball()
@@ -70,15 +71,21 @@ namespace IJ
 
 	void PlayerFireball::OnCollisionEnter(Collider* other)
 	{
+		Sound* sound = ResourceManager::Load<Sound>(L"Sword_hit", L"..\\Resources\\Sound\\enemy_damage.wav");
+
 		Crawler* crawler = dynamic_cast<Crawler*>(other->GetOwner());
 		if (crawler != nullptr)
 		{
 			if (crawler->GetCrawlerState() != Crawler::myCrawlerState::Dead)
 			{
 				crawler->Damaged(2);
+				if (crawler->GetCrawlerHP() <= 0)
+					ResourceManager::Load<Sound>(L"Enemy_death", L"..\\Resources\\Sound\\enemy_death_sword.wav")->Play(false);
 
 				Splat* splat = InputObject::Instantiate<Splat>(myLayerType::Effect);
 				splat->GetComponent<Transform>()->SetPosition(crawler->GetComponent<Transform>()->GetPosition());
+
+				sound->Play(false);
 			}
 		}
 
@@ -88,9 +95,13 @@ namespace IJ
 			if (buzzer->GetBuzzerState() != Buzzer::myBuzzerState::Dead)
 			{
 				buzzer->Damaged(2);
+				if (buzzer->GetBuzzerHP() <= 0)
+					ResourceManager::Load<Sound>(L"Enemy_death", L"..\\Resources\\Sound\\enemy_death_sword.wav")->Play(false);
 
 				Splat* splat = InputObject::Instantiate<Splat>(myLayerType::Effect);
 				splat->GetComponent<Transform>()->SetPosition(buzzer->GetComponent<Transform>()->GetPosition());
+
+				sound->Play(false);
 			}
 		}
 

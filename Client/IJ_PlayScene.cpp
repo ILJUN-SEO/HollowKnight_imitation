@@ -1,15 +1,17 @@
 #include "IJ_PlayScene.h"
+#include "IJ_ObjectManager.h"
 #include "IJ_Camera.h"
+
 #include "IJ_ResourceManager.h"
 #include "IJ_Texture.h"
-#include "IJ_ObjectManager.h"
+#include "IJ_Sound.h"
+
 #include "IJ_Transform.h"
 #include "IJ_SpriteRenderer.h"
 #include "IJ_Animator.h"
 #include "IJ_Collider.h"
 #include "IJ_CollisionManager.h"
 #include "IJ_Rigidbody.h"
-#include "IJ_Application.h"
 
 #include "IJ_Player.h"
 #include "IJ_PlayerSlash.h"
@@ -22,13 +24,10 @@
 #include "IJ_Buzzer.h"
 
 
-extern IJ::Application application;
-
 namespace IJ
 {
 	PlayScene::PlayScene()
 	{}
-
 	PlayScene::~PlayScene()
 	{}
 
@@ -132,11 +131,11 @@ namespace IJ
 		wl7->AddComponent<Collider>()->SetSize(Vector2(160.0f, 160.0f));
 
 		Ground* gr8 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
-		gr8->GetComponent<Transform>()->SetPosition(Vector2(6380.0f, 4140.0f));
+		gr8->GetComponent<Transform>()->SetPosition(Vector2(6380.0f, 4130.0f));
 		col = gr8->AddComponent<Collider>();
 		col->SetSize(Vector2(1580.0f, 200.0f));
 		Wall* wl8 = InputObject::Instantiate<Wall>(myLayerType::Terrain);
-		wl8->GetComponent<Transform>()->SetPosition(Vector2(6380.0f, 4140.0f));
+		wl8->GetComponent<Transform>()->SetPosition(Vector2(6380.0f, 4130.0f));
 		wl8->AddComponent<Collider>()->SetSize(Vector2(1580.0f, 160.0f));
 
 		Ground* gr9 = InputObject::Instantiate<Ground>(myLayerType::Terrain);
@@ -304,14 +303,24 @@ namespace IJ
 		// 利 包访
 		Crawler* crawler1 = InputObject::Instantiate<Crawler>(myLayerType::Enemy);
 		crawler1->GetComponent<Transform>()->SetPosition(Vector2(3600.0f, 5116.0f));
+		Sound* sound = ResourceManager::Load<Sound>(L"crawler1_sound", L"..\\Resources\\Sound\\crawler\\crawler.wav");
+		crawler1->SetCrawlerSound(sound);
 		Crawler* crawler2 = InputObject::Instantiate<Crawler>(myLayerType::Enemy);
 		crawler2->GetComponent<Transform>()->SetPosition(Vector2(5100.0f, 5116.0f));
+		sound = ResourceManager::Load<Sound>(L"crawler2_sound", L"..\\Resources\\Sound\\crawler\\crawler.wav");
+		crawler2->SetCrawlerSound(sound);
 		Crawler* crawler3 = InputObject::Instantiate<Crawler>(myLayerType::Enemy);
 		crawler3->GetComponent<Transform>()->SetPosition(Vector2(7300.0f, 5116.0f));
+		sound = ResourceManager::Load<Sound>(L"crawler3_sound", L"..\\Resources\\Sound\\crawler\\crawler.wav");
+		crawler3->SetCrawlerSound(sound);
 		Crawler* crawler4 = InputObject::Instantiate<Crawler>(myLayerType::Enemy);
 		crawler4->GetComponent<Transform>()->SetPosition(Vector2(8650.0f, 5460.0f));
+		sound = ResourceManager::Load<Sound>(L"crawler4_sound", L"..\\Resources\\Sound\\crawler\\crawler.wav");
+		crawler4->SetCrawlerSound(sound);
 		Crawler* crawler5 = InputObject::Instantiate<Crawler>(myLayerType::Enemy);
 		crawler5->GetComponent<Transform>()->SetPosition(Vector2(6500.0f, 2160.0f));
+		sound = ResourceManager::Load<Sound>(L"crawler5_sound", L"..\\Resources\\Sound\\crawler\\crawler.wav");
+		crawler5->SetCrawlerSound(sound);
 
 		Buzzer* buzzer1 = InputObject::Instantiate<Buzzer>(myLayerType::Enemy);
 		buzzer1->GetComponent<Transform>()->SetPosition(Vector2(5000.0f, 3900.0f));
@@ -323,6 +332,12 @@ namespace IJ
 		CollisionManager::CollisionLayerCheck(myLayerType::Player, myLayerType::Terrain, true);
 		CollisionManager::CollisionLayerCheck(myLayerType::PlayerSlash, myLayerType::Enemy, true);
 		CollisionManager::CollisionLayerCheck(myLayerType::Enemy, myLayerType::Terrain, true);
+
+		// 家府 包访
+		//Sound* sound = ResourceManager::Load<Sound>(L"PlayScene_BGM"
+		//	, L"..\\Resources\\Sound\\BGM\\cave_atmos_misc_3.wav");
+		//Scene::SetBGM(sound);
+		//Scene::GetBGM()->Play(true);
 
 		Camera::SetTarget(player);
 	}

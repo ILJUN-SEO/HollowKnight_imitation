@@ -6,8 +6,10 @@
 #include "IJ_Collider.h"
 #include "IJ_Rigidbody.h"
 #include "IJ_ObjectManager.h"
+
 #include "IJ_ResourceManager.h"
 #include "IJ_Texture.h"
+#include "IJ_Sound.h"
 
 #include "IJ_HUDFrame.h"
 #include "IJ_HUDHealth.h"
@@ -148,6 +150,13 @@ namespace IJ
 		mp12->GetComponent<Transform>()->SetPosition(Vector2(94.0f, 60.0f));
 		mp12->AssignAnimation(L"Mana_12");
 		myMana.push_back(mp12);
+
+		ResourceManager::Load<Sound>(L"Knight_walk", L"..\\Resources\\Sound\\player\\hero_walk_footsteps_stone.wav");
+		ResourceManager::Load<Sound>(L"Knight_jump", L"..\\Resources\\Sound\\player\\hero_jump.wav");
+		ResourceManager::Load<Sound>(L"Knight_focus", L"..\\Resources\\Sound\\player\\focus_health_charging.wav");
+		ResourceManager::Load<Sound>(L"Knight_focus_get", L"..\\Resources\\Sound\\player\\focus_health_heal.wav");
+		ResourceManager::Load<Sound>(L"Knight_fireball", L"..\\Resources\\Sound\\player\\hero_fireball.wav")->SetVolume(30.0f);
+		ResourceManager::Load<Sound>(L"Knight_damaged", L"..\\Resources\\Sound\\player\\hero_damage.wav");
 	}
 
 	void Player::Update()
@@ -283,17 +292,22 @@ namespace IJ
 		{
 			isLookingLeft = true;
 			myCurrentState = myPlayerState::Move;
+			Move();
+			ResourceManager::Find<Sound>(L"Knight_walk")->Play(true);
 		}
 		else if (Input::GetKeyDown(myKeyCode::Right) || Input::GetKeyPressing(myKeyCode::Right))
 		{
 			isLookingLeft = false;
 			myCurrentState = myPlayerState::Move;
+			Move();
+			ResourceManager::Find<Sound>(L"Knight_walk")->Play(true);
 		}
 
 		if (Input::GetKeyDown(myKeyCode::D))
 		{
 			myCurrentState = myPlayerState::Jump;
 			JumpFunc(&position);
+			ResourceManager::Find<Sound>(L"Knight_jump")->Play(false);
 		}
 
 		if (Input::GetKeyDown(myKeyCode::S))
@@ -302,6 +316,7 @@ namespace IJ
 		if (Input::GetKeyDown(myKeyCode::A) && playerMana >= 4)
 		{
 			myCurrentState = myPlayerState::Focus;
+			ResourceManager::Find<Sound>(L"Knight_focus")->Play(true);
 		}
 	}
 
@@ -322,20 +337,33 @@ namespace IJ
 		transform->SetPosition(position);
 
 		if (Input::GetKeyDown(myKeyCode::D))
+		{
+			ResourceManager::Find<Sound>(L"Knight_walk")->Stop(true);
 			myCurrentState = myPlayerState::Jump;
+			ResourceManager::Find<Sound>(L"Knight_jump")->Play(false);
+		}
 
 		if (Input::GetKeyDown(myKeyCode::S))
+		{
+			ResourceManager::Find<Sound>(L"Knight_walk")->Stop(true);
 			myCurrentState = myPlayerState::Attack;
+		}
 
 		if (Input::GetKeyDown(myKeyCode::A) && playerMana >= 4)
+		{
+			ResourceManager::Find<Sound>(L"Knight_walk")->Stop(true);
 			myCurrentState = myPlayerState::Focus;
+			ResourceManager::Find<Sound>(L"Knight_focus")->Play(true);
+		}
 
 		if (Input::GetKeyUp(myKeyCode::Left))
 		{
+			ResourceManager::Find<Sound>(L"Knight_walk")->Stop(true);
 			myCurrentState = myPlayerState::Idle;
 		}
 		else if (Input::GetKeyUp(myKeyCode::Right))
 		{
+			ResourceManager::Find<Sound>(L"Knight_walk")->Stop(true);
 			myCurrentState = myPlayerState::Idle;
 		}
 
@@ -382,7 +410,16 @@ namespace IJ
 		transform->SetPosition(position);
 
 		if (isGrounded)
-			myCurrentState = myPlayerState::Idle;
+		{
+			if (Input::GetKeyPressing(myKeyCode::Left) || Input::GetKeyPressing(myKeyCode::Right))
+			{
+				myCurrentState = myPlayerState::Move;
+				Move();
+				ResourceManager::Find<Sound>(L"Knight_walk")->Play(true);
+			}
+			else
+				myCurrentState = myPlayerState::Idle;
+		}
 		if (animator->IsActavatedAnimationComplete())
 			myCurrentState = myPlayerState::Falling;
 
@@ -406,7 +443,16 @@ namespace IJ
 		transform->SetPosition(position);
 
 		if (isGrounded)
-			myCurrentState = myPlayerState::Idle;
+		{
+			if (Input::GetKeyPressing(myKeyCode::Left) || Input::GetKeyPressing(myKeyCode::Right))
+			{
+				myCurrentState = myPlayerState::Move;
+				Move();
+				ResourceManager::Find<Sound>(L"Knight_walk")->Play(true);
+			}
+			else
+				myCurrentState = myPlayerState::Idle;
+		}
 
 		if (Input::GetKeyDown(myKeyCode::S))
 			myCurrentState = myPlayerState::FallAttack;
@@ -432,24 +478,40 @@ namespace IJ
 
 		if (animator->IsActavatedAnimationComplete())
 		{
-			myCurrentState = myPlayerState::Idle;
+			if (Input::GetKeyPressing(myKeyCode::Left) || Input::GetKeyPressing(myKeyCode::Right))
+			{
+				myCurrentState = myPlayerState::Move;
+				Move();
+				ResourceManager::Find<Sound>(L"Knight_walk")->Play(true);
+			}
+			else
+				myCurrentState = myPlayerState::Idle;
 		}
 
-		//if (Input::GetKeyPressing(myKeyCode::Left) || Input::GetKeyPressing(myKeyCode::Right))
-		//	myCurrentState = myPlayerState::Move;
 		if (isLookingLeft)
 		{
 			if (Input::GetKeyDown(myKeyCode::Right))
+			{
 				myCurrentState = myPlayerState::Move;
+				Move();
+				ResourceManager::Find<Sound>(L"Knight_walk")->Play(true);
+			}
 		}
 		else
 		{
 			if (Input::GetKeyDown(myKeyCode::Left))
+			{
 				myCurrentState = myPlayerState::Move;
+				Move();
+				ResourceManager::Find<Sound>(L"Knight_walk")->Play(true);
+			}
 		}
 
 		if (Input::GetKeyDown(myKeyCode::D))
+		{
 			myCurrentState = myPlayerState::Jump;
+			ResourceManager::Find<Sound>(L"Knight_jump")->Play(false);
+		}
 	}
 
 	void Player::JumpAttack()
@@ -465,10 +527,13 @@ namespace IJ
 
 
 		if (animator->IsActavatedAnimationComplete())
-			myCurrentState = myPlayerState::Fall;
+		{
+			if (jumpPressingTime < 0.6f)
+				myCurrentState = myPlayerState::Jump;
+			else
+				myCurrentState = myPlayerState::Fall;
+		}
 
-		//if (Input::GetKeyPressing(myKeyCode::Left) || Input::GetKeyPressing(myKeyCode::Right))
-		//	myCurrentState = myPlayerState::Jump;
 		if (isLookingLeft)
 		{
 			if (Input::GetKeyDown(myKeyCode::Right))
@@ -495,8 +560,6 @@ namespace IJ
 		if (animator->IsActavatedAnimationComplete())
 			myCurrentState = myPlayerState::Falling;
 
-		//if (Input::GetKeyPressing(myKeyCode::Left) || Input::GetKeyPressing(myKeyCode::Right))
-		//	myCurrentState = myPlayerState::Falling;
 		if (isLookingLeft)
 		{
 			if (Input::GetKeyDown(myKeyCode::Right))
@@ -509,7 +572,16 @@ namespace IJ
 		}
 
 		if (isGrounded)
-			myCurrentState = myPlayerState::Idle;
+		{
+			if (Input::GetKeyPressing(myKeyCode::Left) || Input::GetKeyPressing(myKeyCode::Right))
+			{
+				myCurrentState = myPlayerState::Move;
+				Move();
+				ResourceManager::Find<Sound>(L"Knight_walk")->Play(true);
+			}
+			else
+				myCurrentState = myPlayerState::Idle;
+		}
 	}
 
 	void Player::Focus()
@@ -527,18 +599,26 @@ namespace IJ
 		{
 			HealthPlus();
 			playerMana -= 4;
+
+			ResourceManager::Find<Sound>(L"Knight_focus")->Stop(false);
 			myCurrentState = Player::myPlayerState::FocusGet;
+			ResourceManager::Find<Sound>(L"Knight_focus_get")->Play(false);
 		}
 
 		if (Input::GetKeyUp(myKeyCode::A))
 		{
 			if (focusTime < 0.3f)
 			{
+				ResourceManager::Find<Sound>(L"Knight_focus")->Stop(false);
 				myCurrentState = Player::myPlayerState::Spell;
 				SpellFunc();
+				ResourceManager::Find<Sound>(L"Knight_fireball")->Play(false);
 			}
 			else
+			{
+				ResourceManager::Find<Sound>(L"Knight_focus")->Stop(true);
 				myCurrentState = Player::myPlayerState::Idle;
+			}
 		}
 	}
 
@@ -622,48 +702,52 @@ namespace IJ
 
 	void Player::JumpFunc(Vector2* pos)
 	{
-		if (recoilTime < 0.1f)
+		if (RecoilFunc(pos))
 		{
-			(*pos).y -= 1000.0f * Time::DeltaTime();
-			recoilTime += Time::DeltaTime();
-		}
-		else if (Input::GetKeyDown(myKeyCode::D) || Input::GetKeyPressing(myKeyCode::D))
-		{
-			if (jumpPressingTime < 0.4f)
+			if (Input::GetKeyDown(myKeyCode::D) || Input::GetKeyPressing(myKeyCode::D))
 			{
-				(*pos).y -= 600.0f * Time::DeltaTime();
-				jumpPressingTime += Time::DeltaTime();
-			}
-			else if (0.4f <= jumpPressingTime && jumpPressingTime < 0.5f)
-			{
-				(*pos).y -= 300.0f * Time::DeltaTime();
-				jumpPressingTime += Time::DeltaTime();
-			}
-			else if (0.5f <= jumpPressingTime && jumpPressingTime < 0.6f)
-			{
-				(*pos).y -= 150.0f * Time::DeltaTime();
-				jumpPressingTime += Time::DeltaTime();
+				if (jumpPressingTime < 0.4f)
+				{
+					(*pos).y -= 600.0f * Time::DeltaTime();
+					jumpPressingTime += Time::DeltaTime();
+				}
+				else if (0.4f <= jumpPressingTime && jumpPressingTime < 0.5f)
+				{
+					(*pos).y -= 300.0f * Time::DeltaTime();
+					jumpPressingTime += Time::DeltaTime();
+				}
+				else if (0.5f <= jumpPressingTime && jumpPressingTime < 0.6f)
+				{
+					(*pos).y -= 150.0f * Time::DeltaTime();
+					jumpPressingTime += Time::DeltaTime();
+				}
+				else
+					myCurrentState = myPlayerState::Fall;
 			}
 			else
 				myCurrentState = myPlayerState::Fall;
 		}
-		else
-			myCurrentState = myPlayerState::Fall;
 	}
 
 	void Player::FallFunc(Vector2* pos)
 	{
-		if (recoilTime < 0.2f)
-			(*pos).y -= 600.0f * Time::DeltaTime();
-		else
+		if (RecoilFunc(pos))
 			(*pos).y += 600.0f * Time::DeltaTime();
+	}
+
+	bool Player::RecoilFunc(Math::Vector2* pos)
+	{
+		if (recoilTime < 0.3f)
+			(*pos).y -= 600.0f * Time::DeltaTime();
+
+		return recoilTime >= 0.3f;
 	}
 
 	void Player::AttackFunc()
 	{
 		Animator* animator = GetComponent<Animator>();
 
-		if (isAttacking == false && attackCooldown >= 0.5f)
+		if (isAttacking == false && attackCooldown >= 0.6f)
 		{
 			isAttacking = true;
 

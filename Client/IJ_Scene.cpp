@@ -6,16 +6,15 @@ namespace IJ
 {
 	Scene::Scene()
 		: isShowCollider(false)
+		, myBGM(nullptr)
 	{
 		myLayers.resize((int)myLayerType::END);
 	}
-
 	Scene::~Scene()
 	{}
 
 	void Scene::Initialize()
 	{}
-
 	void Scene::Update()
 	{
 		for (Layer& layer : myLayers)
@@ -26,7 +25,6 @@ namespace IJ
 		if (Input::GetKeyDown(myKeyCode::P))
 			ToggleShowCollider();
 	}
-
 	void Scene::Render(HDC hdc)
 	{
 		for (Layer& layer : myLayers)

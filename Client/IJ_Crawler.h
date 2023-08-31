@@ -1,5 +1,6 @@
 #pragma once
 #include "IJ_GameObject.h"
+#include "IJ_Sound.h"
 
 
 namespace IJ
@@ -28,6 +29,11 @@ namespace IJ
 
 		void Damaged(int damage) { crawlerHP -= damage; }
 		myCrawlerState GetCrawlerState() { return myCurrentState; }
+		int GetCrawlerHP() { return crawlerHP; }
+		void SetCrawlerSound(Sound* sound) { myCrawlerSound = sound; }
+		void SetPlayerNearby(bool value) { isPlayerNearby = value; }
+		bool GetPlayerNearby() { return isPlayerNearby; }
+		void SetSoundStarted(bool value) { isSoundStarted = value; }
 
 		void Walk();
 		void Turn();
@@ -38,5 +44,8 @@ namespace IJ
 		int crawlerHP;
 		bool isLookingLeft;
 		float turnTime;
+		Sound* myCrawlerSound;
+		bool isSoundStarted;
+		bool isPlayerNearby;
 	};
 }
