@@ -525,7 +525,7 @@ namespace IJ
 
 		myWaitTime += Time::DeltaTime();
 
-		if (myWaitTime >= 6.0f)
+		if (myWaitTime >= 5.0f)
 		{
 			myCurrentState = FalseKnight::myFKState::Dead;
 
