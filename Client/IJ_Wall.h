@@ -18,6 +18,8 @@ namespace IJ
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+		void FKCollision(Collider* collider);
+
 	private:
 
 	};

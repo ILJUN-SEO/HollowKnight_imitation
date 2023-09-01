@@ -100,6 +100,9 @@
     <Filter Include="Contents\GameObjects\Effect">
       <UniqueIdentifier>{85ac8581-37b3-48bb-be33-fe2b174a6acf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObjects\Enemy\FalseKnight">
+      <UniqueIdentifier>{a0689b62-7797-463d-8322-65906ef1b472}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonInclude.h">
@@ -252,7 +255,15 @@
     <ClInclude Include="IJ_BossScene.h">
       <Filter>Contents\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="IJ_FalseKnight.h" />
+    <ClInclude Include="IJ_FalseKnight.h">
+      <Filter>Contents\GameObjects\Enemy\FalseKnight</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_FalseKnight_Head.h">
+      <Filter>Contents\GameObjects\Enemy\FalseKnight</Filter>
+    </ClInclude>
+    <ClInclude Include="IJ_FalseKnight_Attack.h">
+      <Filter>Contents\GameObjects\Enemy\FalseKnight</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -396,7 +407,15 @@
     <ClCompile Include="IJ_BossScene.cpp">
       <Filter>Contents\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="IJ_FalseKnight.cpp" />
+    <ClCompile Include="IJ_FalseKnight.cpp">
+      <Filter>Contents\GameObjects\Enemy\FalseKnight</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_FalseKnight_Head.cpp">
+      <Filter>Contents\GameObjects\Enemy\FalseKnight</Filter>
+    </ClCompile>
+    <ClCompile Include="IJ_FalseKnight_Attack.cpp">
+      <Filter>Contents\GameObjects\Enemy\FalseKnight</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">

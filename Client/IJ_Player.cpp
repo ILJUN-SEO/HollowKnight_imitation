@@ -659,6 +659,9 @@ namespace IJ
 		Transform* transform = GetComponent<Transform>();
 		Vector2 position = transform->GetPosition();
 
+		ResourceManager::Find<Sound>(L"Knight_walk")->Stop(true);
+		ResourceManager::Find<Sound>(L"Knight_focus")->Stop(true);
+
 		if (isLookingLeft)
 			animator->PlayAnimation(L"Knight_stun_left");
 		else

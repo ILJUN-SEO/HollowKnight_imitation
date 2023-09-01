@@ -54,13 +54,14 @@ namespace IJ
 
 		// 플레이어 관련
 		Player* player = InputObject::Instantiate<Player>(myLayerType::Player);
-		player->GetComponent<Transform>()->SetPosition(Vector2(460.0f, 825.0f));
+		player->GetComponent<Transform>()->SetPosition(Vector2(600.0f, 825.0f));
 		player->SetLookingLeft(false);
 
 		// 적 관련
 		FalseKnight* falseKnight = InputObject::Instantiate<FalseKnight>(myLayerType::Enemy);
-		falseKnight->GetComponent<Transform>()->SetPosition(Vector2(960.0f, 685.0f));
-		falseKnight->GetComponent<Rigidbody>()->SetGrounded(true);
+		falseKnight->GetComponent<Transform>()->SetPosition(Vector2(1200.0f, 300.0f));
+		falseKnight->GetComponent<Rigidbody>()->SetGrounded(false);
+		falseKnight->SetTargetPlayer(player);
 
 		// 소리 관련
 		Sound* sound = ResourceManager::Load<Sound>(L"Boss_BGM"

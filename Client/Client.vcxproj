@@ -144,6 +144,8 @@
     <ClInclude Include="IJ_Crawler.h" />
     <ClInclude Include="IJ_Entity.h" />
     <ClInclude Include="IJ_FalseKnight.h" />
+    <ClInclude Include="IJ_FalseKnight_Attack.h" />
+    <ClInclude Include="IJ_FalseKnight_Head.h" />
     <ClInclude Include="IJ_GameObject.h" />
     <ClInclude Include="IJ_Ground.h" />
     <ClInclude Include="IJ_HUDFrame.h" />
@@ -191,6 +193,8 @@
     <ClCompile Include="IJ_CollisionManager.cpp" />
     <ClCompile Include="IJ_Crawler.cpp" />
     <ClCompile Include="IJ_FalseKnight.cpp" />
+    <ClCompile Include="IJ_FalseKnight_Attack.cpp" />
+    <ClCompile Include="IJ_FalseKnight_Head.cpp" />
     <ClCompile Include="IJ_Ground.cpp" />
     <ClCompile Include="IJ_HUDFrame.cpp" />
     <ClCompile Include="IJ_HUDHealth.cpp" />

@@ -22,6 +22,7 @@ namespace IJ
 		void SetVelocity(Vector2 velocity) { myVelocity = velocity; }
 		void SetEnableGravity(bool value) { isEnableGravity = value; }
 		void SetGrounded(bool value) { isGrounded = value; }
+		bool GetGrounded() { return isGrounded; }
 		Vector2 GetVelocity() { return myVelocity; }
 		void SetMaxVelocity(Vector2 maxVelocity) { myMaxVelocity = maxVelocity; }
 

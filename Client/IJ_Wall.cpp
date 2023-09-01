@@ -5,6 +5,7 @@
 
 #include "IJ_Player.h"
 #include "IJ_Buzzer.h"
+#include "IJ_FalseKnight.h"
 
 
 namespace IJ
@@ -26,7 +27,9 @@ namespace IJ
 	}
 
 	void Wall::OnCollisionEnter(Collider* other)
-	{}
+	{
+		FKCollision(other);
+	}
 	void Wall::OnCollisionStay(Collider* other)
 	{
 		Transform* walltr = GetComponent<Transform>();
@@ -55,7 +58,37 @@ namespace IJ
 			}
 			playertr->SetPosition(playerpos);
 		}
+
+		FKCollision(other);
 	}
 	void Wall::OnCollisionExit(Collider* other)
 	{}
+
+	void Wall::FKCollision(Collider* collider)
+	{
+		FalseKnight* fk = dynamic_cast<FalseKnight*>(collider->GetOwner());
+		if (fk == nullptr)
+			return;
+		else
+		{
+			Transform* walltr = GetComponent<Transform>();
+			Vector2 wallpos = walltr->GetPosition();
+			Collider* wallcol = GetComponent<Collider>();
+
+			Transform* fktr = fk->GetComponent<Transform>();
+			Vector2 fkpos = fktr->GetPosition();
+			Collider* fkcol = collider;
+
+			if (fkpos.x < wallpos.x)
+			{
+				fkpos.x = wallpos.x - (wallcol->GetSize().x / 2.0f) - (fkcol->GetSize().x / 2.0f);
+			}
+			else if (fkpos.x > wallpos.x)
+			{
+				fkpos.x = wallpos.x + (wallcol->GetSize().x / 2.0f) + (fkcol->GetSize().x / 2.0f);
+			}
+
+			fktr->SetPosition(fkpos);
+		}
+	}
 }

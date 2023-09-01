@@ -5,6 +5,7 @@
 
 #include "IJ_Player.h"
 #include "IJ_Buzzer.h"
+#include "IJ_FalseKnight.h"
 
 
 namespace IJ
@@ -87,6 +88,20 @@ namespace IJ
 				buzzertr->SetPosition(buzzerpos);
 			}
 		}
+
+		FalseKnight* fk = dynamic_cast<FalseKnight*>(other->GetOwner());
+		if (fk != nullptr)
+		{
+			Transform* fktr = fk->GetComponent<Transform>();
+			Vector2 fkpos = fktr->GetPosition();
+			Collider* fkcol = other;
+			Rigidbody* fkrb = fk->GetComponent<Rigidbody>();
+
+			fkrb->SetGrounded(true);
+			fkrb->SetVelocity(Vector2::Zero);
+			fkpos.y = groundpos.y - (groundcol->GetSize().y / 2.0f) - (fkcol->GetSize().y / 2.0f) + 1.0f/* - 55.0f*/;
+			fktr->SetPosition(fkpos);
+		}
 	}
 	void Ground::OnCollisionStay(Collider* other)
 	{
@@ -123,6 +138,18 @@ namespace IJ
 
 			buzzerpos.y = groundpos.y - (GetComponent<Collider>()->GetSize().y / 2.0f) - (other->GetSize().y / 2.0f);
 			buzzertr->SetPosition(buzzerpos);
+		}
+
+		FalseKnight* fk = dynamic_cast<FalseKnight*>(other->GetOwner());
+		if (fk != nullptr)
+		{
+			Transform* fktr = fk->GetComponent<Transform>();
+			Vector2 fkpos = fktr->GetPosition();
+			Collider* fkcol = other;
+			Rigidbody* fkrb = fk->GetComponent<Rigidbody>();
+
+			fkpos.y = groundpos.y - (groundcol->GetSize().y / 2.0f) - (fkcol->GetSize().y / 2.0f) - 50.0f;
+			fktr->SetPosition(fkpos);
 		}
 	}
 	void Ground::OnCollisionExit(Collider* other)

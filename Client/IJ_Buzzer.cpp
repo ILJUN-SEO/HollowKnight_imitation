@@ -98,8 +98,8 @@ namespace IJ
 				ResourceManager::Find<Sound>(L"Knight_damaged")->Play(false);
 
 				PlayerHitEffect* playerhit = InputObject::Instantiate<PlayerHitEffect>(myLayerType::Effect);
-				//playerhit->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
 				playerhit->SetOwner(player);
+				//playerhit->GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
 			}
 		}
 	}

@@ -14,7 +14,7 @@ namespace IJ
 		, myAccelation(Vector2::Zero)
 		, myVelocity(Vector2::Zero)
 		, myMaxVelocity(Vector2(1000.0f, 1000.0f))
-		, myGravity(Vector2::One)
+		, myGravity(Vector2(0.0f, 1000.0f))
 		, isEnableGravity(false)
 		, isGrounded(false)
 	{

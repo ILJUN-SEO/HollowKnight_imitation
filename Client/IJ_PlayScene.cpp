@@ -329,6 +329,7 @@ namespace IJ
 
 		// 충돌 관련
 		CollisionManager::CollisionLayerCheck(myLayerType::Player, myLayerType::Enemy, true);
+		CollisionManager::CollisionLayerCheck(myLayerType::Player, myLayerType::EnemyAttack, true);
 		CollisionManager::CollisionLayerCheck(myLayerType::Player, myLayerType::Terrain, true);
 		CollisionManager::CollisionLayerCheck(myLayerType::PlayerSlash, myLayerType::Enemy, true);
 		CollisionManager::CollisionLayerCheck(myLayerType::Enemy, myLayerType::Terrain, true);

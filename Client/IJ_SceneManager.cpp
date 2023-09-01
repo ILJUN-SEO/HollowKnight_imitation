@@ -28,8 +28,7 @@ namespace IJ
 		CreateScene<BossScene>(L"BossScene");
 
 		LoadScene(L"TitleScene");
-		//LoadScene(L"BossScene");
-		//GetActivatedScene()->GetBGM()->Play(true);
+		GetActivatedScene()->GetBGM()->Play(true);
 	}
 
 	void SceneManager::Update()
@@ -46,7 +45,7 @@ namespace IJ
 			LoadScene(L"PlayScene");
 			Player* player = dynamic_cast<Player*>(GetActivatedScene()->GetLayer(myLayerType::Player).GetGameObjects()[0]);
 			Camera::SetTarget(player);
-			//GetActivatedScene()->GetBGM()->Play(true);
+			GetActivatedScene()->GetBGM()->Play(true);
 		}
 		if (Input::GetKeyDown(myKeyCode::Three))
 		{
@@ -54,7 +53,7 @@ namespace IJ
 			LoadScene(L"BossScene");
 			Player* player = dynamic_cast<Player*>(GetActivatedScene()->GetLayer(myLayerType::Player).GetGameObjects()[0]);
 			Camera::SetTarget(player);
-			//GetActivatedScene()->GetBGM()->Play(true);
+			GetActivatedScene()->GetBGM()->Play(true);
 		}
 
 		myActivatedScene->Update();

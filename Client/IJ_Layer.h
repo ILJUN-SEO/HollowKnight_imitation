@@ -10,6 +10,7 @@ namespace IJ
 		Background,
 		Terrain,
 		Enemy,
+		EnemyAttack,
 		Player,
 		PlayerSlash,
 		Effect,
