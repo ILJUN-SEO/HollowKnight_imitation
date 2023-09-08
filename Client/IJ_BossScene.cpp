@@ -45,12 +45,12 @@ namespace IJ
 		ground->AddComponent<Collider>()->SetSize(Vector2(1920.0f, 200.0f));
 
 		Wall* wallLeft = InputObject::Instantiate<Wall>(myLayerType::Terrain);
-		wallLeft->GetComponent<Transform>()->SetPosition(Vector2(50.0f, 540.0f));
-		wallLeft->AddComponent<Collider>()->SetSize(Vector2(100.0f, 1080.0f));
+		wallLeft->GetComponent<Transform>()->SetPosition(Vector2(-150.0f, 540.0f));
+		wallLeft->AddComponent<Collider>()->SetSize(Vector2(500.0f, 1080.0f));
 
 		Wall* wallRight = InputObject::Instantiate<Wall>(myLayerType::Terrain);
-		wallRight->GetComponent<Transform>()->SetPosition(Vector2(1850.0f, 540.0f));
-		wallRight->AddComponent<Collider>()->SetSize(Vector2(100.0f, 1080.0f));
+		wallRight->GetComponent<Transform>()->SetPosition(Vector2(2050.0f, 540.0f));
+		wallRight->AddComponent<Collider>()->SetSize(Vector2(500.0f, 1080.0f));
 
 		// 플레이어 관련
 		Player* player = InputObject::Instantiate<Player>(myLayerType::Player);
@@ -70,6 +70,9 @@ namespace IJ
 		ResourceManager::Load<Sound>(L"Boss_Defeat"
 			, L"..\\Resources\\Sound\\BGM\\BossDefeat.wav");
 		SetBGM(sound);
+
+		// 충돌 관련
+		CollisionManager::CollisionLayerCheck(myLayerType::EnemyAttack, myLayerType::Terrain, true);
 
 
 		Camera::SetTarget(player);

@@ -104,6 +104,11 @@ namespace IJ
 		{
 			myCurrentState = myFKHeadState::Idle;
 
+			if (myOwner->GetLookingLeft())
+				isLookingLeft = true;
+			else
+				isLookingLeft = false;
+
 			if (isLookingLeft)
 			{
 				//collider->SetOffset(Vector2(-130.0f, 130.0f));

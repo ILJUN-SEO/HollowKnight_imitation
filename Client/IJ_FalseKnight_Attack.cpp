@@ -23,7 +23,7 @@ namespace IJ
 		: myOwner(nullptr)
 		, myAttackType(myFKAttackType::Swing)
 		, isLookingLeft(true)
-		, myDeathTime(2.5f)
+		, myDeathTime(5.0f)
 	{}
 	FalseKnight_Attack::~FalseKnight_Attack()
 	{}

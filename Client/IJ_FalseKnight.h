@@ -64,6 +64,7 @@ namespace IJ
 		void SetLookingLeft(bool value) { isLookingLeft = value; }
 		bool GetLookingLeft() { return isLookingLeft; }
 		void SetTargetPlayer(Player* player) { myTargetPlayer = player; }
+		void ResetWaitTime() { myWaitTime = 0.0f; }
 
 	private:
 		myFKState myCurrentState;

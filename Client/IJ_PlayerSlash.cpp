@@ -195,6 +195,7 @@ namespace IJ
 				if (fk->GetHP() <= 0)
 				{
 					fk->SetFKState(FalseKnight::myFKState::Dying);
+					fk->ResetWaitTime();
 
 					SceneManager::GetActivatedScene()->GetBGM()->Stop(true);
 					ResourceManager::Find<Sound>(L"Boss_dying")->Play(false);

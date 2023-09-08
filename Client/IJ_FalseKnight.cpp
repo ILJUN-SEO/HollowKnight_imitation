@@ -495,9 +495,9 @@ namespace IJ
 			if (animator->IsActavatedAnimationComplete())
 			{
 				if (isLookingLeft)
-					animator->PlayAnimation(L"FK_stun_idle_left");
+					animator->PlayAnimation(L"FK_stun_idle_left", true);
 				else
-					animator->PlayAnimation(L"FK_stun_idle_right");
+					animator->PlayAnimation(L"FK_stun_idle_right", true);
 			}
 		}
 	}
@@ -513,9 +513,9 @@ namespace IJ
 			myArmor = 2;
 
 			if (isLookingLeft)
-				animator->PlayAnimation(L"FK_idle_left");
+				animator->PlayAnimation(L"FK_idle_left", true);
 			else
-				animator->PlayAnimation(L"FK_idle_right");
+				animator->PlayAnimation(L"FK_idle_right", true);
 		}
 	}
 
